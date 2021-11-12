@@ -1,25 +1,28 @@
 import React from "react";
 import translate from "../../../localization/translate";
+import styles from "../style.module.css";
 
 function PasswordBlockScreen(props) {
   const { blockScreenToggle } = props;
   return (
-    <div className="LoginRightWrapper">
-      <div className="BlockUserDiv">
+    <div className={styles.LoginRightWrapper}>
+      <div className={styles.BlockUserDiv}>
         <button
-          className="EmailBlockSwitchBtn"
+          className={styles.EmailBlockSwitchBtn}
           onClick={() => blockScreenToggle("with-otp")}
         >
           <div id="Sigin-With-OTP">
             {translate("Sign_in_with_a_onetime_passcode")}
           </div>
         </button>
-        <div className="block-otp-info">{translate("we_will_send_otp")}</div>
+        <div className={styles.blockotpinfo}>
+          {translate("we_will_send_otp")}
+        </div>
 
-        <div className="Horizontal-dashedline"></div>
+        <div className={styles.Horizontaldashedline}></div>
 
         <div
-          className="Signup-page-link"
+          className={styles.Signuppagelink}
           onClick={() => blockScreenToggle("with-password")}
         >
           {translate("Sign_in_with_a_different_email_address")}

@@ -40,7 +40,7 @@
   flex-wrap: wrap;
   display: flex;
 }
-.Login-page-link {
+.Loginpagelink {
   color: #1671ee;
   border: none;
   background-color: transparent;
@@ -159,7 +159,7 @@ input:-webkit-autofill {
   flex-direction: column;
   margin-top: 1rem;
 }
-.Horizontal-dashedline {
+.Horizontaldashedline {
   border: none;
   border-top: 1px dashed #ced0d6;
   color: rgb(255, 255, 255);
@@ -312,11 +312,11 @@ input:-webkit-autofill {
   padding: 5px;
 }
 
-.Login-page-link:hover {
+.Loginpagelink:hover {
   background-color: transparent;
   color: #1671ee;
 }
-.Login-page-link:focus {
+.Loginpagelink:focus {
   border: none;
   outline: none;
 }
@@ -326,7 +326,7 @@ input:-webkit-autofill {
   align-items: center;
   justify-content: center;
 }
-.otp-info {
+.otpinfo {
   padding: 1rem 0.2rem;
   font-style: normal;
   font-weight: normal;
@@ -337,7 +337,7 @@ input:-webkit-autofill {
 
   text-align: center;
 }
-.block-otp-info {
+.blockotpinfo {
   padding: 1rem 0.2rem;
   font-style: normal;
   font-weight: normal;

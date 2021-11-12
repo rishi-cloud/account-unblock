@@ -5,11 +5,13 @@ import { SettingContext } from "../providers/SettingProvider";
 import messages from "./messages";
 
 const LanguageProvider = ({ children, locale }) => {
-  const { setting } = useContext(SettingContext);
+  // const { localizedContent } = useContext(SettingContext);
+
   return (
     <IntlProvider
       textComponent={Fragment}
       locale={locale}
+      // messages={localizedContent ? localizedContent?.data : messages["en-us"]}
       messages={messages[locale]}
     >
       {children}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./style.css";
+import styles from "./style.module.css";
 import translate from "../../localization/translate";
 import { ReactComponent as OutlineMail } from "../../svg/mailIcon.svg";
 import { ReactComponent as LockOutline } from "../../svg/lockIcon.svg";
@@ -22,10 +22,10 @@ const PasswordFlow = (props) => {
   return (
     <>
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <div className="LoginInputContainer">
+        <div className={styles.LoginInputContainer}>
           {LoginForm.email !== "" ? (
             <div
-              className="LoginInputLabel"
+              className={styles.LoginInputLabel}
               style={{
                 color: validateEmail(LoginForm.email) ? "#0CA77D" : "red",
               }}
@@ -48,7 +48,7 @@ const PasswordFlow = (props) => {
             }}
           >
             <OutlineMail
-              className="LoginInputLogo"
+              className={styles.LoginInputLogo}
               style={{
                 color: validateEmail(LoginForm.email) ? "green" : "",
               }}
@@ -59,7 +59,7 @@ const PasswordFlow = (props) => {
               name="email"
               value={LoginForm.email}
               placeholder="Email"
-              className="LoginInput"
+              className={styles.LoginInput}
               onChange={onChange}
             />
             {validateEmail(LoginForm.email) &&
@@ -76,11 +76,15 @@ const PasswordFlow = (props) => {
           </div>
         </div>
       </div>
-      {LoginError.email && <div className="Error">{LoginError.email}</div>}
+      {LoginError.email && (
+        <div className={styles.Error}>{LoginError.email}</div>
+      )}
       <>
-        <div className="LoginInputContainerPassword">
+        <div className={styles.LoginInputContainerPassword}>
           {LoginForm.password !== "" ? (
-            <div className="LoginInputLabel">{translate("password")}</div>
+            <div className={styles.LoginInputLabel}>
+              {translate("password")}
+            </div>
           ) : null}
           <div
             style={{
@@ -89,13 +93,13 @@ const PasswordFlow = (props) => {
               backgroundColor: "#ffff",
             }}
           >
-            <LockOutline className="LoginInputLogo" />
+            <LockOutline className={styles.LoginInputLogo} />
             <input
               type={showPassword ? "text" : "password"}
               id="password"
               name="password"
               placeholder="Password"
-              className="LoginInput"
+              className={styles.LoginInput}
               onChange={onChange}
             />
             <FillEye
@@ -113,18 +117,18 @@ const PasswordFlow = (props) => {
             />
           </div>
         </div>
-        <div className="forgotPasswordContainer">
+        <div className={styles.forgotPasswordContainer}>
           <button
             type="button"
-            className="forgotPassword"
+            className={styles.forgotPassword}
             onClick={handleForgotPasswordClick}
           >
-            {translate('Forgot_password')}
+            {translate("Forgot_password")}
           </button>
         </div>
       </>
       <button
-        className="SigninWithPassword"
+        className={styles.SigninWithPassword}
         onClick={(e) =>
           onSubmit(e) &&
           trackClickEvent(TealiumTagValueConstans.SIGNIN_CONTINUE_BUTTON)

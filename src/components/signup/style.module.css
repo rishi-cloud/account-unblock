@@ -76,8 +76,8 @@
   padding: 10px;
   border-radius: 5px;
 }
-.bold-id {
-  color: blue;
+.boldid {
+  color: #1671ee;
   margin: 0 3px;
 }
 .Input {
@@ -178,10 +178,10 @@
   width: 10rem;
   height: 7rem;
 }
-.Password-rules-container {
+.Passwordrulescontainer {
   display: flex;
 }
-.Password-rules {
+.Passwordrules {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -202,7 +202,7 @@
   padding: 4px 10px;
   margin: 4px;
 }
-.Rule-text {
+.Ruletext {
   clear: both;
   display: inline-block;
   overflow: hidden;
@@ -221,7 +221,7 @@
   width: 2rem;
   color: rgb(185, 70, 70);
 }
-.Signup-page-link {
+.Signuppagelink {
   color: #1671ee;
   border: none;
   font-weight: 600;
@@ -230,11 +230,11 @@
   margin-top: 0.9rem;
   padding: 2px 7px;
 }
-.Signup-page-link:hover {
+.Signuppagelink:hover {
   background-color: transparent;
   color: #1671ee;
 }
-.Signup-page-link:focus {
+.Signuppagelink:focus {
   border: none;
   outline: none;
 }
@@ -246,7 +246,7 @@
   font-size: 0.875rem;
   align-items: center;
 }
-.HorizontalSignup-dashedline {
+.HorizontalSignupdashedline {
   border: none;
   border-top: 1px dashed #ced0d6;
   color: rgb(255, 255, 255);
@@ -268,19 +268,19 @@
   margin-left: 4rem;
   margin-top: 2rem;
 }
-.loader-creating-your-account {
+.loadercreatingyouraccount {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
 }
-.loading-logo {
+.loadinglogo {
   height: 5rem;
   width: 5rem;
   margin-bottom: 1rem;
 }
-.loading-text {
+.loadingtext {
   font-weight: 700;
   font-family: "Poppins", sans-serif;
   font-size: 2rem;

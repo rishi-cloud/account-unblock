@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../providers/AppContext";
 import { CommonDataContext } from "../../providers/CommonDataContext";
-import "./style.css";
+import styles from "./style.module.css";
 import Login from "./Login";
 import translate from "../../localization/translate";
 import CircularLoader from "../../loader/CircularLoader";
@@ -48,29 +48,33 @@ const LoginUI = (props) => {
   return (
     <>
       {loader ? (
-        <div className="loaderWrapper">
-          <div className="loaderLogo">
-            <McAfeeLogo className="Logo" />
+        <div className={styles.loaderWrapper}>
+          <div className={styles.loaderLogo}>
+            <McAfeeLogo className={styles.Logo} />
           </div>
-          <div className="loader-creating-your-account">
+          <div className={styles.loadercreatingyouraccount}>
             <img
               alt="McAfeeLogo"
-              className="loading-logo"
+              className={styles.loadinglogo}
               src="https://cdn.jsdelivr.net/gh/atulrana007/McAfee-odrplat-auth0-ui/public/images/McAfee-Document-Logo1.png"
             />
-            <div className="loading-text">{translate("Signing_you_in")}...</div>
+            <div className={styles.loadingtext}>
+              {translate("Signing_you_in")}...
+            </div>
             <CircularLoader />
           </div>
         </div>
       ) : (
         <>
-          <div className="LoginContainer">
-            <div className="LoginLeftWrapper">
-              <div className="LoginWelcomeContainer">
-                <McAfeeLogo className="Logo" />
-                <div className="LoginIntro">{translate(LoginText.title)}</div>
+          <div className={styles.LoginContainer}>
+            <div className={styles.LoginLeftWrapper}>
+              <div className={styles.LoginWelcomeContainer}>
+                <McAfeeLogo className={styles.Logo} />
+                <div className={styles.LoginIntro}>
+                  {translate(LoginText.title)}
+                </div>
                 <div
-                  className="LoginIntroSubHeading"
+                  className={styles.LoginIntroSubHeading}
                   style={{
                     display:
                       LoginError.errorCode === "user_blocked"
@@ -78,18 +82,16 @@ const LoginUI = (props) => {
                         : "block",
                   }}
                 >
-                  <p>
-                    <FormattedMessage
-                      id={LoginText.subtitle}
-                      defaultMessage="We sent a one-time passcode to <b>{email}</b>"
-                      values={{
-                        b: (chunks) => <strong>{chunks}</strong>,
-                        email: `${LoginForm.email}`,
-                      }}
-                    >
-                      {(chunks) => <p>{chunks}</p>}
-                    </FormattedMessage>
-                  </p>
+                  <FormattedMessage
+                    id={LoginText.subtitle}
+                    defaultMessage="We sent a one-time passcode to <b>{email}</b>"
+                    values={{
+                      b: (chunks) => <strong>{chunks}</strong>,
+                      email: `${LoginForm.email}`,
+                    }}
+                  >
+                    {(chunks) => <p>{chunks}</p>}
+                  </FormattedMessage>
                 </div>
                 {otpTimer && !LoginError.errorCode ? (
                   <Timer
@@ -101,7 +103,7 @@ const LoginUI = (props) => {
                   />
                 ) : null}
                 {LoginError.errorCode && (
-                  <div className="ErrorDiv">
+                  <div className={styles.ErrorDiv}>
                     <p>
                       <FormattedMessage
                         id={LoginError.errorCode}
@@ -109,7 +111,7 @@ const LoginUI = (props) => {
                         values={{
                           b: (chunks) => (
                             <strong
-                              className="important"
+                              className={styles.important}
                               style={{ color: "#1671ee" }}
                             >
                               {chunks}
@@ -122,7 +124,7 @@ const LoginUI = (props) => {
                           ),
                           rotp: (chunks) => (
                             <strong
-                              className="important"
+                              className={styles.important}
                               style={{ color: "#1671ee", cursor: "pointer" }}
                               onClick={getOtp}
                             >
@@ -137,12 +139,12 @@ const LoginUI = (props) => {
                     </p>
                   </div>
                 )}
-                <div className="HorizontalSignup-dashedline"></div>
+                <div className={styles.HorizontalSignupdashedline}></div>
                 {LoginError.errorCode !== "user_blocked" ? (
-                  <div className="LoginBottomHeading">
+                  <div className={styles.LoginBottomHeading}>
                     <div>{translate("Do_not_have_an_account")}</div>
                     <div
-                      className="Login-page-link"
+                      className={styles.Loginpagelink}
                       onClick={() => {
                         changePage();
                       }}
@@ -151,7 +153,7 @@ const LoginUI = (props) => {
                     </div>
                   </div>
                 ) : switchLogin === "login-with-password" ? (
-                  <div className="LoginBottomHeading">
+                  <div className={styles.LoginBottomHeading}>
                     <p>
                       <FormattedMessage
                         id="We_just_sent_an_email_with_a_link_to_unlock_your_account_You_may_sign_in_with_a_otp_try_resetting_your_password_or_Contact_Support"
@@ -159,7 +161,7 @@ const LoginUI = (props) => {
                         values={{
                           a: (chunks) => (
                             <strong
-                              className="important"
+                              className={styles.important}
                               style={{ color: "#1671ee", cursor: "pointer" }}
                             >
                               {chunks}
@@ -175,7 +177,7 @@ const LoginUI = (props) => {
               </div>
             </div>
             {LoginError.errorCode !== "user_blocked" ? (
-              <div className="LoginRightWrapper">
+              <div className={styles.LoginRightWrapper}>
                 <Login
                   LoginError={LoginError}
                   onChange={onChange}

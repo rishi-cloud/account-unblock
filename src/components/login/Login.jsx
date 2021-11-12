@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "./style.css";
+import styles from "./style.module.css";
 import translate from "../../localization/translate";
 import PasswordFlow from "./password";
 import PasswordLessFlow from "./passwordless";
@@ -25,8 +25,8 @@ const Login = (props) => {
   const { utagData } = useContext(CommonDataContext);
 
   return (
-    <div className="LoginWrapperContainer">
-      <form className="LoginInputWrapper">
+    <div className={styles.LoginWrapperContainer}>
+      <form className={styles.LoginInputWrapper}>
         {switchLogin === "login-with-password" && (
           <PasswordFlow
             onChange={onChange}
@@ -57,25 +57,27 @@ const Login = (props) => {
         )}
       </form>
 
-      <div className="SwitchContainer">
-        <div className="Switch">
-          <div className="Horizontal-dashedline"></div>
-          <div className="ordiv">{translate("or")}</div>
-          <div className="Horizontal-dashedline"></div>
+      <div className={styles.SwitchContainer}>
+        <div className={styles.Switch}>
+          <div className={styles.Horizontaldashedline}></div>
+          <div className={styles.ordiv}>{translate("or")}</div>
+          <div className={styles.Horizontaldashedline}></div>
         </div>
 
         {switchLogin === "login-with-password" && (
           <>
-            <button className="SwitchBtn" onClick={onToggle}>
+            <button className={styles.SwitchBtn} onClick={onToggle}>
               <div id="Sigin-With-OTP">
                 {translate("Sign_in_with_a_onetime_passcode")}
               </div>
             </button>
-            <div className="otp-info">{translate("we_will_send_otp")}</div>
+            <div className={styles.otpinfo}>
+              {translate("we_will_send_otp")}
+            </div>
           </>
         )}
         {switchLogin === "login-with-otp" && (
-          <button className="SwitchBtn" onClick={onToggle}>
+          <button className={styles.SwitchBtn} onClick={onToggle}>
             <div>{translate("signIn_with_password")}</div>
           </button>
         )}

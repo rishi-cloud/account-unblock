@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../../providers/AppContext";
 import { CommonDataContext } from "../../providers/CommonDataContext";
 import Signup from "./Signup";
-import "./style.css";
+import styles from "./style.module.css";
 import translate from "../../localization/translate";
 import CircularLoader from "../../loader/CircularLoader";
 import { ReactComponent as McAfeeLogo } from "../../svg/Mcafee-Logo.svg";
@@ -23,23 +23,24 @@ const SignupUI = (props) => {
     // LoginForm,
     changePage,
     showSignupForm,
+    errorEmail,
   } = props;
   // const { setWhichPage } = useContext(AppContext);
   const { SignupText } = useContext(CommonDataContext);
   return (
     <>
       {loader ? (
-        <div className="loaderWrapper">
-          <div className="loaderLogo">
-            <McAfeeLogo className="Logo" />
+        <div className={styles.loaderWrapper}>
+          <div className={styles.loaderLogo}>
+            <McAfeeLogo className={styles.Logo} />
           </div>
-          <div className="loader-creating-your-account">
+          <div className={styles.loadercreatingyouraccount}>
             <img
               alt="McAfeeLogo"
-              className="loading-logo"
+              className={styles.loadinglogo}
               src="https://cdn.jsdelivr.net/gh/atulrana007/McAfee-odrplat-auth0-ui/public/images/McAfee-Document-Logo1.png"
             />
-            <div className="loading-text">
+            <div className={styles.loadingtext}>
               {translate("Creating_your_account")}
             </div>
             <CircularLoader />
@@ -47,56 +48,65 @@ const SignupUI = (props) => {
         </div>
       ) : (
         <>
-          <div className="SignupWrapper">
-            <div className="leftContainer">
-              <McAfeeLogo className="Logo" />
-              <div className="Intro">{translate(SignupText.title)}</div>
+          <div className={styles.SignupWrapper}>
+            <div className={styles.leftContainer}>
+              <McAfeeLogo className={styles.Logo} />
+              <div className={styles.Intro}>{translate(SignupText.title)}</div>
               {showSignupForm ? (
-                <div className="IntroSubHeading">
-                  <div className="Points">{translate(SignupText.subtitle)}</div>
+                <div className={styles.IntroSubHeading}>
+                  <div className={styles.Points}>
+                    {translate(SignupText.subtitle)}
+                  </div>
                 </div>
-              ) : (
+              ) : null}
+              {SignupError.errorCode ? (
                 <>
-                  <div className="IntroSubHeadingWithError">
-                    <div className="ErrorPoints">
+                  <div className={styles.IntroSubHeadingWithError}>
+                    <div className={styles.ErrorPoints}>
                       <FormattedMessage
-                        id={SignupText.subtitle}
+                        id={SignupError.errorCode}
                         defaultMessage="We can’t create an account for <b>{email}</b> because your email is from a country subject to US export restrictions, or your company is on a list of prohibited organizations, either by the US or foreign government agency."
                         values={{
-                          b: (chunks) => (
-                            <strong className="important">{chunks}</strong>
-                          ),
-                          email: `${SignupForm.email}`,
+                          b: (chunks) => <strong>{chunks}</strong>,
+                          email: `${errorEmail}`,
                         }}
                       />
                     </div>
-                    <div className="Points">
+                    <div className={styles.Points}>
                       <FormattedMessage
                         id="Email_us_at"
                         defaultMessage="Email us at <b>export@mcafee.com</b> if you have any questions."
                         values={{
-                          b: (chunks) => <p className="bold-id">{chunks}</p>,
+                          b: (chunks) => (
+                            <p className={styles.boldid}>{chunks}</p>
+                          ),
                         }}
                       />
                     </div>
                   </div>
                 </>
-              )}
-              <div className="HorizontalSignup-dashedline"></div>
+              ) : null}
+              <div className={styles.HorizontalSignupdashedline}></div>
               {showSignupForm ? (
-                <div className="BottomHeadingSignUp">
-                  {translate("Already_have_a_account")}
-                  <p className="Signup-page-link" onClick={() => changePage()}>
+                <div className={styles.BottomHeadingSignUp}>
+                  {translate("Already_have_an_account")}
+                  <p
+                    className={styles.Signuppagelink}
+                    onClick={() => changePage()}
+                  >
                     {translate("Sign_in_now")}
                   </p>
                 </div>
               ) : (
-                <div className="Signup-page-link" onClick={() => changePage()}>
+                <div
+                  className={styles.Signuppagelink}
+                  onClick={() => changePage()}
+                >
                   {translate("Sign_in_with_a_different_email_address")}
                 </div>
               )}
             </div>
-            <div className="RightContainerSignup">
+            <div className={styles.RightContainerSignup}>
               {showSignupForm ? (
                 <Signup
                   onChange={onChange}

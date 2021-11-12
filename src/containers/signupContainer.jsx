@@ -19,6 +19,7 @@ export default function SignupContainer(props) {
 
   // Initialized States
   const [isValid, setIsValid] = useState(false);
+  const [errorEmail, setErrorEmail] = useState("");
   const [passwordRules, setPasswordRules] = useState(null);
   const [showSignupForm, setShowSignupForm] = useState(true);
   const { SignupForm, setSignupForm } = useContext(CommonDataContext);
@@ -58,69 +59,75 @@ export default function SignupContainer(props) {
   const onSubmit = async (e) => {
     e.preventDefault();
     setLoader(true);
-    console.log("not getting inside this");
-    if (
-      SignupForm.email !== "" &&
-      SignupForm.password !== "" &&
-      SignupForm.confirmPassword !== "" &&
-      SignupForm.password === SignupForm.confirmPassword &&
-      isValid
-    ) {
-      setSignupForm({
-        ...SignupForm,
-        isSubmitting: true,
-      });
-      try {
-        trackClickEvent("submitting-for-signup");
-        const res = await SignupWithPassword(
-          SignupForm.email,
-          SignupForm.password
-        );
-        if (res.email) {
-          await loginWithPassword(SignupForm.email, SignupForm.password);
-        }
-      } catch (e) {
-        setSignupForm({
-          ...SignupForm,
-          email: "",
-          password: "",
-          confirmPassword: "",
-          isSubmitting: false,
-        });
-        if (e.code === "invalid_signup") {
-          setLoginText({
-            title: "Looks_like_you_already_have_an_account",
-            subtitle: "This_email_already_exists",
-          });
-          setLoginForm({
-            ...LoginForm,
-            email: SignupForm.email,
-            password: "",
-          });
-          setWhichPage("login-page");
-          trackClickEvent("User-Already-Registered");
-        } else if (
-          e.code === "extensibility_error" &&
-          e.description ===
-            "Denied user registration in Pre User Registration Hook"
-        ) {
-          setShowSignupForm(false);
-          setSignupText({
-            title: "We_are_sorry_but_we_could_not_create_your_account",
-            subtitle: "we_cannot_create_an_account",
-          });
-        } else {
-          setSignupError({
-            ...SignupError,
-            databaseError: e.description,
-            errorCode: e.code,
-          });
-          trackClickEvent("failure-at-signup");
-        }
-      }
-    }
-
+    // console.log("not getting inside this");
+    // if (
+    //   SignupForm.email !== "" &&
+    //   SignupForm.password !== "" &&
+    //   SignupForm.confirmPassword !== "" &&
+    //   SignupForm.password === SignupForm.confirmPassword &&
+    //   isValid
+    // ) {
+    //   setSignupForm({
+    //     ...SignupForm,
+    //     isSubmitting: true,
+    //   });
+    //   try {
+    //     trackClickEvent("submitting-for-signup");
+    //     const res = await SignupWithPassword(
+    //       SignupForm.email,
+    //       SignupForm.password
+    //     );
+    //     if (res.email) {
+    //       await loginWithPassword(SignupForm.email, SignupForm.password);
+    //     }
+    //   } catch (e) {
+    setErrorEmail(SignupForm.email);
+    setSignupForm({
+      ...SignupForm,
+      email: "",
+      password: "",
+      confirmPassword: "",
+      isSubmitting: false,
+    });
+    // if (e.code === "invalid_signup") {
+    //   setLoginText({
+    //     title: "Looks_like_you_already_have_an_account",
+    //     subtitle: "This_email_already_exists",
+    //   });
+    //   setLoginForm({
+    //     ...LoginForm,
+    //     email: SignupForm.email,
+    //     password: "",
+    //   });
+    //   setWhichPage("login-page");
+    //   trackClickEvent("User-Already-Registered");
+    // } else if (
+    //   e.code === "extensibility_error" &&
+    //   e.description ===
+    //     "Denied user registration in Pre User Registration Hook"
+    // ) {
+    setShowSignupForm(false);
+    setSignupText({
+      title: "We_are_sorry_but_we_could_not_create_your_account",
+      subtitle: "we_cannot_create_an_account",
+    });
+    setSignupError({
+      ...SignupError,
+      databaseError: e.description,
+      errorCode: "signUp.export_restriction",
+    });
+    //   } else {
+    //     setSignupError({
+    //       ...SignupError,
+    //       databaseError: e.description,
+    //       errorCode: e.code,
+    //     });
+    //     trackClickEvent("failure-at-signup");
+    //   }
+    // }
+    // }
     setLoader(false);
+    // }
   };
   const changePage = () => {
     const checkCookies = cookies.get("ua");
@@ -181,5 +188,6 @@ export default function SignupContainer(props) {
     LoginForm,
     changePage,
     showSignupForm,
+    errorEmail,
   });
 }

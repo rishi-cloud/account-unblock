@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./style.css";
+import styles from "./style.module.css";
 import { ReactComponent as OutlineMail } from "../../svg/mailIcon.svg";
 import { ReactComponent as LockOutline } from "../../svg/lockIcon.svg";
 import { ReactComponent as FillEye } from "../../svg/eyeIcon.svg";
@@ -29,13 +29,13 @@ const Signup = (props) => {
     PasswordPolicyState
   );
   return (
-    <div className="formWrapper">
-      <form className="InputWrapper">
+    <div className={styles.formWrapper}>
+      <form className={styles.InputWrapper}>
         <>
           {SignupForm.email !== "" ? (
-            <div className="InputLabel">{translate("email")}</div>
+            <div className={styles.InputLabel}>{translate("email")}</div>
           ) : null}
-          <div className="InputAndLogoSignup">
+          <div className={styles.InputAndLogoSignup}>
             <OutlineMail
               style={{
                 height: "2rem",
@@ -50,14 +50,14 @@ const Signup = (props) => {
               name="email"
               value={SignupForm.email}
               placeholder="Email"
-              className="Input"
+              className={styles.Input}
               onChange={onChange}
             />
           </div>
           <div>
             {SignupForm.password !== "" ? (
               <div
-                className="InputLabelPass"
+                className={styles.InputLabelPass}
                 style={{
                   color: isValid ? "#0CA77D" : "rgb(175, 174, 174)",
                 }}
@@ -66,7 +66,7 @@ const Signup = (props) => {
               </div>
             ) : null}
             <div
-              className="InputAndLogoSignup"
+              className={styles.InputAndLogoSignup}
               // style={{
               //   border:
               //     LoginError.isEmailError === true
@@ -95,7 +95,7 @@ const Signup = (props) => {
                 name="password"
                 value={SignupForm.password}
                 placeholder="Password"
-                className="Input"
+                className={styles.Input}
                 onChange={onChange}
                 onFocus={() => {
                   onClick();
@@ -125,22 +125,22 @@ const Signup = (props) => {
               ) : null}
             </div>
           </div>
-          <div className="Password-rules-container">
+          <div className={styles.Passwordrulescontainer}>
             {displayRules ? (
               <>
-                <div className="Password-rules">
+                <div className={styles.Passwordrules}>
                   {displayablerule.map((item, index) => {
                     return (
-                      <div className="Rule" key={index}>
+                      <div className={styles.Rule} key={index}>
                         {" "}
-                        <div className="checkbox">
+                        <div className={styles.checkbox}>
                           {PasswordPolicyState[getKeys[index]] ? (
-                            <PasswordTick className="tick" />
+                            <PasswordTick className={styles.tick} />
                           ) : (
-                            <PasswordCross className="cancel" />
+                            <PasswordCross className={styles.cancel} />
                           )}
                         </div>
-                        <div className="Rule-text">{item}</div>
+                        <div className={styles.Ruletext}>{item}</div>
                       </div>
                     );
                   })}
@@ -151,7 +151,7 @@ const Signup = (props) => {
           <div>
             {SignupForm.confirmPassword !== "" ? (
               <div
-                className="InputLabelCPass"
+                className={styles.InputLabelCPass}
                 style={{
                   color:
                     SignupForm.password === SignupForm.confirmPassword &&
@@ -164,7 +164,7 @@ const Signup = (props) => {
               </div>
             ) : null}
             <div
-              className="InputAndLogoSignup"
+              className={styles.InputAndLogoSignup}
               // style={{
               //   border:
               //     LoginError.isEmailError === true
@@ -196,7 +196,7 @@ const Signup = (props) => {
                 name="confirmPassword"
                 value={SignupForm.confirmPassword}
                 placeholder="Confirm password"
-                className="Input"
+                className={styles.Input}
                 onChange={onChange}
                 onBlur={() => setDisplayRules(false)}
               />
@@ -225,9 +225,11 @@ const Signup = (props) => {
             </div>
           </div>
           {SignupError.errorCode && (
-            <div className="Error">{translate(SignupError.errorCode)}</div>
+            <div className={styles.Error}>
+              {translate(SignupError.errorCode)}
+            </div>
           )}
-          <div className="PolicyLink">
+          <div className={styles.PolicyLink}>
             <FormattedMessage
               id="By_clicking_Create_my_Account_you_accept_McAfee_License_Agreement_and_Privacy_Notice"
               defaultMessage="By clicking <b>Create my account</b> you accept <a>McAfee’s License Agreement</a> and <a>Privacy Notice</a>"
@@ -235,7 +237,7 @@ const Signup = (props) => {
                 a: (chunks) => (
                   <a
                     style={{ color: "rgb(66, 88, 255)" }}
-                    className="external_link"
+                    className={styles.external_link}
                     target="_blank"
                     href="https://www.example.com/shoe"
                   >
@@ -270,8 +272,8 @@ const Signup = (props) => {
               SignupForm.password === SignupForm.confirmPassword &&
               isValid &&
               !SignupForm.isSubmitting
-                ? "SubmitButtonActive"
-                : "SubmitButton"
+                ? styles.SubmitButtonActive
+                : styles.SubmitButton
             }
             onClick={onSubmit}
           >

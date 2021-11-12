@@ -1,7 +1,7 @@
 import React from "react";
 import { TealiumTagValueConstans } from "../../constants/TealiumConstants";
 import translate from "../../localization/translate";
-
+import styles from "./style.module.css";
 import { ReactComponent as OutlineMail } from "../../svg/mailIcon.svg";
 import { ReactComponent as TickIcon } from "../../svg/tickIcon.svg";
 
@@ -23,10 +23,10 @@ const PasswordLessFlow = (props) => {
     <>
       {!hideEmail && (
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div className="LoginInputContainer">
+          <div className={styles.LoginInputContainer}>
             {LoginForm.email !== "" ? (
               <div
-                className="LoginInputLabel"
+                className={styles.LoginInputLabel}
                 style={{
                   color: validateEmail(LoginForm.email) ? "#0CA77D" : "red",
                 }}
@@ -49,7 +49,7 @@ const PasswordLessFlow = (props) => {
               }}
             >
               <OutlineMail
-                className="LoginInputLogo"
+                className={styles.LoginInputLogo}
                 style={{
                   color: validateEmail(LoginForm.email) ? "green" : "",
                 }}
@@ -60,7 +60,7 @@ const PasswordLessFlow = (props) => {
                 name="email"
                 value={LoginForm.email}
                 placeholder="Email"
-                className="LoginInput"
+                className={styles.LoginInput}
                 onChange={onChange}
               />
               {validateEmail(LoginForm.email) &&
@@ -78,17 +78,19 @@ const PasswordLessFlow = (props) => {
           </div>
         </div>
       )}
-      {LoginError.email && <div className="Error">{LoginError.email}</div>}
+      {LoginError.email && (
+        <div className={styles.Error}>{LoginError.email}</div>
+      )}
 
       {LoginForm.otpAvailable && (
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div
-            className="LoginInputContainer"
+            className={styles.LoginInputContainer}
             style={{ border: `1px solid ${otpValid ? "#848faa" : "red"}` }}
           >
             {LoginForm.otp !== "" ? (
               <div
-                className="LoginInputLabel"
+                className={styles.LoginInputLabel}
                 style={{ color: otpValid ? "#848faa" : "red" }}
               >
                 {translate("one_time_passcode")}
@@ -101,17 +103,19 @@ const PasswordLessFlow = (props) => {
               id="otp"
               name="otp"
               placeholder="One-time passcode"
-              className="LoginInput"
+              className={styles.LoginInput}
               onChange={onChange}
             />
           </div>
-          <div className="LoginOtpResendContainer" onClick={getOtp}>
-            <div className="LoginResendBtn">{translate("ResendCode")}</div>
+          <div className={styles.LoginOtpResendContainer} onClick={getOtp}>
+            <div className={styles.LoginResendBtn}>
+              {translate("ResendCode")}
+            </div>
           </div>
         </div>
       )}
       <button
-        className="RequestOtp"
+        className={styles.RequestOtp}
         onClick={(e) =>
           onSubmit(e) && trackClickEvent(TealiumTagValueConstans.SIGNIN_BUTTON)
         }
@@ -140,14 +144,14 @@ const PasswordLessFlow = (props) => {
       </button>
 
       {LoginForm.otpAvailable && (
-        <div className="LoginOptMessageContainer">
-          <div className="LoginOtpMessage">
+        <div className={styles.LoginOptMessageContainer}>
+          <div className={styles.LoginOtpMessage}>
             <div>
               {translate("If_you_didnt_receive_a_passcode")} ,{" "}
               {translate("check_your_spam_folder")}
             </div>
           </div>
-          <div className="ContactSupport">
+          <div className={styles.ContactSupport}>
             <div>Need Help?</div>
             <div
               style={{
