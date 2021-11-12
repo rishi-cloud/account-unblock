@@ -167,6 +167,15 @@ input:-webkit-autofill {
   height: 1px;
   width: 50%;
 }
+.HorizontalSignupdashedline {
+  border: none;
+  border-top: 1px dashed #ced0d6;
+  color: rgb(255, 255, 255);
+  background-color: #fff;
+  height: 1px;
+  width: 100%;
+  margin-top: 4px;
+}
 
 .LoginOtpResendContainer {
   align-self: flex-start;
@@ -372,6 +381,52 @@ input:-webkit-autofill {
 }
 .otpBlockWrapper {
   flex: 1;
+}
+.loaderWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.loaderLogo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 4rem;
+  margin-top: 2rem;
+}
+.loadercreatingyouraccount {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.loadinglogo {
+  height: 5rem;
+  width: 5rem;
+  margin-bottom: 1rem;
+}
+.loadingtext {
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+}
+.Signuppagelink {
+  color: #1671ee;
+  border: none;
+  font-weight: 600;
+  background-color: transparent;
+  cursor: pointer;
+  margin-top: 0.9rem;
+  padding: 2px 7px;
+}
+.Signuppagelink:hover {
+  background-color: transparent;
+  color: #1671ee;
+}
+.Signuppagelink:focus {
+  border: none;
+  outline: none;
 }
 
 @media only screen and (min-width: 700px) {

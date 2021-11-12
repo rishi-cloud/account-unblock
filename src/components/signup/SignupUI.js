@@ -4,7 +4,7 @@ import { CommonDataContext } from "../../providers/CommonDataContext";
 import Signup from "./Signup";
 import styles from "./style.module.css";
 import translate from "../../localization/translate";
-import CircularLoader from "../../loader/CircularLoader";
+import LoaderScreen from "../../loader/LoaderScreen";
 import { ReactComponent as McAfeeLogo } from "../../svg/Mcafee-Logo.svg";
 import { FormattedMessage } from "react-intl";
 
@@ -30,22 +30,7 @@ const SignupUI = (props) => {
   return (
     <>
       {loader ? (
-        <div className={styles.loaderWrapper}>
-          <div className={styles.loaderLogo}>
-            <McAfeeLogo className={styles.Logo} />
-          </div>
-          <div className={styles.loadercreatingyouraccount}>
-            <img
-              alt="McAfeeLogo"
-              className={styles.loadinglogo}
-              src="https://cdn.jsdelivr.net/gh/atulrana007/McAfee-odrplat-auth0-ui/public/images/McAfee-Document-Logo1.png"
-            />
-            <div className={styles.loadingtext}>
-              {translate("Creating_your_account")}
-            </div>
-            <CircularLoader />
-          </div>
-        </div>
+        <LoaderScreen text="Creating_your_account" />
       ) : (
         <>
           <div className={styles.SignupWrapper}>

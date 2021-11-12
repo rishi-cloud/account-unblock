@@ -245,13 +245,16 @@ export default function LoginContainer(props) {
           // databaseError: err?.description,
           // errorCode: err?.code === null ? err.original.message : err?.code,
           databaseError: "Blocked user",
-          errorCode: "user_blocked",
+          errorCode: `login.password_lock`,
         });
       } else {
         setLoginError({
           ...LoginError,
           databaseError: err?.description,
-          errorCode: err?.code === null ? err.original.message : err?.code,
+          errorCode:
+            err?.code === null
+              ? err.original.message
+              : `error.login.login.${err?.code}`,
         });
       }
       setLoginForm({

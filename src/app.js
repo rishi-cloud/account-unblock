@@ -4,7 +4,7 @@ import { Route, Switch, useLocation } from "react-router-dom";
 import Authorize from "./components/Authorize";
 
 import Main from "./Main";
-import "./app.css";
+
 import Footer from "./components/Footer/Footer";
 import ResetPassword from "./components/reset-password";
 
@@ -13,7 +13,7 @@ import LanguageProvider from "./localization/languageProvider";
 import { LOCALES } from "./localization/constants";
 import { CommonDataProvider } from "./providers/CommonDataContext";
 
-import "./app.css";
+import styles from "./app.module.css";
 import { AppProvider } from "./providers/AppContext";
 import { SettingProvider } from "./providers/SettingProvider";
 import { TrackingProvider } from "./providers/TrackingProvider";
@@ -63,9 +63,9 @@ const App = ({ pageConfig, passwordResetConfig }) => {
         >
           <AppProvider>
             <LanguageProvider locale={locale.current}>
-              <div className="Page-Container">
-                <div className="Content-Wrap">
-                  <div id="app" className="d-flex flex-column h-100">
+              <div className={styles.PageContainer}>
+                <div className={styles.ContentWrap}>
+                  <div id="app">
                     <Switch>
                       <Route path="/login" exact>
                         {attachAccountProvider(<Main />)}

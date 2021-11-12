@@ -1,0 +1,33 @@
+.loaderWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.loaderLogo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 4rem;
+  margin-top: 2rem;
+}
+.loadercreatingyouraccount {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.loadinglogo {
+  height: 5rem;
+  width: 5rem;
+  margin-bottom: 1rem;
+}
+.loadingtext {
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+}
+.Logo {
+  width: 10rem;
+  height: 7rem;
+}

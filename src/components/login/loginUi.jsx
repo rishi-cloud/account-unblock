@@ -4,12 +4,13 @@ import { CommonDataContext } from "../../providers/CommonDataContext";
 import styles from "./style.module.css";
 import Login from "./Login";
 import translate from "../../localization/translate";
-import CircularLoader from "../../loader/CircularLoader";
-import { ReactComponent as McAfeeLogo } from "../../svg/Mcafee-Logo.svg";
+
+import LoaderScreen from "../../loader/LoaderScreen";
 import Timer from "../Timer/index";
 import PasswordBlockScreen from "./view/PasswordBlockScreen";
 import OtpBlockScreen from "./view/OtpBlockScreen";
 import { FormattedMessage } from "react-intl";
+import { ReactComponent as McAfeeLogo } from "../../svg/Mcafee-Logo.svg";
 
 const LoginUI = (props) => {
   const {
@@ -48,22 +49,7 @@ const LoginUI = (props) => {
   return (
     <>
       {loader ? (
-        <div className={styles.loaderWrapper}>
-          <div className={styles.loaderLogo}>
-            <McAfeeLogo className={styles.Logo} />
-          </div>
-          <div className={styles.loadercreatingyouraccount}>
-            <img
-              alt="McAfeeLogo"
-              className={styles.loadinglogo}
-              src="https://cdn.jsdelivr.net/gh/atulrana007/McAfee-odrplat-auth0-ui/public/images/McAfee-Document-Logo1.png"
-            />
-            <div className={styles.loadingtext}>
-              {translate("Signing_you_in")}...
-            </div>
-            <CircularLoader />
-          </div>
-        </div>
+        <LoaderScreen text="Signing_you_in" />
       ) : (
         <>
           <div className={styles.LoginContainer}>
@@ -77,7 +63,7 @@ const LoginUI = (props) => {
                   className={styles.LoginIntroSubHeading}
                   style={{
                     display:
-                      LoginError.errorCode === "user_blocked"
+                      LoginError.errorCode === "login.password_lock"
                         ? "none"
                         : "block",
                   }}
@@ -140,7 +126,7 @@ const LoginUI = (props) => {
                   </div>
                 )}
                 <div className={styles.HorizontalSignupdashedline}></div>
-                {LoginError.errorCode !== "user_blocked" ? (
+                {LoginError.errorCode !== "login.password_lock" ? (
                   <div className={styles.LoginBottomHeading}>
                     <div>{translate("Do_not_have_an_account")}</div>
                     <div
@@ -176,7 +162,7 @@ const LoginUI = (props) => {
                 ) : null}
               </div>
             </div>
-            {LoginError.errorCode !== "user_blocked" ? (
+            {LoginError.errorCode !== "login.password_lock" ? (
               <div className={styles.LoginRightWrapper}>
                 <Login
                   LoginError={LoginError}

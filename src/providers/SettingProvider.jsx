@@ -8,6 +8,24 @@ const SettingProvider = (props) => {
   const [setting, setSetting] = useState(null);
   const [localizedContent, setLocalizedContent] = useState(null);
   const { trackClickEvent } = useContext(TrackingContext);
+  const ExtractingLocalizedContent = (jsonData) => {
+    const errorMessage = {
+      ...jsonData.error.login,
+      ...jsonData.error.passwordless,
+      ...jsonData.error.forgotPassword,
+      ...jsonData.error.signUp,
+    };
+
+    const Messages = Object.keys(jsonData)
+      .filter((key) => key !== "error")
+      .reduce((obj, key) => {
+        obj[key] = jsonData[key];
+        return obj;
+      }, {});
+    console.log("finalMessage", { ...errorMessage, ...Messages });
+    return { ...errorMessage, ...Messages };
+  };
+
   useEffect(() => {
     const getSettings = async () => {
       try {
@@ -18,9 +36,10 @@ const SettingProvider = (props) => {
           process.env.REACT_APP_CONTENT_LINK
         );
         console.log("settings", settingResponse);
-        console.log("localized", localizedFileResponse);
         setSetting(settingResponse);
-        setLocalizedContent(localizedFileResponse);
+        setLocalizedContent(
+          ExtractingLocalizedContent(localizedFileResponse.data)
+        );
       } catch (err) {
         console.log(err);
       }

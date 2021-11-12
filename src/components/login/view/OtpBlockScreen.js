@@ -1,6 +1,7 @@
 import React from "react";
 
 import PasswordFlow from "../password";
+import styles from "../style.module.css";
 
 function OtpBlockScreen(props) {
   const {
@@ -13,10 +14,11 @@ function OtpBlockScreen(props) {
     LoginText,
     handleForgotPasswordClick,
   } = props;
+
   return (
-    <div className="LoginRightWrapper">
-      <div className="LoginWrapperContainer">
-        <form className="LoginInputWrapper">
+    <div className={styles.LoginRightWrapper}>
+      <div className={styles.LoginWrapperContainer}>
+        <form className={styles.LoginInputWrapper}>
           <PasswordFlow
             onChange={onChange}
             LoginError={LoginError}
