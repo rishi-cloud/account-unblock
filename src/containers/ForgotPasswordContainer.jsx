@@ -81,6 +81,7 @@ function ForgotPasswordContainer(props) {
     handleEmailChange,
     handleEmailMe,
     backToSignIn,
+    validateEmail,
   });
 }
 

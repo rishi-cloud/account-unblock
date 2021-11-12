@@ -5,8 +5,13 @@ import "./style.css";
 import ForgotPasswordEmail from "./ForgotPasswordEmail";
 import { FormattedMessage } from "react-intl";
 function ForgotPasswordUI(props) {
-  const { emailDetails, handleEmailChange, handleEmailMe , backToSignIn } =
-    props;
+  const {
+    emailDetails,
+    handleEmailChange,
+    handleEmailMe,
+    backToSignIn,
+    validateEmail,
+  } = props;
   return (
     <>
       {emailDetails.emailSent ? (
@@ -31,7 +36,14 @@ function ForgotPasswordUI(props) {
           <div className="ForgotPasswordRightWrapper">
             <div className="ForgotPasswordEmailInputContainer">
               {emailDetails.email !== "" ? (
-                <div className="LoginInputLabel">{translate("email")}</div>
+                <div
+                  className="ForgotPasswordInputLabel"
+                  style={{
+                    color: validateEmail(emailDetails.email) ? "#0CA77D" : "red",
+                  }}
+                >
+                  {translate("email")}
+                </div>
               ) : null}
               <div
                 style={{
@@ -39,10 +51,10 @@ function ForgotPasswordUI(props) {
                   display: "flex",
                   border:
                     emailDetails.emailError !== ""
-                      ? "2px solid red"
-                      : emailDetails.emailError === ""
-                      ? "2px solid green"
-                      : "",
+                      ? "1px solid red"
+                      : emailDetails.email === ""
+                      ? "1px solid #848faa"
+                      : " 1px solid #0CA77D",
                   backgroundColor: "#ffff",
                   borderRadius: "1rem",
                   alignItems: "center",

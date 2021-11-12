@@ -54,8 +54,8 @@ function ChangePasswordForm(props) {
               >
                 <LockOutline
                   style={{
-                    height: "1.5rem",
-                    width: "1.5rem",
+                    height: "1.4rem",
+                    width: "1.4rem",
                     color: "rgb(175, 174, 174)",
                   }}
                 />
@@ -152,8 +152,8 @@ function ChangePasswordForm(props) {
               >
                 <LockOutline
                   style={{
-                    height: "1.5rem",
-                    width: "1.5rem",
+                    height: "1.4rem",
+                    width: "1.4rem",
                     // marginTop: "0.5rem",
                     color: "rgb(175, 174, 174)",
                   }}
