@@ -7,7 +7,7 @@ function ForgotPasswordContainer(props) {
   const [emailDetails, updateEmailDetails] = useState({
     email: "",
     emailError: "",
-    databaseMessage: "",
+    emailSent: false,
   });
   const { setLoginText } = useContext(CommonDataContext);
 
@@ -58,7 +58,7 @@ function ForgotPasswordContainer(props) {
       const res = await sendForgotPasswordLink(emailDetails.email);
       updateEmailDetails((prevEmailDetails) => {
         const updatedEmailDetails = { ...prevEmailDetails };
-        updatedEmailDetails.databaseMessage = res;
+        updatedEmailDetails.emailSent = true;
         return updatedEmailDetails;
       });
     } catch (err) {
@@ -70,6 +70,9 @@ function ForgotPasswordContainer(props) {
       });
     }
   };
+  const backToSignIn = () => {
+    setWhichPage("login-page");
+  };
 
   const child = React.Children.only(props.children);
   return React.cloneElement(child, {
@@ -77,8 +80,8 @@ function ForgotPasswordContainer(props) {
     emailDetails,
     handleEmailChange,
     handleEmailMe,
-    setWhichPage,
-    setLoginText,
+    backToSignIn,
+    validateEmail,
   });
 }
 

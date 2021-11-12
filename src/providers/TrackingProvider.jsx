@@ -8,7 +8,8 @@ const TrackingContext = React.createContext({});
 const populateTealiumData = (props, location) => {
   return {
     ...window.utag_data,
-    [TealiumTagKeyConstants.TEALIUM_CLIENT_ID]: props.config.clientName,
+    ...(props.config && { [TealiumTagKeyConstants.TEALIUM_CLIENT_ID]: props.config.clientName}),
+    // [TealiumTagKeyConstants.TEALIUM_CLIENT_ID]: props.config.clientName,
     [TealiumTagKeyConstants.TEALIUM_CULTURE_CODE]: getCulture(location),
   };
 };

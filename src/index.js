@@ -38,6 +38,34 @@ window.LoginWidget = class LoginWidget {
 //   document.getElementById("root")
 // );
 
+window.PasswordResetWidget = class PasswordResetWidget {
+  init(opts) {
+   console.log("locally: rishi singhal")
+   console.log(opts)
+   const passwordResetConfig = opts.passwordResetConfig;
+   if (!passwordResetConfig) {
+     throw new Error("passwordResetConfig must be provided in opts");
+   }
+
+    ReactDOM.render(
+      <BrowserRouter>
+        <App passwordResetConfig={passwordResetConfig} />
+      </BrowserRouter>,
+      document.getElementById("root")
+    );
+  }
+};
+// new window.PasswordResetWidget().init(
+//   {
+//     passwordResetConfig:{
+//       csrfToken: "custom-token",
+//       email: "custom-email",
+//       tenantName: "custom-domain",
+//       ticket: "8nfPeX3z5M8Ybm0Fd0N5Bff9hSm9gSsc"
+//     }
+//   }
+// )
+
 // ReactDOM.render(
 //     <BrowserRouter>
 //         <App />

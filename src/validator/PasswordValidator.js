@@ -245,6 +245,6 @@ export const validatePassword = (
     default:
       break;
   }
-  console.log(copyObj);
+  // console.log(copyObj);
   setPasswordPolicyState(copyObj);
 };

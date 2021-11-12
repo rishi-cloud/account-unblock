@@ -1,0 +1,35 @@
+.ResetPasswordBtnWrapper {
+    display: flex;
+    height: 3rem;
+    margin-bottom: 1.25rem;
+    flex-direction: row;
+    padding: 0.5rem 1rem;
+    border-radius: 18px;
+    border: 1px solid RGB(212, 213, 219);
+    color: RGB(38, 41, 77);
+    font-size: inherit;
+    outline: none;
+    align-items: center;
+  }
+
+  .ResetPasswordInput {
+    border-radius: 1rem;
+    margin-left: 0.3rem;
+    width: 100%;
+    background-color: white;
+    border: 0px solid white;
+    color: RGB(38, 41, 77);
+    font-size: 1rem;
+    outline: none;
+  }
+  .ResetPasswordHeader {
+    position: absolute;
+    font-weight: 600;
+    color: rgb(175, 174, 174);
+    margin-left: 2rem;
+    margin-top: -1rem;
+    background-color: #fff;
+    padding: 5px;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+  }

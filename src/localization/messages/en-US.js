@@ -85,6 +85,19 @@ const en = {
       "We couldn’t sign you with this passcode. <rotp>Try again or resend code.</rotp>",
     passwordless_access_denied:
       "We couldn’t sign you with this passcode. <rotp>Try again or resend code.</rotp>",
+    Forgot_password:"Forgot password?",
+    Reset_Password: "Reset password",
+    Enter_email_to_reset_password: "Enter the email you used to create your McAfee account and we’ll send you a link to reset your password.",
+    Forgot_your_password_contact_support:"Forgot which email you used? <a>Contact Support</a>",
+    Email_me: "Email me",
+    Go_back_to_signin: "Go back to sign in",
+    Back_to_signin:"Back to sign in",
+    Check_inbox: "Check your inbox",
+    Password_reset_link_sent: "Password reset link sent. Use it within 72 hours to reset your password.",
+    Did_not_receive_reset_password_link_request_another_email_forgot_email_need_help_contact_support:"If you didn't receive a link, check your spam folder or <a>request another email</a>. Forgot which email you used or need help? <a>Contact Support</a>",
+    Enter_new_password:"Enter your new password for {email}.",
+    Password_successfully_reset:"Password successfully reset!",
+    Close_tab_to_previous_page_to_signin:"Close this tab to return to the previous page and sign in. "
   },
 };
 export default en;

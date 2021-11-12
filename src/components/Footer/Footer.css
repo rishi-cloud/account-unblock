@@ -1,8 +1,5 @@
 .Footer-Container {
-  display: flex;
-  flex-direction: column;
-  background-color: #f9fcff;
-  padding: 2rem;
+  display: none;
 }
 .Footer-LeftWrapper {
   flex: 1;
@@ -35,5 +32,14 @@
   .Footer-LeftWrapper {
     font-size: 1rem;
     justify-content: unset;
+  }
+}
+
+@media  (min-width: 480px) {
+  .Footer-Container {
+    display: flex;
+    flex-direction: column;
+    background-color: #f9fcff;
+    padding: 2rem;
   }
 }

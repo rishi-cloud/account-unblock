@@ -20,8 +20,6 @@ function Main() {
         return <Login setWhichPage={setWhichPage} />;
       case "forgotPassword-page":
         return <ForgotPassword setWhichPage={setWhichPage} />;
-      // case "resetPassword-page":
-      //   return <ResetPasswordUi />;
       default:
         return <Login setWhichPage={setWhichPage} />;
     }

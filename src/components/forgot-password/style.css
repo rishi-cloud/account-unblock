@@ -1,129 +1,215 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,600;0,800;1,700&display=swap");
 .ForgotPasswordContainer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: column;
+  margin: 0rem 2rem;
+  overflow: hidden;
+  height: 100vh;
 }
 
-.ForgotPasswordLeftWrapper {
-    margin-top: 2rem;
-    width: 55%;
-    padding: 0rem 2rem;
+.ForgotPasswordLeftContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .ForgotPasswordIntro {
-    width: fit-content;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    font-family: "Poppins", sans-serif;
+  width: fit-content;
+  /* height: 40px; */
+  display: flex;
+  align-items: center;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  font-family: "Poppins", sans-serif;
+  color: #212934;
 }
 .ForgotPasswordIntroSubHeading {
-    color: gray;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
+  color: #5A6175;
+  font-size: 1rem;
+  line-height: 1.25rem;
 }
 
 .ForgotPasswordRightWrapper {
-    width: 45%;
-    padding-right: 1rem;
-    margin-top: 7.2rem;
+  flex: 1;
+  margin-top: 1.75rem;
+  display: flex;
+  flex-direction: column;
 }
 .McAfeeLogo {
-    flex: 1;
-    width: 10rem;
+  flex: 1;
+  width: 10rem;
+  height: 1rem,
 }
-.emailMeBtnWrapper{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2rem;
+.emailMeBtnWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.emailMeBtn{
-    cursor: pointer;
-    color: white;
-    padding: 0px 16px;
-    background-color: #4258FF;
-    width: 100%;
-    height: 40px;
-    font-size: 1rem;
-    line-height: 24px;
-    font-weight: 600;
-    border-radius: 24px;
-    border: none;
-    outline: none;
+.emailMeBtn {
+  cursor: pointer;
+  color: white;
+  padding: 0px 16px;
+  background-color: #4258ff;
+  width: 100%;
+  height: 40px;
+  font-size: 1rem;
+  line-height: 24px;
+  font-weight: 600;
+  border-radius: 24px;
+  border: none;
+  outline: none;
 }
-.emailMeBtn:focus{
-    outline: none;
+.emailMeBtn:focus {
+  outline: none;
 }
-
-.contactSupportWrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
-    line-height: 16px;
-    margin: 1rem 0rem;
-}
-.contactSupportText{
-    margin: 0rem;
-    
-}
-.contactSupportBtn{
-    border: none;
-    outline: none;
-    background-color: inherit;
-    color: #4258FF;
-}
-.contactSupportBtn:focus{
-    outline: none;
-}
-.dottedLine{
-    border-top: 1px dotted #CED0D6;
-}
-.signInBtnWrapper{
-    display: flex;
-    justify-content: center;
-
-}
-.signInBtn{
-    color: #4258FF;
-    border: none;
-    outline: none;
-    background-color: inherit;
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 600;
-    height: 20px;
-}
-.signInBtn:focus{
-    outline: none;
+.emailMeBtnDisabled{
+    background-color: rgb(204, 204, 204);
 }
 
-@media only screen and (max-width: 700px) {
-    .ForgotPasswordContainer{
-        flex-direction: column;
-    }
-    .ForgotPasswordLeftWrapper{
-        width: 100%;
-    }
-    .ForgotPasswordIntro{
-        height: fit-content;
+.contactSupportWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  line-height: 16px;
+  margin: 1rem 0rem;
+  color: #6D7895;
+}
+.contactSupportText {
+  margin: 0rem;
+}
+.contactSupportBtn {
+  border: none;
+  outline: none;
+  background-color: inherit;
+  color: #4258ff;
+}
+.contactSupportBtn:focus {
+  outline: none;
+}
+.dottedLine {
+  border-top: 1px dotted #ced0d6;
+}
+.signInBtnWrapper {
+  display: flex;
+  justify-content: center;
+}
+.signInBtn {
+  color: #4258ff;
+  border: none;
+  outline: none;
+  background-color: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  height: 20px;
+}
+.signInBtn:focus {
+  outline: none;
+}
+.ForgotPasswordEmailLogo {
+  margin: 0rem 0.75rem;
+  width: 1.55rem;
+  height: 1.45rem;
+  color: rgb(175, 174, 174);
+}
+.ForgotPasswordEmailInput {
+  padding-right: 1rem;
+  border-radius: 1rem;
+  flex: 1;
+  font-size: 1.3rem;
+  color: RGB(38, 41, 77);
+  border: none;
+  outline: none;
+  width: 100%;
+}
+.Error {
+  color: red;
+  padding: 0rem 1rem;
+}
+.ForgotPasswordEmailInputContainer {
+  position: relative;
+  border-radius: 1rem;
+  height: 3rem;
+  box-shadow: inset 0 2px 2px 0 rgb(0 0 0 / 5%);
+  margin: 1rem 0;
+}
 
-    }
-    .ForgotPasswordRightWrapper{
-        width: 100%;
-        padding-right: 0rem;
-        padding: 2rem;
-        margin-top: 0rem;
-    }
+.forgotPasswordDropDownContainer {
+  margin-top: auto;
+  margin-bottom: 1.75rem;
+}
+
+.flexGrow {
+    flex-grow: 1;
+}
+
+.ForgotPasswordInputLabel {
+  flex: 1;
+  position: absolute;
+  top: -1rem;
+  background-color: #fff;
+  left: 10px;
+  padding: 3px 2px;
+  font-weight: 600;
+  color: darkgray;
+  font-size: 0.75rem;
+  font-weight: 1.25rem;
+}
+
+
+/* screen from tablet and above */
+@media only screen and (min-width: 768px) {
+  .ForgotPasswordContainer {
+    flex-direction: row;
+    margin: 2rem 8rem 0rem 4rem;
+  }
+  .ForgotPasswordIntro {
+    height: fit-content;
+    font-size: 2rem;
+  }
+  .ForgotPasswordLeftWrapper {
+    flex: 1 1;
+    padding-right: 2rem;
+  }
+  .ForgotPasswordRightWrapper {
+    flex: 1 1;
+    margin-top: 5.2rem;
+  }
+  .limitWidth{
+    max-width: 55%;
+}
+}
+
+/* screen above large mobile */
+@media only screen and (min-width: 480px) {
+  .forgotPasswordDropDownContainer {
+    margin-top: 1.2rem;
+  }
+  .ForgotPasswordContainer {
+    height: fit-content;
+  }
+}
+
+/* screen between small tablet and big tablet */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .ForgotPasswordContainer {
+    margin-right: 6rem;
+  }
+  .limitWidth{
+    max-width: 60%;
+}
+}
+
+ /* screen for big size devices */
+ @media only screen and (min-width: 1140px) {
+    .ForgotPasswordLeftContainer {
+        padding-right: 5rem;
+      }
+      .ForgotPasswordRightWrapper {
+       padding: 0rem 6rem;
+      }
 
     
 }

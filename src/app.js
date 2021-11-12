@@ -6,6 +6,7 @@ import Authorize from "./components/Authorize";
 import Main from "./Main";
 import "./app.css";
 import Footer from "./components/Footer/Footer";
+import ResetPassword from "./components/reset-password";
 
 import { AccountProvider } from "./providers/AccountContext";
 import LanguageProvider from "./localization/languageProvider";
@@ -16,12 +17,13 @@ import "./app.css";
 import { AppProvider } from "./providers/AppContext";
 import { SettingProvider } from "./providers/SettingProvider";
 import { TrackingProvider } from "./providers/TrackingProvider";
+import { ResetPasswordProvider } from "./providers/ResetPasswordContext";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-const App = ({ pageConfig }) => {
+const App = ({ pageConfig, passwordResetConfig }) => {
   const parsedHash = new URLSearchParams(window.location.hash.substr(1));
 
   let query = useQuery();
@@ -48,27 +50,42 @@ const App = ({ pageConfig }) => {
     locale.current = "en-us";
   }
 
+  const attachAccountProvider = (Component) => {
+    return <AccountProvider config={pageConfig}>{Component}</AccountProvider>;
+  };
+
   return (
     <TrackingProvider config={pageConfig}>
       <SettingProvider>
-        <CommonDataProvider config={pageConfig}>
+        <CommonDataProvider
+          config={pageConfig}
+          passwordResetConfig={passwordResetConfig}
+        >
           <AppProvider>
             <LanguageProvider locale={locale.current}>
-              <AccountProvider config={pageConfig} locale={locale.current}>
-                <div className="Page-Container">
-                  <div className="Content-Wrap">
-                    <div id="app" className="d-flex flex-column h-100">
-                      <Switch>
-                        <Route path="/login" exact component={() => <Main />} />
-                        <Route exact path="/authorize">
+              <div className="Page-Container">
+                <div className="Content-Wrap">
+                  <div id="app" className="d-flex flex-column h-100">
+                    <Switch>
+                      <Route path="/login" exact>
+                        {attachAccountProvider(<Main />)}
+                      </Route>
+                      <Route exact path="/authorize">
+                        {attachAccountProvider(
                           <Authorize config={pageConfig} />
-                        </Route>
-                      </Switch>
-                    </div>
+                        )}
+                        <Authorize config={pageConfig} />
+                      </Route>
+                      <Route path="/lo/reset" exact>
+                        <ResetPasswordProvider>
+                          <ResetPassword />
+                        </ResetPasswordProvider>
+                      </Route>
+                    </Switch>
                   </div>
-                  <Footer />
                 </div>
-              </AccountProvider>
+                <Footer />
+              </div>
             </LanguageProvider>
           </AppProvider>
         </CommonDataProvider>

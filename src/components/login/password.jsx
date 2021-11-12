@@ -119,7 +119,7 @@ const PasswordFlow = (props) => {
             className="forgotPassword"
             onClick={handleForgotPasswordClick}
           >
-            Forgot password?
+            {translate('Forgot_password')}
           </button>
         </div>
       </>
