@@ -290,17 +290,6 @@ export default function LoginContainer(props) {
             ...LoginForm,
             isSubmitting: false,
           });
-          setLoginText({
-            title: "You_have_reached_the_maximum_number_of_password_attempts",
-            subtitle: "too_many_attempts",
-          });
-          setLoginError({
-            ...LoginError,
-            // databaseError: err?.description,
-            // errorCode: err?.code === null ? err.original.message : err?.code,
-            databaseError: "Blocked user",
-            errorCode: "passwordless.passcode_lock",
-          });
         }
       } else {
         trackClickEvent("submitting-for-requesting-otp");
@@ -331,7 +320,7 @@ export default function LoginContainer(props) {
           // databaseError: err?.description,
           // errorCode: err?.code === null ? err.original.message : err?.code,
           databaseError: "Blocked user",
-          errorCode: "user_blocked",
+          errorCode: "passwordless.passcode_lock",
         });
       } else {
         console.log("errorcode", `passwordless.${err?.code}`);
