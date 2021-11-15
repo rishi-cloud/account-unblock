@@ -35,15 +35,11 @@ const Signup = (props) => {
           {SignupForm.email !== "" ? (
             <div className={styles.InputLabel}>{translate("email")}</div>
           ) : null}
-          <div className={styles.InputAndLogoSignup}>
-            <OutlineMail
-              style={{
-                height: "2rem",
-                width: "2rem",
-                marginTop: "0.5rem",
-                color: "rgb(175, 174, 174)",
-              }}
-            />
+          <div
+            className={styles.InputAndLogoSignup}
+            style={{ background: SignupForm.isEmailDisable ? "#EFF0F2" : "" }}
+          >
+            <OutlineMail className={styles.emailSVG} />
             <input
               type="email"
               id="email"
@@ -52,6 +48,8 @@ const Signup = (props) => {
               placeholder="Email"
               className={styles.Input}
               onChange={onChange}
+              disabled={SignupForm.isEmailDisable}
+              style={{ background: SignupForm.isEmailDisable ? "#EFF0F2" : "" }}
             />
           </div>
           <div>
@@ -81,14 +79,7 @@ const Signup = (props) => {
                 }`,
               }}
             >
-              <LockOutline
-                style={{
-                  height: "2rem",
-                  width: "2rem",
-                  marginTop: "0.5rem",
-                  color: "rgb(175, 174, 174)",
-                }}
-              />
+              <LockOutline className={styles.lockSVG} />
               <input
                 type={showPassword ? "text" : "password"}
                 id="password"
@@ -182,14 +173,7 @@ const Signup = (props) => {
                 }`,
               }}
             >
-              <LockOutline
-                style={{
-                  height: "2rem",
-                  width: "2rem",
-                  marginTop: "0.5rem",
-                  color: "rgb(175, 174, 174)",
-                }}
-              />
+              <LockOutline className={styles.lockSVG} />
               <input
                 type={showPassword ? "text" : "password"}
                 id="confirmPassword"

@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { BrowserRouter as Router } from "react-router-dom";
@@ -24,7 +24,7 @@ const setUp = (props) => {
   render(
     <Router>
       <TrackingProvider config={props.pageConfig}>
-        <SettingProvider>
+        <SettingProvider config={props.locale.current}>
           <CommonDataProvider config={props.pageConfig}>
             <AppProvider>
               <LanguageProvider locale={props.locale.current}>
@@ -71,7 +71,7 @@ describe("<SignUp/>", () => {
   test("should check if the signup component sub-heading is rendered properly", () => {
     setUp(props);
     const signupScreenText = screen.getByText(
-      "Enter your email address, set a password and we'll get your account created."
+      "Enter your email address, set a password and we’ll create your account."
     );
     expect(signupScreenText).toBeInTheDocument();
   });
@@ -92,12 +92,58 @@ describe("<SignUp/>", () => {
   });
   test("should check if the signup form confirm password field is rendered properly", () => {
     setUp(props);
-    const signupScreenText = screen.getByPlaceholderText("Confirm Password");
+    const signupScreenText = screen.getByPlaceholderText("Confirm password");
     expect(signupScreenText).toBeInTheDocument();
   });
   test("should check if the signup form submit button is rendered properly", () => {
     setUp(props);
-    const signupScreenText = screen.getByText("Create My Account");
+    const signupScreenText = screen.getByText("Create my Account");
     expect(signupScreenText).toBeInTheDocument();
+  });
+});
+
+describe("Signup Form testing", () => {
+  const props = {
+    locale: { current: "en-us" },
+    pageConfig: {
+      auth0Domain: "test-auth0Domain",
+      clientID: "test-clientID",
+      callbackURL: "test-callbackURL",
+      auth0Tenant: "test-auth0Tenant",
+      extraParams: {
+        response_type: "test-response_type",
+        scope: "test-scope",
+        state: "test-state",
+        nonce: "test-nonce",
+        _csrf: "test-_csrf",
+        audience: "test-audience",
+      },
+    },
+  };
+  test("should check if email field value is updated", () => {
+    setUp(props);
+    const emailInput = screen.getByPlaceholderText("Email");
+    fireEvent.change(emailInput, {
+      target: { value: "test-email@dispostable.com" },
+    });
+    expect(
+      screen.getByDisplayValue("test-email@dispostable.com")
+    ).toBeInTheDocument();
+  });
+  test("should check if Password field value is updated", () => {
+    setUp(props);
+    const emailInput = screen.getByPlaceholderText("Password");
+    fireEvent.change(emailInput, {
+      target: { value: "Mcafee123" },
+    });
+    expect(screen.getByDisplayValue("Mcafee123")).toBeInTheDocument();
+  });
+  test("should check if Confirm password field value is updated", () => {
+    setUp(props);
+    const emailInput = screen.getByPlaceholderText("Confirm password");
+    fireEvent.change(emailInput, {
+      target: { value: "Mcafee123" },
+    });
+    expect(screen.getByDisplayValue("Mcafee123")).toBeInTheDocument();
   });
 });

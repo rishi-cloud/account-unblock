@@ -20,17 +20,18 @@ const CommonDataProvider = (props) => {
       "Enter_your_email_address_set_password_and_well_get_your_account_created",
   });
   const [LoginForm, setLoginForm] = useState({
-    email: "",
+    email: props.email || "",
     password: "",
     otp: "",
     otpAvailable: false,
     isSubmitting: false,
   });
   const [SignupForm, setSignupForm] = useState({
-    email: "",
+    email: props.email || "",
     password: "",
     confirmPassword: "",
     isSubmitting: false,
+    isEmailDisable: props.email ? true : false,
   });
 
   // Tracking Event function from Context

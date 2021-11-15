@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { TealiumTagKeyConstants } from "../constants/TealiumConstants";
-import Cookies from "universal-cookie/es6";
+import Cookies from "universal-cookie";
 
 const TrackingContext = React.createContext({});
 
 const populateTealiumData = (props, location) => {
   return {
     ...window.utag_data,
-    ...(props.config && { [TealiumTagKeyConstants.TEALIUM_CLIENT_ID]: props.config.clientName}),
+    ...(props.config && {
+      [TealiumTagKeyConstants.TEALIUM_CLIENT_ID]: props.config.clientName,
+    }),
     // [TealiumTagKeyConstants.TEALIUM_CLIENT_ID]: props.config.clientName,
     [TealiumTagKeyConstants.TEALIUM_CULTURE_CODE]: getCulture(location),
   };

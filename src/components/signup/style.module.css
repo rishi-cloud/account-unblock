@@ -255,6 +255,18 @@
   width: 100%;
   margin-top: 4px;
 }
+.emailSVG {
+  height: 2rem;
+  width: 2rem;
+  margin-top: 0.5rem;
+  color: rgb(175, 174, 174);
+}
+.lockSVG {
+  height: 2rem;
+  width: 2rem;
+  margin-top: 0.5rem;
+  color: rgb(175, 174, 174);
+}
 
 @media only screen and (min-width: 700px) {
   .SignupWrapper {
