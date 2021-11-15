@@ -88,6 +88,7 @@ export default function SignupContainer(props) {
           confirmPassword: "",
           isSubmitting: false,
         });
+        setIsValid(false);
         if (e.code === "invalid_signup") {
           setLoginText({
             title: "Looks_like_you_already_have_an_account",
@@ -119,7 +120,7 @@ export default function SignupContainer(props) {
           setSignupError({
             ...SignupError,
             databaseError: e.description,
-            errorCode: e.code,
+            errorCode: e?.code ?? e?.message,
           });
           trackClickEvent("failure-at-signup");
         }
