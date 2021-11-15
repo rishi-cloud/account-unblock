@@ -56,7 +56,7 @@ const App = ({ pageConfig, passwordResetConfig }) => {
 
   return (
     <TrackingProvider config={pageConfig}>
-      <SettingProvider>
+      <SettingProvider locale={locale.current}>
         <CommonDataProvider
           config={pageConfig}
           passwordResetConfig={passwordResetConfig}

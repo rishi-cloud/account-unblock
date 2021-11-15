@@ -40,10 +40,14 @@ const SettingProvider = (props) => {
     const getSettings = async () => {
       try {
         const settingResponse = await axios.get(
-          process.env.REACT_APP_SETTINGS_LINK
+          `https://d1aza67fhfglew.cloudfront.net/settings/${props.locale}.json`
         );
+        const localeForMessageLink =
+          props?.locale.slice(0, -2) +
+          props?.locale[props?.locale.length - 2].toUpperCase() +
+          props?.locale[props?.locale.length - 1].toUpperCase();
         const localizedFileResponse = await axios.get(
-          process.env.REACT_APP_CONTENT_LINK
+          `https://d1aza67fhfglew.cloudfront.net/content/${localeForMessageLink}/messages.json`
         );
         console.log("settings", settingResponse);
         setSetting(settingResponse);
