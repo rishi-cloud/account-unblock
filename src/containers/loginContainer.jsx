@@ -323,6 +323,7 @@ export default function LoginContainer(props) {
           databaseError: "Blocked user",
           errorCode: "passwordless.passcode_lock",
         });
+        setHideEmail(false);
         setLoginForm({
           ...LoginForm,
           password: "",
