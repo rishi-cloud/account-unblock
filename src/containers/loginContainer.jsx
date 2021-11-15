@@ -76,7 +76,7 @@ export default function LoginContainer(props) {
       });
       setOtpTimer(false);
       setHideEmail(false);
-      setLoginForm({ ...LoginForm, otpAvailable: false });
+      setLoginForm({ ...LoginForm, otpAvailable: false, otp: "" });
       setToggle("login-with-password");
       fireOtpPageViewCall(TealiumTagValueConstans.LOGIN_PAGE_NAME);
       const currentPage = cookies.get("ua");
@@ -248,17 +248,20 @@ export default function LoginContainer(props) {
           errorCode: `login.password_lock`,
         });
       } else {
+        setLoginText({
+          title: "Sign_into_your_McAfee_account",
+          subtitle: "choose_your_signIn_method_continue",
+        });
         setLoginError({
           ...LoginError,
           databaseError: err?.description,
           errorCode:
-            err?.code === null
-              ? err.original.message
-              : `error.login.login.${err?.code}`,
+            err?.code === null ? err.original.message : `login.${err?.code}`,
         });
       }
       setLoginForm({
         ...LoginForm,
+        password: "",
         isSubmitting: false,
       });
       settingCookies();
@@ -286,6 +289,17 @@ export default function LoginContainer(props) {
           setLoginForm({
             ...LoginForm,
             isSubmitting: false,
+          });
+          setLoginText({
+            title: "You_have_reached_the_maximum_number_of_password_attempts",
+            subtitle: "too_many_attempts",
+          });
+          setLoginError({
+            ...LoginError,
+            // databaseError: err?.description,
+            // errorCode: err?.code === null ? err.original.message : err?.code,
+            databaseError: "Blocked user",
+            errorCode: "passwordless.passcode_lock",
           });
         }
       } else {
@@ -320,17 +334,17 @@ export default function LoginContainer(props) {
           errorCode: "user_blocked",
         });
       } else {
+        console.log("errorcode", `passwordless.${err?.code}`);
         setLoginError({
           ...LoginError,
-          databaseError: `passwordless_${err?.description}`,
-          errorCode: `passwordless_${err?.code}` ?? err?.message,
+          databaseError: `passwordless.${err?.description}`,
+          errorCode: `passwordless.${err?.code}` ?? err?.message,
         });
       }
       setLoginForm({
         ...LoginForm,
         password: "",
         otp: "",
-        otpAvailable: false,
         isSubmitting: false,
       });
       settingCookies();

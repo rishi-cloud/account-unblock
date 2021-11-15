@@ -10,14 +10,29 @@ module.exports = {
     main: lModules,
   },
   output: {
-    filename: "bundle_forgot_password_customdb.min.js",
+    filename: "bundle_2_1.min.js",
     path: path.resolve(__dirname, "dist"),
   },
   module: {
     rules: [
       {
         test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+              modules: true,
+            },
+          },
+        ],
+        include: /\.module\.css$/,
+      },
+      {
+        test: /\.css$/,
         use: ["style-loader", "css-loader"],
+        exclude: /\.module\.css$/,
       },
       {
         test: /\.js$/,

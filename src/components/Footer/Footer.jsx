@@ -15,7 +15,7 @@ const Footer = () => {
         <div className={styles.FooterLinkContainer}>FAQs </div>
       </div>
       <div className={styles.FooterRightWrapper}>
-        <div> Copyright &copy;{new Date().getFullYear()} McAfee , LLC</div>
+        <div>{translate("Copyright_Text")}</div>
       </div>
     </div>
   );

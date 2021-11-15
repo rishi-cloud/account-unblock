@@ -58,8 +58,6 @@ export default function SignupContainer(props) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    setLoader(true);
-    console.log("not getting inside this");
     if (
       SignupForm.email !== "" &&
       SignupForm.password !== "" &&
@@ -67,6 +65,7 @@ export default function SignupContainer(props) {
       SignupForm.password === SignupForm.confirmPassword &&
       isValid
     ) {
+      setLoader(true);
       setSignupForm({
         ...SignupForm,
         isSubmitting: true,

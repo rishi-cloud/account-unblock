@@ -116,8 +116,14 @@ input:-webkit-autofill {
   font-size: 14px;
   border-radius: 5px;
 }
+.importantBold {
+  color: #890611;
+  cursor: pointer;
+}
 .important {
   font-weight: 400;
+  color: #1671ee;
+  cursor: pointer;
 }
 
 .RequestOtp {
@@ -334,6 +340,7 @@ input:-webkit-autofill {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 .otpinfo {
   padding: 1rem 0.2rem;

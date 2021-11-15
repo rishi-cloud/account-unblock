@@ -23,7 +23,17 @@ const SettingProvider = (props) => {
         return obj;
       }, {});
     console.log("finalMessage", { ...errorMessage, ...Messages });
-    return { ...errorMessage, ...Messages };
+    return {
+      ...errorMessage,
+      ...Messages,
+      "passwordless.invalid_user_password":
+        "We couldn’t sign you with this passcode. <rotp>Try again or resend code.</rotp>",
+      "passwordless.access_denied":
+        "We couldn’t sign you with this passcode. <rotp>Try again or resend code.</rotp>",
+      Need_help: "Need help?",
+      "passwordless.passcode_lock":
+        "For your security, passcode sign in for <b>{email}</b> has been locked due to too many sign in attempts.",
+    };
   };
 
   useEffect(() => {
@@ -45,7 +55,6 @@ const SettingProvider = (props) => {
       }
     };
     getSettings();
-    trackClickEvent("Failure-while-fetching-settings");
   }, []);
 
   return (

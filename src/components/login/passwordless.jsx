@@ -147,20 +147,21 @@ const PasswordLessFlow = (props) => {
         <div className={styles.LoginOptMessageContainer}>
           <div className={styles.LoginOtpMessage}>
             <div>
-              {translate("If_you_didnt_receive_a_passcode")} ,{" "}
-              {translate("check_your_spam_folder")}
+              {translate(
+                "If_you_didnt_receive_a_passcode_check_your_spam_folder"
+              )}
             </div>
           </div>
           <div className={styles.ContactSupport}>
-            <div>Need Help?</div>
+            <div>{translate("Need_help")}</div>
             <div
               style={{
                 margin: "0 5px",
-                color: "blue",
+                color: "#1671ee",
                 cursor: "pointer",
               }}
             >
-              Contact Support
+              {translate("Contact_support")}
             </div>
           </div>
         </div>

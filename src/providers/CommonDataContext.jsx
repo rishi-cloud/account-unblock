@@ -38,16 +38,16 @@ const CommonDataProvider = (props) => {
 
   const getCommonData = async () => {
     try {
+      // `/client/soKVdT2wmzd71LKYoZpv6FJMTg6yQ238.js`
       const res = await axios.get(
-        `/client/soKVdT2wmzd71LKYoZpv6FJMTg6yQ238.js`
-        // `https://${props.config.auth0Domain}/client/${props.config.clientID}.js`
+        `https://${props.config.auth0Domain}/client/${props.config.clientID}.js`
       );
       const data = res.data;
       if (typeof data === "string") {
         const filteredData = data.slice(16, -2);
         const jsonData = JSON.parse(filteredData);
         const DB_ARRAY = jsonData?.strategies[0]?.connections.filter(
-          (item) => item.name === "Username-Password-Authentication"
+          (item) => item.name === "Test-CustomDB"
         );
         console.log("DB ARRAY RECIVED", DB_ARRAY);
         setConn(DB_ARRAY);

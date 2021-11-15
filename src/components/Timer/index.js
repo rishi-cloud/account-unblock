@@ -39,7 +39,7 @@ const Timer = (props) => {
         </div>
       ) : (
         <div className="timer-active">
-          {translate("Passcode_expired_in")}{" "}
+          {translate("Passcode_expires_in")}{" "}
           <span style={{ fontWeight: 700 }}>
             {TimerState.minutes === 0 && TimerState.seconds > 0
               ? TimerState.seconds

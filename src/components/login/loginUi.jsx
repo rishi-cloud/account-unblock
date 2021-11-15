@@ -63,7 +63,8 @@ const LoginUI = (props) => {
                   className={styles.LoginIntroSubHeading}
                   style={{
                     display:
-                      LoginError.errorCode === "login.password_lock"
+                      LoginError.errorCode === "login.password_lock" ||
+                      LoginError.errorCode === "passwordless.passcode_lock"
                         ? "none"
                         : "block",
                   }}
@@ -96,10 +97,7 @@ const LoginUI = (props) => {
                         defaultMessage="We couldn’t sign you with this email and password. Try again, <b>reset your password</b>, or <b>sign in with a one-time passcode</b>."
                         values={{
                           b: (chunks) => (
-                            <strong
-                              className={styles.important}
-                              style={{ color: "#1671ee" }}
-                            >
+                            <strong className={styles.importantBold}>
                               {chunks}
                             </strong>
                           ),
@@ -111,7 +109,6 @@ const LoginUI = (props) => {
                           rotp: (chunks) => (
                             <strong
                               className={styles.important}
-                              style={{ color: "#1671ee", cursor: "pointer" }}
                               onClick={getOtp}
                             >
                               {chunks}
@@ -142,14 +139,11 @@ const LoginUI = (props) => {
                   <div className={styles.LoginBottomHeading}>
                     <p>
                       <FormattedMessage
-                        id="We_just_sent_an_email_with_a_link_to_unlock_your_account_You_may_sign_in_with_a_otp_try_resetting_your_password_or_Contact_Support"
+                        id="login.auth0_password_lock"
                         defaultMessage="We sent a one-time passcode to <b>{email}</b>"
                         values={{
                           a: (chunks) => (
-                            <strong
-                              className={styles.important}
-                              style={{ color: "#1671ee", cursor: "pointer" }}
-                            >
+                            <strong className={styles.important}>
                               {chunks}
                             </strong>
                           ),
@@ -162,7 +156,23 @@ const LoginUI = (props) => {
                 ) : null}
               </div>
             </div>
-            {LoginError.errorCode !== "login.password_lock" ? (
+            {LoginError.errorCode === "login.password_lock" ||
+            LoginError.errorCode === "passwordless.passcode_lock" ? (
+              switchLogin === "login-with-password" ? (
+                <PasswordBlockScreen blockScreenToggle={blockScreenToggle} />
+              ) : (
+                <OtpBlockScreen
+                  onChange={onChange}
+                  LoginError={LoginError}
+                  LoginForm={LoginForm}
+                  validateEmail={validateEmail}
+                  onSubmit={onSubmit}
+                  trackClickEvent={trackClickEvent}
+                  LoginText={LoginText}
+                  handleForgotPasswordClick={handleForgotPasswordClick}
+                />
+              )
+            ) : (
               <div className={styles.LoginRightWrapper}>
                 <Login
                   LoginError={LoginError}
@@ -185,19 +195,6 @@ const LoginUI = (props) => {
                   trackClickEvent={trackClickEvent}
                 />
               </div>
-            ) : switchLogin === "login-with-password" ? (
-              <PasswordBlockScreen blockScreenToggle={blockScreenToggle} />
-            ) : (
-              <OtpBlockScreen
-                onChange={onChange}
-                LoginError={LoginError}
-                LoginForm={LoginForm}
-                validateEmail={validateEmail}
-                onSubmit={onSubmit}
-                trackClickEvent={trackClickEvent}
-                LoginText={LoginText}
-                handleForgotPasswordClick={handleForgotPasswordClick}
-              />
             )}
           </div>
         </>
