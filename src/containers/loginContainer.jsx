@@ -323,6 +323,13 @@ export default function LoginContainer(props) {
           databaseError: "Blocked user",
           errorCode: "passwordless.passcode_lock",
         });
+        setLoginForm({
+          ...LoginForm,
+          password: "",
+          otp: "",
+          otpAvailable: false,
+          isSubmitting: false,
+        });
       } else {
         console.log("errorcode", `passwordless.${err?.code}`);
         setLoginError({
@@ -330,13 +337,14 @@ export default function LoginContainer(props) {
           databaseError: `passwordless.${err?.description}`,
           errorCode: `passwordless.${err?.code}` ?? err?.message,
         });
+        setLoginForm({
+          ...LoginForm,
+          password: "",
+          otp: "",
+          isSubmitting: false,
+        });
       }
-      setLoginForm({
-        ...LoginForm,
-        password: "",
-        otp: "",
-        isSubmitting: false,
-      });
+
       setOtpTimer(false);
       settingCookies();
       trackClickEvent("otp-login-failure");
