@@ -248,6 +248,7 @@ export default function LoginContainer(props) {
           errorCode: `login.password_lock`,
         });
       } else {
+        setToggle("login-with-password");
         setLoginText({
           title: "Sign_into_your_McAfee_account",
           subtitle: "choose_your_signIn_method_continue",
