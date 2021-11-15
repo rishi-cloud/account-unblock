@@ -15,19 +15,19 @@ function Main() {
   const { whichPage, setWhichPage } = useContext(AppContext);
   const { setting, localizedContent } = useContext(SettingContext);
   const returnPage = (whichPage) => {
-    if (!setting && !localizedContent) {
-      return <LoaderScreen text="" />;
-    } else {
-      switch (whichPage) {
-        case "signup-page":
-          return <Signup setWhichPage={setWhichPage} />;
-        case "login-page":
-          return <Login setWhichPage={setWhichPage} />;
-        case "forgotPassword-page":
-          return <ForgotPassword setWhichPage={setWhichPage} />;
-        default:
-          return <Login setWhichPage={setWhichPage} />;
-      }
+    // if (!setting && !localizedContent) {
+    //   return <LoaderScreen text="" />;
+    // } else {
+    switch (whichPage) {
+      case "signup-page":
+        return <Signup setWhichPage={setWhichPage} />;
+      case "login-page":
+        return <Login setWhichPage={setWhichPage} />;
+      case "forgotPassword-page":
+        return <ForgotPassword setWhichPage={setWhichPage} />;
+      default:
+        return <Login setWhichPage={setWhichPage} />;
+      // }
     }
   };
 
