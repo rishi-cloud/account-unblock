@@ -337,6 +337,7 @@ export default function LoginContainer(props) {
         otp: "",
         isSubmitting: false,
       });
+      setOtpTimer(false);
       settingCookies();
       trackClickEvent("otp-login-failure");
     }
