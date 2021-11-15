@@ -354,6 +354,16 @@ export default function LoginContainer(props) {
       ) {
         await submitForLoginWithPassword();
       }
+    } else if (
+      switchLogin === "login-with-otp" &&
+      LoginError.errorCode === "passwordless.passcode_lock"
+    ) {
+      if (
+        (validateEmail(LoginForm.email) && LoginForm.password !== "") ||
+        LoginForm.isSubmitting
+      ) {
+        await submitForLoginWithPassword();
+      }
     } else {
       await submitForLoginWithOTP();
       setLoader(false);
