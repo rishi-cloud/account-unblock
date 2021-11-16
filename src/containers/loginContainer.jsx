@@ -78,6 +78,7 @@ export default function LoginContainer(props) {
       setHideEmail(false);
       setLoginForm({ ...LoginForm, otpAvailable: false, otp: "" });
       setToggle("login-with-password");
+      trackClickEvent(e.target.id);
       fireOtpPageViewCall(TealiumTagValueConstans.LOGIN_PAGE_NAME);
       const currentPage = cookies.get("ua");
       if (!currentPage) {

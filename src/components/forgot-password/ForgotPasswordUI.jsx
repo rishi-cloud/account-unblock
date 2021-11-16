@@ -39,7 +39,9 @@ function ForgotPasswordUI(props) {
                 <div
                   className="ForgotPasswordInputLabel"
                   style={{
-                    color: validateEmail(emailDetails.email) ? "#0CA77D" : "red",
+                    color: validateEmail(emailDetails.email)
+                      ? "#0CA77D"
+                      : "red",
                   }}
                 >
                   {translate("email")}
@@ -89,6 +91,7 @@ function ForgotPasswordUI(props) {
                   disabled={
                     emailDetails.emailError !== "" || emailDetails.email === ""
                   }
+                  id="Sending-email-for-reset-password-submit-button"
                 >
                   {translate("Email_me")}
                 </button>
@@ -116,7 +119,11 @@ function ForgotPasswordUI(props) {
               </div>
               <hr className="dottedLine" />
               <div className="signInBtnWrapper">
-                <button className="signInBtn" onClick={backToSignIn}>
+                <button
+                  className="signInBtn"
+                  onClick={backToSignIn}
+                  id="Signin-page-redirect-from-forgotpassword"
+                >
                   {translate("Go_back_to_signin")}
                 </button>
               </div>

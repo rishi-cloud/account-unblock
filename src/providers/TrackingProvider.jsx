@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { TealiumTagKeyConstants } from "../constants/TealiumConstants";
 import Cookies from "universal-cookie";
@@ -38,6 +38,19 @@ const TrackingProvider = (props) => {
     updatedUtagData["tm_global_navigation_element_click"] = "true";
     utag?.link(updatedUtagData);
   };
+  const onClickTracker = (e) => {
+    if (e.target.id) {
+      console.log("now only", e.target.id);
+      trackClickEvent(e.target.id);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("click", onClickTracker);
+    return () => {
+      window.removeEventListener("click", onClickTracker);
+    };
+  }, []);
+
   return (
     <TrackingContext.Provider
       value={{ trackClickEvent, utagData, setUtagData }}

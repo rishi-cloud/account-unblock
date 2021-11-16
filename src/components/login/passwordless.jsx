@@ -116,9 +116,7 @@ const PasswordLessFlow = (props) => {
       )}
       <button
         className={styles.RequestOtp}
-        onClick={(e) =>
-          onSubmit(e) && trackClickEvent(TealiumTagValueConstans.SIGNIN_BUTTON)
-        }
+        onClick={(e) => onSubmit(e)}
         disabled={
           !validateEmail(LoginForm.email) ||
           LoginForm.isSubmitting ||
@@ -135,12 +133,9 @@ const PasswordLessFlow = (props) => {
               : "",
           cursor: LoginForm.isSubmitting ? "progress" : "pointer",
         }}
+        id="otp-signin-button-click"
       >
-        {LoginForm.otpAvailable ? (
-          <div>{translate("continue")}</div>
-        ) : (
-          <div>{translate("continue")}</div>
-        )}
+        {translate("continue")}
       </button>
 
       {LoginForm.otpAvailable && (

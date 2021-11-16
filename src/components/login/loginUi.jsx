@@ -131,6 +131,7 @@ const LoginUI = (props) => {
                       onClick={() => {
                         changePage();
                       }}
+                      id="Signup-page-link-button"
                     >
                       {translate("Create_one_now")}
                     </div>

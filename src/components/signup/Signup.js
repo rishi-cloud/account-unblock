@@ -260,8 +260,9 @@ const Signup = (props) => {
                 : styles.SubmitButton
             }
             onClick={onSubmit}
+            id="Signup-submit-button-click"
           >
-            <div>{translate("Create_my_Account")}</div>
+            {translate("Create_my_Account")}
           </button>
         </>
       </form>

@@ -122,6 +122,7 @@ const PasswordFlow = (props) => {
             type="button"
             className={styles.forgotPassword}
             onClick={handleForgotPasswordClick}
+            id="forgot-password-button-click"
           >
             {translate("Forgot_password")}
           </button>
@@ -129,10 +130,10 @@ const PasswordFlow = (props) => {
       </>
       <button
         className={styles.SigninWithPassword}
-        onClick={(e) =>
+        onClick={(e) => {
           onSubmit(e) &&
-          trackClickEvent(TealiumTagValueConstans.SIGNIN_CONTINUE_BUTTON)
-        }
+            trackClickEvent(TealiumTagValueConstans.SIGNIN_CONTINUE_BUTTON);
+        }}
         disabled={
           !validateEmail(LoginForm.email) ||
           LoginForm.password === "" ||
@@ -149,8 +150,9 @@ const PasswordFlow = (props) => {
               : "",
           cursor: LoginForm.isSubmitting ? "progress" : "pointer",
         }}
+        id="Signin-with-password-submit-button-click"
       >
-        <div>{translate("signIn")}</div>
+        {translate("signIn")}
       </button>
     </>
   );

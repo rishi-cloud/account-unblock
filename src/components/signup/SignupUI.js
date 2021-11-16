@@ -78,6 +78,7 @@ const SignupUI = (props) => {
                   <p
                     className={styles.Signuppagelink}
                     onClick={() => changePage()}
+                    id="Signin-page-redirect-from-signup"
                   >
                     {translate("Sign_in_now")}
                   </p>
@@ -86,6 +87,7 @@ const SignupUI = (props) => {
                 <div
                   className={styles.Signuppagelink}
                   onClick={() => changePage()}
+                  id="Signin-with-different-email-redirect-link"
                 >
                   {translate("Sign_in_with_a_different_email_address")}
                 </div>

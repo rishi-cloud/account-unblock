@@ -66,10 +66,12 @@ const Login = (props) => {
 
         {switchLogin === "login-with-password" && (
           <>
-            <button className={styles.SwitchBtn} onClick={onToggle}>
-              <div id="Sigin-With-OTP">
-                {translate("Sign_in_with_a_onetime_passcode")}
-              </div>
+            <button
+              className={styles.SwitchBtn}
+              onClick={onToggle}
+              id="Sigin-With-OTP"
+            >
+              {translate("Sign_in_with_a_onetime_passcode")}
             </button>
             <div className={styles.otpinfo}>
               {translate("we_will_send_otp")}
@@ -77,8 +79,12 @@ const Login = (props) => {
           </>
         )}
         {switchLogin === "login-with-otp" && (
-          <button className={styles.SwitchBtn} onClick={onToggle}>
-            <div>{translate("signIn_with_password")}</div>
+          <button
+            className={styles.SwitchBtn}
+            onClick={onToggle}
+            id="Sigin-With-password"
+          >
+            {translate("signIn_with_password")}
           </button>
         )}
       </div>
