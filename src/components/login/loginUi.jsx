@@ -64,7 +64,17 @@ const LoginUI = (props) => {
         </div>
       );
     } else {
-      if (switchLogin === "login-with-password") {
+      if (blockScreenState.otpBlock && blockScreenState.passwordBlock) {
+        return (
+          <div
+            className={styles.Signuppagelink}
+            onClick={() => blockScreenToggle("with-password")}
+            id="Signin-redirect-from-blockscreen"
+          >
+            {translate("Sign_in_with_a_different_email_address")}
+          </div>
+        );
+      } else if (blockScreenState.passwordBlock) {
         console.log("inside this one");
         return (
           <div className={styles.LoginBottomHeading}>
@@ -79,16 +89,6 @@ const LoginUI = (props) => {
                 }}
               ></FormattedMessage>
             </p>
-          </div>
-        );
-      } else if (blockScreenState.otpBlock && blockScreenState.passwordBlock) {
-        return (
-          <div
-            className={styles.Signuppagelink}
-            onClick={() => blockScreenToggle("with-password")}
-            id="Signin-redirect-from-blockscreen"
-          >
-            {translate("Sign_in_with_a_different_email_address")}
           </div>
         );
       } else if (blockScreenState.otpBlock) {
