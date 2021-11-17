@@ -35,6 +35,7 @@ const LoginUI = (props) => {
     changePage,
     handleForgotPasswordClick,
     blockScreenToggle,
+    blockScreenState,
   } = props;
   const { LoginText, utagData } = useContext(CommonDataContext);
 
@@ -46,6 +47,124 @@ const LoginUI = (props) => {
     updatedUtagData["tm_global_navigation_element_click"] = "true";
     utag?.link(updatedUtagData);
   };
+  const BottomHeading = () => {
+    if (!blockScreenState.passwordBlock && !blockScreenState.otpBlock) {
+      return (
+        <div className={styles.LoginBottomHeading}>
+          <div>{translate("Do_not_have_an_account")}</div>
+          <div
+            className={styles.Loginpagelink}
+            onClick={() => {
+              changePage();
+            }}
+            id="Signup-page-link-button"
+          >
+            {translate("Create_one_now")}
+          </div>
+        </div>
+      );
+    } else {
+      if (switchLogin === "login-with-password") {
+        console.log("inside this one");
+        return (
+          <div className={styles.LoginBottomHeading}>
+            <p>
+              <FormattedMessage
+                id="login.auth0_password_lock"
+                defaultMessage="We sent a one-time passcode to <b>{email}</b>"
+                values={{
+                  a: (chunks) => (
+                    <strong className={styles.important}>{chunks}</strong>
+                  ),
+                }}
+              ></FormattedMessage>
+            </p>
+          </div>
+        );
+      } else if (blockScreenState.otpBlock && blockScreenState.passwordBlock) {
+        return (
+          <div
+            className={styles.Signuppagelink}
+            onClick={() => blockScreenToggle("with-password")}
+            id="Signin-redirect-from-blockscreen"
+          >
+            {translate("Sign_in_with_a_different_email_address")}
+          </div>
+        );
+      } else if (blockScreenState.otpBlock) {
+        return (
+          <div className={styles.LoginBottomHeading}>
+            <p>
+              <FormattedMessage
+                id="otp_lock_bottom_Message"
+                defaultMessage="You may sign in with a password, try <a>resetting your password</a> or <b>Contact Support.</b>"
+                values={{
+                  a: (chunks) => (
+                    <strong className={styles.important}>{chunks}</strong>
+                  ),
+                  b: (chunks) => (
+                    <strong className={styles.important}>{chunks}</strong>
+                  ),
+                }}
+              ></FormattedMessage>
+            </p>
+          </div>
+        );
+      } else {
+        return;
+      }
+    }
+  };
+  const RightContainerContent = () => {
+    if (blockScreenState.otpBlock && blockScreenState.passwordBlock) {
+      return null;
+    } else if (blockScreenState.otpBlock || blockScreenState.passwordBlock) {
+      if (blockScreenState.passwordBlock) {
+        return <PasswordBlockScreen blockScreenToggle={blockScreenToggle} />;
+      } else {
+        return (
+          <OtpBlockScreen
+            onChange={onChange}
+            LoginError={LoginError}
+            LoginForm={LoginForm}
+            validateEmail={validateEmail}
+            onSubmit={onSubmit}
+            trackClickEvent={trackClickEvent}
+            LoginText={LoginText}
+            handleForgotPasswordClick={handleForgotPasswordClick}
+            blockScreenState={blockScreenState}
+          />
+        );
+      }
+    } else {
+      return (
+        <div className={styles.LoginRightWrapper}>
+          <Login
+            LoginError={LoginError}
+            onChange={onChange}
+            switchLogin={switchLogin}
+            onSubmit={onSubmit}
+            LoginForm={LoginForm}
+            onToggle={onToggle}
+            onPressContinue={onPressContinue}
+            Continue={Continue}
+            getOtp={getOtp}
+            validateEmail={validateEmail}
+            socialBtn={socialBtn}
+            hideEmail={hideEmail}
+            LoginText={LoginText}
+            otpValid={otpValid}
+            setOtpValid={setOtpValid}
+            handleForgotPasswordClick={handleForgotPasswordClick}
+            setTimer={setTimer}
+            trackClickEvent={trackClickEvent}
+            blockScreenState={blockScreenState}
+          />
+        </div>
+      );
+    }
+  };
+
   return (
     <>
       {loader ? (
@@ -63,8 +182,11 @@ const LoginUI = (props) => {
                   className={styles.LoginIntroSubHeading}
                   style={{
                     display:
-                      LoginError.errorCode === "login.password_lock" ||
-                      LoginError.errorCode === "passwordless.passcode_lock"
+                      blockScreenState.otpBlock &&
+                      blockScreenState.passwordBlock
+                        ? "block"
+                        : blockScreenState.otpBlock ||
+                          blockScreenState.passwordBlock
                         ? "none"
                         : "block",
                   }}
@@ -75,6 +197,9 @@ const LoginUI = (props) => {
                     values={{
                       b: (chunks) => <strong>{chunks}</strong>,
                       email: `${LoginForm.email}`,
+                      a: (chunks) => (
+                        <strong className={styles.important}>{chunks}</strong>
+                      ),
                     }}
                   >
                     {(chunks) => <p>{chunks}</p>}
@@ -123,80 +248,12 @@ const LoginUI = (props) => {
                   </div>
                 )}
                 <div className={styles.HorizontalSignupdashedline}></div>
-                {LoginError.errorCode !== "login.password_lock" ? (
-                  <div className={styles.LoginBottomHeading}>
-                    <div>{translate("Do_not_have_an_account")}</div>
-                    <div
-                      className={styles.Loginpagelink}
-                      onClick={() => {
-                        changePage();
-                      }}
-                      id="Signup-page-link-button"
-                    >
-                      {translate("Create_one_now")}
-                    </div>
-                  </div>
-                ) : switchLogin === "login-with-password" ? (
-                  <div className={styles.LoginBottomHeading}>
-                    <p>
-                      <FormattedMessage
-                        id="login.auth0_password_lock"
-                        defaultMessage="We sent a one-time passcode to <b>{email}</b>"
-                        values={{
-                          a: (chunks) => (
-                            <strong className={styles.important}>
-                              {chunks}
-                            </strong>
-                          ),
-                        }}
-                      >
-                        {(chunks) => <p>{chunks}</p>}
-                      </FormattedMessage>
-                    </p>
-                  </div>
-                ) : null}
+                {BottomHeading()}
               </div>
             </div>
-            {LoginError.errorCode === "login.password_lock" ||
-            LoginError.errorCode === "passwordless.passcode_lock" ? (
-              switchLogin === "login-with-password" ? (
-                <PasswordBlockScreen blockScreenToggle={blockScreenToggle} />
-              ) : (
-                <OtpBlockScreen
-                  onChange={onChange}
-                  LoginError={LoginError}
-                  LoginForm={LoginForm}
-                  validateEmail={validateEmail}
-                  onSubmit={onSubmit}
-                  trackClickEvent={trackClickEvent}
-                  LoginText={LoginText}
-                  handleForgotPasswordClick={handleForgotPasswordClick}
-                />
-              )
-            ) : (
-              <div className={styles.LoginRightWrapper}>
-                <Login
-                  LoginError={LoginError}
-                  onChange={onChange}
-                  switchLogin={switchLogin}
-                  onSubmit={onSubmit}
-                  LoginForm={LoginForm}
-                  onToggle={onToggle}
-                  onPressContinue={onPressContinue}
-                  Continue={Continue}
-                  getOtp={getOtp}
-                  validateEmail={validateEmail}
-                  socialBtn={socialBtn}
-                  hideEmail={hideEmail}
-                  LoginText={LoginText}
-                  otpValid={otpValid}
-                  setOtpValid={setOtpValid}
-                  handleForgotPasswordClick={handleForgotPasswordClick}
-                  setTimer={setTimer}
-                  trackClickEvent={trackClickEvent}
-                />
-              </div>
-            )}
+            <div className={styles.RightLoginContainer}>
+              {RightContainerContent()}
+            </div>
           </div>
         </>
       )}

@@ -39,9 +39,10 @@ const SettingProvider = (props) => {
   useEffect(() => {
     const getSettings = async () => {
       try {
-        const settingResponse = await axios.get(
-          `https://d1aza67fhfglew.cloudfront.net/settings/${props.locale}.json`
-        );
+        const settingResponse = await axios
+          .get
+          // `https://d1aza67fhfglew.cloudfront.net/settings/${props.locale}.json`
+          ();
         const localeForMessageLink =
           props?.locale.slice(0, -2) +
           props?.locale[props?.locale.length - 2].toUpperCase() +
@@ -59,7 +60,7 @@ const SettingProvider = (props) => {
       }
     };
     getSettings();
-  }, []);
+  }, [props?.locale]);
 
   return (
     <SettingContext.Provider value={{ setting, localizedContent }}>

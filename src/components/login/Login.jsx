@@ -21,6 +21,7 @@ const Login = (props) => {
     setOtpValid,
     trackClickEvent,
     handleForgotPasswordClick,
+    blockScreenState,
   } = props;
   const { utagData } = useContext(CommonDataContext);
 
@@ -37,6 +38,7 @@ const Login = (props) => {
             trackClickEvent={trackClickEvent}
             LoginText={LoginText}
             handleForgotPasswordClick={handleForgotPasswordClick}
+            blockScreenState={blockScreenState}
           />
         )}
 
@@ -53,6 +55,7 @@ const Login = (props) => {
             LoginText={LoginText}
             otpValid={otpValid}
             setOtpValid={setOtpValid}
+            blockScreenState={blockScreenState}
           />
         )}
       </form>

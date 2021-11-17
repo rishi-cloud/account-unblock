@@ -2,6 +2,7 @@
 .LoginContainer {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
 }
 
 .LoginLeftWrapper {
@@ -125,6 +126,13 @@ input:-webkit-autofill {
   color: #1671ee;
   cursor: pointer;
 }
+.cancel {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin-right: 0.7rem;
+  margin-top: 1rem;
+  color: rgb(185, 70, 70);
+}
 
 .RequestOtp {
   margin-top: 1rem;
@@ -192,6 +200,11 @@ input:-webkit-autofill {
   background-color: #fff;
   font-weight: 600;
   cursor: pointer;
+}
+.RightContainerLogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .Switch {
@@ -463,5 +476,8 @@ input:-webkit-autofill {
   }
   .BlockUserDiv {
     margin: 6rem 2rem;
+  }
+  .RightLoginContainer {
+    flex: 1;
   }
 }

@@ -33,6 +33,10 @@ export default function LoginContainer(props) {
   const [switchLogin, setToggle] = useState("login-with-password");
 
   const [Continue, setContinue] = useState(false);
+  const [blockScreenState, setBlockScreenState] = useState({
+    otpBlock: false,
+    passwordBlock: false,
+  });
 
   const [hideEmail, setHideEmail] = useState(false);
   const { setWhichPage } = useContext(AppContext);
@@ -209,6 +213,10 @@ export default function LoginContainer(props) {
         otpAvailable: false,
       });
     }
+    setBlockScreenState({
+      otpBlock: false,
+      passwordBlock: false,
+    });
   };
 
   const onChange = (e) => {
@@ -237,23 +245,45 @@ export default function LoginContainer(props) {
       });
     } catch (err) {
       if (err.code === "too_many_attempts") {
-        setLoginText({
-          title: "You_have_reached_the_maximum_number_of_password_attempts",
-          subtitle: "too_many_attempts",
+        setBlockScreenState({
+          ...blockScreenState,
+          passwordBlock: true,
         });
-        setLoginError({
-          ...LoginError,
-          // databaseError: err?.description,
-          // errorCode: err?.code === null ? err.original.message : err?.code,
-          databaseError: "Blocked user",
-          errorCode: `login.password_lock`,
-        });
+        if (blockScreenState.otpBlock) {
+          setLoginText({
+            title: "login_lock_title",
+            subtitle: "login_lock_subtitle",
+          });
+          setLoginError({
+            ...LoginError,
+            // databaseError: err?.description,
+            // errorCode: err?.code === null ? err.original.message : err?.code,
+            databaseError: "",
+            errorCode: "",
+          });
+        } else {
+          setLoginText({
+            title: "You_have_reached_the_maximum_number_of_password_attempts",
+            subtitle:
+              "You_have_reached_the_maximum_number_of_password_attempts",
+          });
+          setLoginError({
+            ...LoginError,
+            // databaseError: err?.description,
+            // errorCode: err?.code === null ? err.original.message : err?.code,
+            databaseError: "Blocked user",
+            errorCode: `login.auth0_password_lock`,
+          });
+        }
       } else {
         setToggle("login-with-password");
-        setLoginText({
-          title: "Sign_into_your_McAfee_account",
-          subtitle: "choose_your_signIn_method_continue",
-        });
+        if (!blockScreenState.otpBlock) {
+          setLoginText({
+            title: "Sign_into_your_McAfee_account",
+            subtitle: "choose_your_signIn_method_continue",
+          });
+        }
+
         setLoginError({
           ...LoginError,
           databaseError: err?.description,
@@ -315,7 +345,7 @@ export default function LoginContainer(props) {
       if (err.code === "too_many_attempts") {
         setLoginText({
           title: "You_have_reached_the_maximum_number_of_password_attempts",
-          subtitle: "too_many_attempts",
+          subtitle: "You_have_reached_the_maximum_number_of_password_attempts",
         });
         setLoginError({
           ...LoginError,
@@ -323,6 +353,10 @@ export default function LoginContainer(props) {
           // errorCode: err?.code === null ? err.original.message : err?.code,
           databaseError: "Blocked user",
           errorCode: "passwordless.passcode_lock",
+        });
+        setBlockScreenState({
+          ...blockScreenState,
+          otpBlock: true,
         });
         setHideEmail(false);
         setLoginForm({
@@ -442,5 +476,6 @@ export default function LoginContainer(props) {
     changePage,
     handleForgotPasswordClick,
     blockScreenToggle,
+    blockScreenState,
   });
 }

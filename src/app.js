@@ -29,7 +29,7 @@ const App = ({ pageConfig, passwordResetConfig }) => {
   let query = useQuery();
   let locale = useRef("");
   let email = useRef("");
-  email.current = query.get("email") ?? "";
+  email.current = query.get("email") ? parsedHash.get("email") : "";
   let lang;
   let culture = query.get("culture") ?? parsedHash.get("culture");
 

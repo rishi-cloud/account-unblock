@@ -85,20 +85,31 @@ const en = {
     NumberCheck: "1 number (0-9)",
     Length_Check: "{leastcount} to 32 characters",
     Creating_your_account: "Creating your account...",
-    Forgot_password:"Forgot password?",
+    Forgot_password: "Forgot password?",
     Reset_Password: "Reset password",
-    Enter_email_to_reset_password: "Enter the email you used to create your McAfee account and we’ll send you a link to reset your password.",
-    Forgot_your_password_contact_support:"Forgot which email you used? <a>Contact Support</a>",
+    Enter_email_to_reset_password:
+      "Enter the email you used to create your McAfee account and we’ll send you a link to reset your password.",
+    Forgot_your_password_contact_support:
+      "Forgot which email you used? <a>Contact Support</a>",
     Email_me: "Email me",
     Go_back_to_signin: "Go back to sign in",
-    Back_to_signin:"Back to sign in",
+    Back_to_signin: "Back to sign in",
     Check_inbox: "Check your inbox",
-    Password_reset_link_sent: "Password reset link sent. Use it within 72 hours to reset your password.",
-    Did_not_receive_reset_password_link_request_another_email_forgot_email_need_help_contact_support:"If you didn't receive a link, check your spam folder or <a>request another email</a>. Forgot which email you used or need help? <a>Contact Support</a>",
-    Enter_new_password:"Enter your new password for {email}.",
-    Password_successfully_reset:"Password successfully reset!",
-    Close_tab_to_previous_page_to_signin:"Close this tab to return to the previous page and sign in.",
+    Password_reset_link_sent:
+      "Password reset link sent. Use it within 72 hours to reset your password.",
+    Did_not_receive_reset_password_link_request_another_email_forgot_email_need_help_contact_support:
+      "If you didn't receive a link, check your spam folder or <a>request another email</a>. Forgot which email you used or need help? <a>Contact Support</a>",
+    Enter_new_password: "Enter your new password for {email}.",
+    Password_successfully_reset: "Password successfully reset!",
+    Close_tab_to_previous_page_to_signin:
+      "Close this tab to return to the previous page and sign in.",
     Need_help: "Need help?",
+    login_lock_title:
+      "We’ve temporarily locked your account to protect your identity",
+    login_lock_subtitle:
+      "We sent an email to <b>{email}</b> to unlock your account. Or you can <a>reset your password</a> or <a>Contact Support</a> to verify your identity and unlock your account.",
+    otp_lock_bottom_Message:
+      "You may sign in with a password, try <a>resetting your password</a> or <b>Contact Support.</b>",
   },
 };
 export default en;

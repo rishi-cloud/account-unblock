@@ -13,6 +13,7 @@ function OtpBlockScreen(props) {
     trackClickEvent,
     LoginText,
     handleForgotPasswordClick,
+    blockScreenState,
   } = props;
 
   return (
@@ -28,6 +29,7 @@ function OtpBlockScreen(props) {
             trackClickEvent={trackClickEvent}
             LoginText={LoginText}
             handleForgotPasswordClick={handleForgotPasswordClick}
+            blockScreenState={blockScreenState}
           />
         </form>
       </div>

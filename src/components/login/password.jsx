@@ -5,6 +5,7 @@ import { ReactComponent as OutlineMail } from "../../svg/mailIcon.svg";
 import { ReactComponent as LockOutline } from "../../svg/lockIcon.svg";
 import { ReactComponent as TickIcon } from "../../svg/tickIcon.svg";
 import { ReactComponent as FillEye } from "../../svg/eyeIcon.svg";
+import { ReactComponent as PasswordCross } from "../../svg/errorCross.svg";
 import { TealiumTagValueConstans } from "../../constants/TealiumConstants";
 
 const PasswordFlow = (props) => {
@@ -17,6 +18,7 @@ const PasswordFlow = (props) => {
     trackClickEvent,
     LoginText,
     handleForgotPasswordClick,
+    blockScreenState,
   } = props;
   const [showPassword, setShowPassword] = useState(false);
   return (
@@ -27,7 +29,13 @@ const PasswordFlow = (props) => {
             <div
               className={styles.LoginInputLabel}
               style={{
-                color: validateEmail(LoginForm.email) ? "#0CA77D" : "red",
+                color:
+                  !validateEmail(LoginForm.email) ||
+                  (LoginError.errorCode &&
+                    LoginError.errorCode !== "login.password_lock" &&
+                    LoginError.errorCode !== "passwordless.passcode_lock")
+                    ? "#FF3838"
+                    : "#0CA77D",
               }}
             >
               {translate("email")}
@@ -38,8 +46,11 @@ const PasswordFlow = (props) => {
               flex: 1,
               display: "flex",
               border:
-                LoginError.isEmailError === true
-                  ? "1px solid red"
+                LoginError.isEmailError === true ||
+                (LoginError.errorCode &&
+                  LoginError.errorCode !== "login.password_lock" &&
+                  LoginError.errorCode !== "passwordless.passcode_lock")
+                  ? "1px solid #FF3838"
                   : validateEmail(LoginForm.email)
                   ? "1px solid #0CA77D"
                   : "1px solid #848faa",
@@ -73,6 +84,11 @@ const PasswordFlow = (props) => {
                 }}
               />
             ) : null}
+            {LoginError.errorCode &&
+              LoginError.errorCode !== "login.password_lock" &&
+              LoginError.errorCode !== "passwordless.passcode_lock" && (
+                <PasswordCross className={styles.cancel} />
+              )}
           </div>
         </div>
       </div>
@@ -80,9 +96,29 @@ const PasswordFlow = (props) => {
         <div className={styles.Error}>{LoginError.email}</div>
       )}
       <>
-        <div className={styles.LoginInputContainerPassword}>
+        <div
+          className={styles.LoginInputContainerPassword}
+          style={{
+            border:
+              LoginError.errorCode &&
+              LoginError.errorCode !== "login.password_lock" &&
+              LoginError.errorCode !== "passwordless.passcode_lock"
+                ? "1px solid #FF3838"
+                : "1px solid #848faa",
+          }}
+        >
           {LoginForm.password !== "" ? (
-            <div className={styles.LoginInputLabel}>
+            <div
+              className={styles.LoginInputLabel}
+              style={{
+                color:
+                  LoginError.errorCode &&
+                  LoginError.errorCode !== "login.password_lock" &&
+                  LoginError.errorCode !== "passwordless.passcode_lock"
+                    ? "#FF3838"
+                    : "",
+              }}
+            >
               {translate("password")}
             </div>
           ) : null}
@@ -115,6 +151,11 @@ const PasswordFlow = (props) => {
                 showPassword ? setShowPassword(false) : setShowPassword(true);
               }}
             />
+            {LoginError.errorCode &&
+              LoginError.errorCode !== "login.password_lock" &&
+              LoginError.errorCode !== "passwordless.passcode_lock" && (
+                <PasswordCross className={styles.cancel} />
+              )}
           </div>
         </div>
         <div className={styles.forgotPasswordContainer}>
