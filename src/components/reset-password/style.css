@@ -33,3 +33,47 @@
     font-size: 0.75rem;
     line-height: 1.25rem;
   }
+
+  .Passwordrulescontainer {
+    display: flex;
+  }
+  .Passwordrules {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 1rem;
+    background-color: transparent;
+    border-radius: 1.5rem;
+  }
+  .Rule {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+    background-color: #f5f6fa;
+    border-radius: 1rem;
+    padding: 4px 10px;
+    margin: 4px;
+  }
+  .Ruletext {
+    clear: both;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-left: 0.5rem;
+    color: #4a4f5d;
+  }
+  
+  .tick {
+    height: 2rem;
+    width: 2rem;
+    color: rgb(54, 230, 54);
+  }
+  .cancel {
+    height: 2rem;
+    width: 2rem;
+    color: rgb(185, 70, 70);
+  }
