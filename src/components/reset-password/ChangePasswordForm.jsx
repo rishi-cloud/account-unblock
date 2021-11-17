@@ -101,10 +101,10 @@ function ChangePasswordForm(props) {
 
             {displayRules && (
               <div
-                className="Password-rules-container"
+                className="Passwordrulescontainer"
                 style={{ marginBottom: "1.5rem" }}
               >
-                <div className="Password-rules">
+                <div className="Passwordrules">
                   {displayablerule.map((item, index) => {
                     return (
                       <div className="Rule" key={index}>
@@ -115,7 +115,7 @@ function ChangePasswordForm(props) {
                             <PasswordCross className="cancel" />
                           )}
                         </div>
-                        <div className="Rule-text">{item}</div>
+                        <div className="Ruletext">{item}</div>
                       </div>
                     );
                   })}
