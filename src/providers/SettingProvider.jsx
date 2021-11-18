@@ -39,16 +39,15 @@ const SettingProvider = (props) => {
   useEffect(() => {
     const getSettings = async () => {
       try {
-        const settingResponse = await axios
-          .get
-          // `https://d1aza67fhfglew.cloudfront.net/settings/${props.locale}.json`
-          ();
+        const settingResponse = await axios.get(
+          `settings/${props.locale}.json`
+        );
         const localeForMessageLink =
           props?.locale.slice(0, -2) +
           props?.locale[props?.locale.length - 2].toUpperCase() +
           props?.locale[props?.locale.length - 1].toUpperCase();
         const localizedFileResponse = await axios.get(
-          `https://d1aza67fhfglew.cloudfront.net/content/${localeForMessageLink}/messages.json`
+          `content/${localeForMessageLink}/messages.json`
         );
         console.log("settings", settingResponse);
         setSetting(settingResponse);
