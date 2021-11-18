@@ -11,6 +11,7 @@ function ForgotPasswordEmail(props) {
     a_contact_support: (chunks) => (
       <a
         className="contactSupportBtn"
+        target="_blank"
         href={`https://home.mcafee.com/root/support.aspx?culture=${locale.toUpperCase()}`}
       >
         {chunks}

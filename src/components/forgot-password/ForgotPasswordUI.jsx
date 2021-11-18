@@ -18,6 +18,7 @@ function ForgotPasswordUI(props) {
   const FORMATVALUES = {
     a_contact_support: (chunks) => (
       <a
+        target="_blank"
         style={{ color: "rgb(66, 88, 255)" }}
         href={`https://home.mcafee.com/root/support.aspx?culture=${locale.toUpperCase()}`}
       >

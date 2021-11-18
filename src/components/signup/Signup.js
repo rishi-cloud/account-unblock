@@ -36,6 +36,7 @@ const Signup = (props) => {
       <a
         style={{ color: "rgb(66, 88, 255)" }}
         className={styles.external_link}
+        target="_blank"
         href={`https://home.mcafee.com/root/support.aspx?culture=${locale.toUpperCase()}`}
       >
         {chunks}
@@ -45,6 +46,7 @@ const Signup = (props) => {
       <a
         style={{ color: "rgb(66, 88, 255)" }}
         className={styles.external_link}
+        target="_blank"
         href={`https://www.mcafee.com/en-au/consumer-support/policy/legal.html?culture=${locale.toUpperCase()}#eula`}
       >
         {chunks}
@@ -64,6 +66,7 @@ const Signup = (props) => {
       <a
         style={{ color: "rgb(66, 88, 255)" }}
         className={styles.external_link}
+        target="_blank"
         href={`https://www.mcafee.com/legal?culture=${locale.toUpperCase()}&affid=916#privacytop`}
       >
         {chunks}

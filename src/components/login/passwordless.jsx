@@ -158,6 +158,7 @@ const PasswordLessFlow = (props) => {
               }}
             >
               <a
+                target="_blank"
                 href={`https://home.mcafee.com/root/support.aspx?culture=${locale.toUpperCase()}`}
               >
                 {translate("Contact_support")}

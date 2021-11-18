@@ -9,6 +9,7 @@ const Footer = () => {
       <div className={styles.FooterLeftWrapper}>
         <div className={styles.FooterLinkContainer}>
           <a
+            target="_blank"
             href={`https://home.mcafee.com/root/support.aspx?culture=${locale.toUpperCase()}`}
           >
             {translate("contactUs")}
@@ -17,6 +18,7 @@ const Footer = () => {
         <div className={styles.FooterLinkContainer}>
           {" "}
           <a
+            target="_blank"
             href={`https://www.mcafee.com/legal?culture=${locale.toUpperCase()}&affid=916#privacytop`}
           >
             {" "}
