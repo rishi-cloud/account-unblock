@@ -28,6 +28,7 @@ const App = ({ pageConfig, passwordResetConfig }) => {
 
   let query = useQuery();
   let locale = useRef("");
+  const affiliateId = useRef(query.get("affid"));
   let email = useRef("");
   email.current = query.get("email") ? parsedHash.get("email") : "";
   let lang;
@@ -58,7 +59,7 @@ const App = ({ pageConfig, passwordResetConfig }) => {
 
   return (
     <TrackingProvider config={pageConfig}>
-      <SettingProvider locale={locale.current}>
+      <SettingProvider locale={locale.current} affiliateId={affiliateId.current}>
         <CommonDataProvider
           config={pageConfig}
           passwordResetConfig={passwordResetConfig}

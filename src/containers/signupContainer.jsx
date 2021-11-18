@@ -1,10 +1,11 @@
-import React, { useContext, useState, useCallback } from "react";
+import React, { useContext, useState, useCallback , useEffect} from "react";
 import { debounce } from "lodash";
 import { AccountContext } from "../providers/AccountContext";
 import { AppContext } from "../providers/AppContext";
 import { CommonDataContext } from "../providers/CommonDataContext";
 import { validatePassword } from "../validator/PasswordValidator";
 import { TrackingContext } from "../providers/TrackingProvider";
+import { SettingContext } from '../providers/SettingProvider'
 import Cookies from "universal-cookie";
 
 export default function SignupContainer(props) {
@@ -15,9 +16,11 @@ export default function SignupContainer(props) {
   const { setWhichPage } = useContext(AppContext);
   const { LoginForm, setLoginForm } = useContext(CommonDataContext);
   const { setSignupText } = useContext(CommonDataContext);
+  const { setting } = useContext(SettingContext);
   // Context Data
 
   // Initialized States
+  const [optinFields,setOptinFields] = useState(null)
   const [isValid, setIsValid] = useState(false);
   const [errorEmail, setErrorEmail] = useState("");
   const [passwordRules, setPasswordRules] = useState(null);
@@ -45,6 +48,11 @@ export default function SignupContainer(props) {
   // Object Initialization
   const cookies = new Cookies();
 
+  useEffect(() => {
+    if(setting?.OptinFields){
+      setOptinFields(setting.OptinFields)
+    }
+  },[ setting])
   const debounceSubmit = useCallback(
     debounce(() => {
       setSignupForm({
@@ -74,7 +82,8 @@ export default function SignupContainer(props) {
         trackClickEvent("submitting-for-signup");
         const res = await SignupWithPassword(
           SignupForm.email,
-          SignupForm.password
+          SignupForm.password,
+          optinFields,
         );
         if (res.email) {
           await loginWithPassword(SignupForm.email, SignupForm.password);
@@ -177,6 +186,15 @@ export default function SignupContainer(props) {
     setWhichPage("forgotPassword-page");
   };
 
+  const handleOptinsCheckBoxes = (optinField)=>{
+    setOptinFields(prevOptingSettings=>{
+      const newOptingSettings = {...prevOptingSettings}
+      newOptingSettings[optinField].checked = newOptingSettings[optinField].checked==="false"? "true": "false"
+      return newOptingSettings
+    })
+
+  }
+
   const child = React.Children.only(props.children);
   return React.cloneElement(child, {
     onSubmit,
@@ -194,5 +212,7 @@ export default function SignupContainer(props) {
     showSignupForm,
     errorEmail,
     handleForgotPasswordClick,
+    handleOptinsCheckBoxes,
+    optinFields,
   });
 }

@@ -267,6 +267,22 @@
   margin-top: 0.5rem;
   color: rgb(175, 174, 174);
 }
+.optinFieldsWrapper{
+  margin-top: 1rem;
+  
+}
+.optinField {
+  border: 1px solid rgb(212, 213, 219);
+  border-radius: 4px;
+  padding: 0.5rem;
+  display: flex;
+  margin: 0.5rem 0rem;
+}
+
+.optinFieldInput{
+  zoom: 1.5;
+  margin: 0.2rem 0.5rem 0rem 0rem;
+}
 
 @media only screen and (min-width: 700px) {
   .SignupWrapper {

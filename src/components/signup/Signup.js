@@ -22,6 +22,8 @@ const Signup = (props) => {
     isValid,
     SignupError,
     handleForgotPasswordClick,
+    handleOptinsCheckBoxes,
+    optinFields,
   } = props;
   const [showPassword, setShowPassword] = useState(false);
   const [displayRules, setDisplayRules] = useState(false);
@@ -258,6 +260,71 @@ const Signup = (props) => {
               {translate(SignupError.errorCode)}
             </div>
           )}
+          <div className={styles.optinFieldsWrapper}>
+            {optinFields && optinFields.VirusThreats.display === "true" && (
+              <div className={styles.optinField}>
+                <input
+                  className={styles.optinFieldInput}
+                  type="checkbox"
+                  id="VirusThreats"
+                  name="VirusThreats"
+                  value="VirusThreats"
+                  onChange={(e) => {
+                    handleOptinsCheckBoxes(e.target.name);
+                  }}
+                  checked={
+                    optinFields.VirusThreats.checked === "true" ? true : false
+                  }
+                />
+                <label htmlFor="VirusThreats">
+                  I want to receive information about the latest viruses
+                  (available in English only).
+                </label>
+              </div>
+            )}
+            {optinFields && optinFields.SpecialPromo.display === "true" && (
+              <div className={styles.optinField}>
+                <input
+                  className={styles.optinFieldInput}
+                  type="checkbox"
+                  id="SpecialPromo"
+                  name="SpecialPromo"
+                  value="SpecialPromo"
+                  onChange={(e) => {
+                    handleOptinsCheckBoxes(e.target.name);
+                  }}
+                  checked={
+                    optinFields.SpecialPromo.checked === "true" ? true : false
+                  }
+                />
+                <label htmlFor="SpecialPromo">
+                  I would like to receive information about McAfee special
+                  offers.
+                </label>
+              </div>
+            )}
+            {optinFields && optinFields.PartnerPromo.display === "true" && (
+              <div className={styles.optinField}>
+                <input
+                  className={styles.optinFieldInput}
+                  type="checkbox"
+                  id="PartnerPromo"
+                  name="PartnerPromo"
+                  value="PartnerPromo"
+                  onChange={(e) => {
+                    handleOptinsCheckBoxes(e.target.name);
+                  }}
+                  checked={
+                    optinFields.PartnerPromo.checked === "true" ? true : false
+                  }
+                />
+                <label htmlFor="PartnerPromo">
+                  I would like to receive information about special offers from
+                  McAfee partners.
+                </label>
+              </div>
+            )}
+          </div>
           <div className={styles.PolicyLink}>
             <FormattedMessage
               id="By_clicking_Create_my_Account_you_accept_McAfee_License_Agreement_and_Privacy_Notice"

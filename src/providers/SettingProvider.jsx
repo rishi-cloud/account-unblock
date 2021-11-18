@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { TrackingContext } from "./TrackingProvider";
-
+import settings from "../localization/settings";
 const SettingContext = React.createContext({});
 
 const SettingProvider = (props) => {
   const [setting, setSetting] = useState(null);
   const [localizedContent, setLocalizedContent] = useState(null);
   const { trackClickEvent } = useContext(TrackingContext);
+  const [optinFields, setOptinFields] = useState();
   const ExtractingLocalizedContent = (jsonData) => {
     const errorMessage = {
       ...jsonData.error.login,
@@ -22,7 +23,7 @@ const SettingProvider = (props) => {
         obj[key] = jsonData[key];
         return obj;
       }, {});
-    console.log("finalMessage", { ...errorMessage, ...Messages });
+    // console.log("finalMessage", { ...errorMessage, ...Messages });
     return {
       ...errorMessage,
       ...Messages,
@@ -39,9 +40,17 @@ const SettingProvider = (props) => {
   useEffect(() => {
     const getSettings = async () => {
       try {
-        const settingResponse = await axios.get(
-          `https://d1aza67fhfglew.cloudfront.net/settings/${props.locale}.json`
-        );
+        // CDN is not working
+        // const settingResponse = await axios.get(
+        //   `"https://d1aza67fhfglew.cloudfront.net/settings/${props.locale}.json`
+        // );
+        const settingResponse = {data:settings[props.locale]}
+        if (
+          settingResponse.data?.affiliates &&
+          typeof settingResponse.data.affiliates === "object"
+        ) {
+          setSetting(settingResponse.data.affiliates[props.affiliateId]);
+        }
         const localeForMessageLink =
           props?.locale.slice(0, -2) +
           props?.locale[props?.locale.length - 2].toUpperCase() +
@@ -49,8 +58,8 @@ const SettingProvider = (props) => {
         const localizedFileResponse = await axios.get(
           `https://d1aza67fhfglew.cloudfront.net/content/${localeForMessageLink}/messages.json`
         );
-        console.log("settings", settingResponse);
-        setSetting(settingResponse);
+       
+        
         setLocalizedContent(
           ExtractingLocalizedContent(localizedFileResponse.data)
         );
@@ -62,7 +71,7 @@ const SettingProvider = (props) => {
   }, [props?.locale]);
 
   return (
-    <SettingContext.Provider value={{ setting, localizedContent }}>
+    <SettingContext.Provider value={{ setting, localizedContent, optinFields }}>
       {props.children}
     </SettingContext.Provider>
   );

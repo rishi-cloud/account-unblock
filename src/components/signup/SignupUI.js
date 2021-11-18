@@ -24,6 +24,8 @@ const SignupUI = (props) => {
     changePage,
     showSignupForm,
     errorEmail,
+    handleOptinsCheckBoxes,
+    optinFields,
   } = props;
   // const { setWhichPage } = useContext(AppContext);
   const { SignupText } = useContext(CommonDataContext);
@@ -104,6 +106,8 @@ const SignupUI = (props) => {
                   PasswordPolicyState={PasswordPolicyState}
                   isValid={isValid}
                   SignupError={SignupError}
+                  handleOptinsCheckBoxes={handleOptinsCheckBoxes}
+                  optinFields={optinFields}
                 ></Signup>
               ) : null}
             </div>
