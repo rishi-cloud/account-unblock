@@ -93,6 +93,7 @@ function ForgotPasswordContainer(props) {
     handleEmailMe,
     backToSignIn,
     validateEmail,
+    updateEmailDetails,
   });
 }
 

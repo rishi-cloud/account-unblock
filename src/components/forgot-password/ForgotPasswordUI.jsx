@@ -12,6 +12,7 @@ function ForgotPasswordUI(props) {
     handleEmailMe,
     backToSignIn,
     validateEmail,
+    updateEmailDetails,
   } = props;
   const { locale } = useContext(CommonDataContext);
   const FORMATVALUES = {
@@ -27,7 +28,11 @@ function ForgotPasswordUI(props) {
   return (
     <>
       {emailDetails.emailSent ? (
-        <ForgotPasswordEmail backToSignIn={backToSignIn} />
+        <ForgotPasswordEmail
+          backToSignIn={backToSignIn}
+          updateEmailDetails={updateEmailDetails}
+          emailDetails={emailDetails}
+        />
       ) : (
         <div className="ForgotPasswordContainer">
           <div className="ForgotPasswordLeftWrapper">
@@ -116,15 +121,6 @@ function ForgotPasswordUI(props) {
                   )}
                   values={{
                     ...FORMATVALUES,
-                    a: (chunks) => (
-                      <a
-                        className="contactSupportBtn"
-                        target="_blank"
-                        href="https://www.example.com/shoe"
-                      >
-                        {chunks}
-                      </a>
-                    ),
                   }}
                 >
                   {(chunks) => <p className="contactSupportText">{chunks}</p>}

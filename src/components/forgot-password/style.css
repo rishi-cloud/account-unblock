@@ -25,7 +25,7 @@
   color: #212934;
 }
 .ForgotPasswordIntroSubHeading {
-  color: #5A6175;
+  color: #5a6175;
   font-size: 1rem;
   line-height: 1.25rem;
 }
@@ -39,7 +39,6 @@
 .McAfeeLogo {
   flex: 1;
   width: 10rem;
-  height: 1rem,
 }
 .emailMeBtnWrapper {
   display: flex;
@@ -63,18 +62,18 @@
 .emailMeBtn:focus {
   outline: none;
 }
-.emailMeBtnDisabled{
-    background-color: rgb(204, 204, 204);
+.emailMeBtnDisabled {
+  background-color: rgb(204, 204, 204);
 }
 
 .contactSupportWrapper {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   font-size: 12px;
   line-height: 16px;
   margin: 1rem 0rem;
-  color: #6D7895;
+  color: #6d7895;
 }
 .contactSupportText {
   margin: 0rem;
@@ -84,6 +83,7 @@
   outline: none;
   background-color: inherit;
   color: #4258ff;
+  font-weight: 400;
 }
 .contactSupportBtn:focus {
   outline: none;
@@ -142,7 +142,7 @@
 }
 
 .flexGrow {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 .ForgotPasswordInputLabel {
@@ -157,7 +157,6 @@
   font-size: 0.75rem;
   font-weight: 1.25rem;
 }
-
 
 /* screen from tablet and above */
 @media only screen and (min-width: 768px) {
@@ -177,9 +176,9 @@
     flex: 1 1;
     margin-top: 5.2rem;
   }
-  .limitWidth{
+  .limitWidth {
     max-width: 55%;
-}
+  }
 }
 
 /* screen above large mobile */
@@ -197,19 +196,17 @@
   .ForgotPasswordContainer {
     margin-right: 6rem;
   }
-  .limitWidth{
+  .limitWidth {
     max-width: 60%;
-}
+  }
 }
 
- /* screen for big size devices */
- @media only screen and (min-width: 1140px) {
-    .ForgotPasswordLeftContainer {
-        padding-right: 5rem;
-      }
-      .ForgotPasswordRightWrapper {
-       padding: 0rem 6rem;
-      }
-
-    
+/* screen for big size devices */
+@media only screen and (min-width: 1140px) {
+  .ForgotPasswordLeftContainer {
+    padding-right: 5rem;
+  }
+  .ForgotPasswordRightWrapper {
+    padding: 0rem 6rem;
+  }
 }
