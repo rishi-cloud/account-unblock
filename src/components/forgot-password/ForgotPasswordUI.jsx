@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import translate from "../../localization/translate";
 import { AiOutlineMail } from "react-icons/ai";
 import "./style.css";
 import ForgotPasswordEmail from "./ForgotPasswordEmail";
 import { FormattedMessage } from "react-intl";
+import { CommonDataContext } from "../../providers/CommonDataContext";
 function ForgotPasswordUI(props) {
   const {
     emailDetails,
@@ -12,6 +13,17 @@ function ForgotPasswordUI(props) {
     backToSignIn,
     validateEmail,
   } = props;
+  const { locale } = useContext(CommonDataContext);
+  const FORMATVALUES = {
+    a_contact_support: (chunks) => (
+      <a
+        style={{ color: "rgb(66, 88, 255)" }}
+        href={`https://home.mcafee.com/root/support.aspx?culture=${locale.toUpperCase()}`}
+      >
+        {chunks}
+      </a>
+    ),
+  };
   return (
     <>
       {emailDetails.emailSent ? (
@@ -103,6 +115,7 @@ function ForgotPasswordUI(props) {
                     "Forgot_your_password_contact_support"
                   )}
                   values={{
+                    ...FORMATVALUES,
                     a: (chunks) => (
                       <a
                         className="contactSupportBtn"

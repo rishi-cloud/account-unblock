@@ -172,6 +172,10 @@ export default function SignupContainer(props) {
       [e.target.name]: e.target.value,
     });
   };
+  const handleForgotPasswordClick = (e) => {
+    e.preventDefault();
+    setWhichPage("forgotPassword-page");
+  };
 
   const child = React.Children.only(props.children);
   return React.cloneElement(child, {
@@ -189,5 +193,6 @@ export default function SignupContainer(props) {
     changePage,
     showSignupForm,
     errorEmail,
+    handleForgotPasswordClick,
   });
 }

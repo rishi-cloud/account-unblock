@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./style.module.css";
 import { ReactComponent as OutlineMail } from "../../svg/mailIcon.svg";
 import { ReactComponent as LockOutline } from "../../svg/lockIcon.svg";
@@ -9,6 +9,7 @@ import { DisplayRules } from "../../utils/displayRules";
 import { ReactComponent as TickIcon } from "../../svg/tickIcon.svg";
 import translate from "../../localization/translate";
 import { FormattedMessage } from "react-intl";
+import { CommonDataContext } from "../../providers/CommonDataContext";
 
 const Signup = (props) => {
   const {
@@ -20,14 +21,55 @@ const Signup = (props) => {
     onClick,
     isValid,
     SignupError,
+    handleForgotPasswordClick,
   } = props;
   const [showPassword, setShowPassword] = useState(false);
   const [displayRules, setDisplayRules] = useState(false);
+  const { locale } = useContext(CommonDataContext);
 
   const { getKeys, displayablerule } = DisplayRules(
     passwordRules,
     PasswordPolicyState
   );
+  const values = {
+    a_contact_support: (chunks) => (
+      <a
+        style={{ color: "rgb(66, 88, 255)" }}
+        className={styles.external_link}
+        href={`https://home.mcafee.com/root/support.aspx?culture=${locale.toUpperCase()}`}
+      >
+        {chunks}
+      </a>
+    ),
+    a_McAfee_License: (chunks) => (
+      <a
+        style={{ color: "rgb(66, 88, 255)" }}
+        className={styles.external_link}
+        href={`https://www.mcafee.com/en-au/consumer-support/policy/legal.html?culture=${locale.toUpperCase()}#eula`}
+      >
+        {chunks}
+      </a>
+    ),
+    a_reset_pass: (chunks) => (
+      <button
+        type="button"
+        className={styles.forgotPassword}
+        onClick={handleForgotPasswordClick}
+        id="forgot-password-button-click"
+      >
+        {chunks}
+      </button>
+    ),
+    a_privacy_notice: (chunks) => (
+      <a
+        style={{ color: "rgb(66, 88, 255)" }}
+        className={styles.external_link}
+        href={`https://www.mcafee.com/legal?culture=${locale.toUpperCase()}&affid=916#privacytop`}
+      >
+        {chunks}
+      </a>
+    ),
+  };
   return (
     <div className={styles.formWrapper}>
       <form className={styles.InputWrapper}>
@@ -216,18 +258,9 @@ const Signup = (props) => {
           <div className={styles.PolicyLink}>
             <FormattedMessage
               id="By_clicking_Create_my_Account_you_accept_McAfee_License_Agreement_and_Privacy_Notice"
-              defaultMessage="By clicking <b>Create my account</b> you accept <a>McAfee’s License Agreement</a> and <a>Privacy Notice</a>"
+              defaultMessage="By clicking <b>Create my account</b> you accept <a_McAfee_License>McAfee’s License Agreement</a_McAfee_License> and <a_privacy_notice>Privacy Notice</a_privacy_notice>"
               values={{
-                a: (chunks) => (
-                  <a
-                    style={{ color: "rgb(66, 88, 255)" }}
-                    className={styles.external_link}
-                    target="_blank"
-                    href="https://www.example.com/shoe"
-                  >
-                    {chunks}
-                  </a>
-                ),
+                ...values,
 
                 b: (chunks) => <strong>{chunks}</strong>,
               }}

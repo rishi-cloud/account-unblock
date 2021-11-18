@@ -17,6 +17,7 @@ const PasswordLessFlow = (props) => {
     trackClickEvent,
     LoginText,
     otpValid,
+    locale,
   } = props;
 
   return (
@@ -156,7 +157,11 @@ const PasswordLessFlow = (props) => {
                 cursor: "pointer",
               }}
             >
-              {translate("Contact_support")}
+              <a
+                href={`https://home.mcafee.com/root/support.aspx?culture=${locale.toUpperCase()}`}
+              >
+                {translate("Contact_support")}
+              </a>
             </div>
           </div>
         </div>

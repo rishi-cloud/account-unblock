@@ -63,6 +63,7 @@ const App = ({ pageConfig, passwordResetConfig }) => {
           config={pageConfig}
           passwordResetConfig={passwordResetConfig}
           email={email.current}
+          locale={locale.current}
         >
           <AppProvider>
             <LanguageProvider locale={locale.current}>

@@ -272,7 +272,7 @@ export default function LoginContainer(props) {
             // databaseError: err?.description,
             // errorCode: err?.code === null ? err.original.message : err?.code,
             databaseError: "Blocked user",
-            errorCode: `login.auth0_password_lock`,
+            errorCode: `login.password_lock`,
           });
         }
       } else {
@@ -288,7 +288,9 @@ export default function LoginContainer(props) {
           ...LoginError,
           databaseError: err?.description,
           errorCode:
-            err?.code === null ? err.original.message : `login.${err?.code}`,
+            err?.code === null
+              ? `login.${err.original.message}`
+              : `login.${err?.code}`,
         });
       }
       setLoginForm({
@@ -344,8 +346,8 @@ export default function LoginContainer(props) {
     } catch (err) {
       if (err.code === "too_many_attempts") {
         setLoginText({
-          title: "You_have_reached_the_maximum_number_of_password_attempts",
-          subtitle: "You_have_reached_the_maximum_number_of_password_attempts",
+          title: "You_have_reached_the_maximum_number_of_passcode_attempts",
+          subtitle: "You_have_reached_the_maximum_number_of_passcode_attempts",
         });
         setLoginError({
           ...LoginError,
@@ -380,7 +382,6 @@ export default function LoginContainer(props) {
           isSubmitting: false,
         });
       }
-
       setOtpTimer(false);
       settingCookies();
       trackClickEvent("otp-login-failure");

@@ -9,6 +9,7 @@ const CommonDataContext = React.createContext({});
 const CommonDataProvider = (props) => {
   // Initializing the states
   const [connections, setConn] = useState([]);
+  const [locale, setLocale] = useState("en-us");
   const [passwordResetConfig, setPasswordResetConfig] = useState({});
   const [LoginText, setLoginText] = useState({
     title: "Sign_into_your_McAfee_account",
@@ -39,16 +40,16 @@ const CommonDataProvider = (props) => {
 
   const getCommonData = async () => {
     try {
-      // `https://${props.config.auth0Domain}/client/${props.config.clientID}.js`
+      // `/client/soKVdT2wmzd71LKYoZpv6FJMTg6yQ238.js`
       const res = await axios.get(
-        `/client/soKVdT2wmzd71LKYoZpv6FJMTg6yQ238.js`
+        `https://${props.config.auth0Domain}/client/${props.config.clientID}.js`
       );
       const data = res.data;
       if (typeof data === "string") {
         const filteredData = data.slice(16, -2);
         const jsonData = JSON.parse(filteredData);
         const DB_ARRAY = jsonData?.strategies[0]?.connections.filter(
-          (item) => item.name === "Username-Password-Authentication"
+          (item) => item.name === "Test-CustomDB"
         );
         console.log("DB ARRAY RECIVED", DB_ARRAY);
         setConn(DB_ARRAY);
@@ -59,7 +60,10 @@ const CommonDataProvider = (props) => {
     }
   };
   useEffect(() => {
-    if (props.config) getCommonData();
+    if (props.config) {
+      setLocale(props?.locale);
+      getCommonData();
+    }
     if (props.passwordResetConfig)
       setPasswordResetConfig(props.passwordResetConfig);
   }, []);
@@ -76,6 +80,7 @@ const CommonDataProvider = (props) => {
         SignupForm,
         setSignupForm,
         passwordResetConfig,
+        locale,
       }}
     >
       {props.children}

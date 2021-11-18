@@ -37,7 +37,7 @@ const LoginUI = (props) => {
     blockScreenToggle,
     blockScreenState,
   } = props;
-  const { LoginText, utagData } = useContext(CommonDataContext);
+  const { LoginText, utagData, locale } = useContext(CommonDataContext);
 
   const trackClickEvent = (navElement) => {
     let utag = window.utag;
@@ -46,6 +46,54 @@ const LoginUI = (props) => {
     updatedUtagData["tm_global_navigation_element"] = navElement;
     updatedUtagData["tm_global_navigation_element_click"] = "true";
     utag?.link(updatedUtagData);
+  };
+  const FORMATVALUES = {
+    a_contact_support: (chunks) => (
+      <a
+        style={{ color: "rgb(66, 88, 255)" }}
+        className={styles.external_link}
+        href={`https://home.mcafee.com/root/support.aspx?culture=${locale.toUpperCase()}`}
+      >
+        {chunks}
+      </a>
+    ),
+    a_McAfee_License: (chunks) => (
+      <a
+        style={{ color: "rgb(66, 88, 255)" }}
+        className={styles.external_link}
+        href={`https://www.mcafee.com/en-au/consumer-support/policy/legal.html?culture=${locale.toUpperCase()}#eula`}
+      >
+        {chunks}
+      </a>
+    ),
+    a_reset_pass: (chunks) => (
+      <strong
+        className={styles.important}
+        style={{ color: "rgb(66, 88, 255)" }}
+        onClick={handleForgotPasswordClick}
+        id="forgot-password-button-click"
+      >
+        {chunks}
+      </strong>
+    ),
+    a_signin_otp: (chunks) => (
+      <strong
+        className={styles.important}
+        onClick={onToggle}
+        id="Sigin-With-OTP"
+      >
+        {translate("Sign_in_with_a_onetime_passcode")}
+      </strong>
+    ),
+    a_privacy_notice: (chunks) => (
+      <a
+        style={{ color: "rgb(66, 88, 255)" }}
+        className={styles.external_link}
+        href={`https://www.mcafee.com/legal?culture=${locale.toUpperCase()}&affid=916#privacytop`}
+      >
+        {chunks}
+      </a>
+    ),
   };
   const BottomHeading = () => {
     if (!blockScreenState.passwordBlock && !blockScreenState.otpBlock) {
@@ -83,6 +131,7 @@ const LoginUI = (props) => {
                 id="login.auth0_password_lock"
                 defaultMessage="We sent a one-time passcode to <b>{email}</b>"
                 values={{
+                  ...FORMATVALUES,
                   a: (chunks) => (
                     <strong className={styles.important}>{chunks}</strong>
                   ),
@@ -99,6 +148,7 @@ const LoginUI = (props) => {
                 id="otp_lock_bottom_Message"
                 defaultMessage="You may sign in with a password, try <a>resetting your password</a> or <b>Contact Support.</b>"
                 values={{
+                  ...FORMATVALUES,
                   a: (chunks) => (
                     <strong className={styles.important}>{chunks}</strong>
                   ),
@@ -159,12 +209,13 @@ const LoginUI = (props) => {
             setTimer={setTimer}
             trackClickEvent={trackClickEvent}
             blockScreenState={blockScreenState}
+            locale={locale}
           />
         </div>
       );
     }
   };
-
+  console.log("error", typeof LoginError.errorCode);
   return (
     <>
       {loader ? (
@@ -195,6 +246,7 @@ const LoginUI = (props) => {
                     id={LoginText.subtitle}
                     defaultMessage="We sent a one-time passcode to <b>{email}</b>"
                     values={{
+                      ...FORMATVALUES,
                       b: (chunks) => <strong>{chunks}</strong>,
                       email: `${LoginForm.email}`,
                       a: (chunks) => (
@@ -219,8 +271,9 @@ const LoginUI = (props) => {
                     <p>
                       <FormattedMessage
                         id={LoginError.errorCode}
-                        defaultMessage="We couldn’t sign you with this email and password. Try again, <b>reset your password</b>, or <b>sign in with a one-time passcode</b>."
+                        defaultMessage="We're sorry, something went wrong"
                         values={{
+                          ...FORMATVALUES,
                           b: (chunks) => (
                             <strong className={styles.importantBold}>
                               {chunks}
@@ -231,7 +284,7 @@ const LoginUI = (props) => {
                               {chunks}
                             </strong>
                           ),
-                          rotp: (chunks) => (
+                          a_rotp: (chunks) => (
                             <strong
                               className={styles.important}
                               onClick={getOtp}
@@ -241,9 +294,7 @@ const LoginUI = (props) => {
                           ),
                           email: `${LoginForm.email}`,
                         }}
-                      >
-                        {(chunks) => <p>{chunks}</p>}
-                      </FormattedMessage>
+                      ></FormattedMessage>
                     </p>
                   </div>
                 )}

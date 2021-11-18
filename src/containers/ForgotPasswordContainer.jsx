@@ -9,7 +9,7 @@ function ForgotPasswordContainer(props) {
     emailError: "",
     emailSent: false,
   });
-  const { setLoginText } = useContext(CommonDataContext);
+  const { setLoginText, setLoginForm } = useContext(CommonDataContext);
 
   const { sendForgotPasswordLink } = useContext(AccountContext);
   const { setWhichPage } = useContext(AppContext);
@@ -71,6 +71,17 @@ function ForgotPasswordContainer(props) {
     }
   };
   const backToSignIn = () => {
+    setLoginText({
+      title: "Sign_into_your_McAfee_account",
+      subtitle: "choose_your_signIn_method_continue",
+    });
+    setLoginForm({
+      email: "",
+      password: "",
+      otp: "",
+      otpAvailable: false,
+      isSubmitting: false,
+    });
     setWhichPage("login-page");
   };
 
