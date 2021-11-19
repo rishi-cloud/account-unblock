@@ -233,6 +233,7 @@ export default function LoginContainer(props) {
         email: "",
         password: "",
         otpAvailable: false,
+        isSubmitting: false,
       });
       setHideEmail(false);
       setOnlyPasswordLock(false);
@@ -387,6 +388,10 @@ export default function LoginContainer(props) {
             // errorCode: err?.code === null ? err.original.message : err?.code,
             databaseError: "",
             errorCode: "",
+          });
+          setLoginForm({
+            ...LoginForm,
+            isSubmitting: false,
           });
         } else {
           setLoginText({
