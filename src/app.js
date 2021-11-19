@@ -28,7 +28,7 @@ const App = ({ pageConfig, passwordResetConfig }) => {
 
   let query = useQuery();
   let locale = useRef("");
-  const affiliateId = useRef(query.get("aff_id"));
+  const affiliateId = useRef(query.get("aff_id") || parsedHash.get("aff_id"));
   let email = useRef("");
   email.current = query.get("email") ? parsedHash.get("email") : "";
   let lang;
