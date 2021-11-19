@@ -10,6 +10,7 @@ import { ReactComponent as TickIcon } from "../../svg/tickIcon.svg";
 import translate from "../../localization/translate";
 import { FormattedMessage } from "react-intl";
 import { CommonDataContext } from "../../providers/CommonDataContext";
+import { validate } from "password-sheriff/lib/rules/length";
 
 const Signup = (props) => {
   const {
@@ -75,6 +76,7 @@ const Signup = (props) => {
       </a>
     ),
   };
+  console.log("block", optinFields);
   return (
     <div className={styles.formWrapper}>
       <form className={styles.InputWrapper}>
@@ -377,6 +379,7 @@ const Signup = (props) => {
           <button
             className={
               SignupForm.email !== "" &&
+              validate(SignupForm.email) &&
               SignupForm.password !== "" &&
               SignupForm.confirmPassword !== "" &&
               SignupForm.password === SignupForm.confirmPassword &&

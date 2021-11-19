@@ -97,6 +97,8 @@ const en = {
       "Close this tab to return to the previous page and sign in.",
     "passwordless.invalid_user_password":
       "We couldn’t sign you with this passcode. <a_rotp>Try again or resend code.</a_rotp>",
+    "passwordless.passcode_lock":
+      "For your security, passcode sign in for <b>{email}</b> has been locked due to too many sign in attempts.",
     Need_help: "Need help?",
     Contact_support: "Contact support",
     login_lock_title:
@@ -111,6 +113,14 @@ const en = {
       " I would like to receive information about McAfee special offers.",
     optin_PartnerPromo:
       "I would like to receive information about special offers from McAfee partners.",
+    Resending_code: "Resending code...",
+    Code_sent: "Code sent.",
+    "passwordless.multiple_resend_otp":
+      "You’ve reached the maximum number of one-time passcode attempts. Wait a few minutes and try again.",
+    You_have_reached_the_maximum_number_of_passcode_attempts:
+      "You’ve reached the maximum number of passcode attempts",
+    We_just_sent_an_email_with_a_link_to_unlock_your_account_You_may_sign_in_with_a_password:
+      "We just sent an email with a link to unlock your account. You may sign in with a password, <a_reset_pass>try resetting your password</a_reset_pass> or <a_contact_support>Contact Support.</a_contact_support>",
   },
 };
 export default en;

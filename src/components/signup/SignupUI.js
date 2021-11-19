@@ -26,6 +26,7 @@ const SignupUI = (props) => {
     errorEmail,
     handleOptinsCheckBoxes,
     optinFields,
+    validateEmail,
   } = props;
   // const { setWhichPage } = useContext(AppContext);
   const { SignupText } = useContext(CommonDataContext);
@@ -108,6 +109,7 @@ const SignupUI = (props) => {
                   SignupError={SignupError}
                   handleOptinsCheckBoxes={handleOptinsCheckBoxes}
                   optinFields={optinFields}
+                  validateEmail={validateEmail}
                 ></Signup>
               ) : null}
             </div>

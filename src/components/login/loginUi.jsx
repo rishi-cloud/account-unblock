@@ -36,8 +36,12 @@ const LoginUI = (props) => {
     handleForgotPasswordClick,
     blockScreenToggle,
     blockScreenState,
+    onlyPasswordLock,
+    onlyOTPLock,
   } = props;
   const { LoginText, utagData, locale } = useContext(CommonDataContext);
+
+  console.log("what is happening to them", onlyPasswordLock, onlyOTPLock);
 
   const trackClickEvent = (navElement) => {
     let utag = window.utag;
@@ -119,13 +123,13 @@ const LoginUI = (props) => {
         return (
           <div
             className={styles.Signuppagelink}
-            onClick={() => blockScreenToggle("with-password")}
+            onClick={() => blockScreenToggle("both-locked")}
             id="Signin-redirect-from-blockscreen"
           >
             {translate("Sign_in_with_a_different_email_address")}
           </div>
         );
-      } else if (blockScreenState.passwordBlock) {
+      } else if (blockScreenState.passwordBlock && onlyPasswordLock) {
         console.log("inside this one");
         return (
           <div className={styles.LoginBottomHeading}>
@@ -143,7 +147,7 @@ const LoginUI = (props) => {
             </p>
           </div>
         );
-      } else if (blockScreenState.otpBlock) {
+      } else if (blockScreenState.otpBlock && onlyOTPLock) {
         return (
           <div className={styles.LoginBottomHeading}>
             <p>
@@ -164,7 +168,20 @@ const LoginUI = (props) => {
           </div>
         );
       } else {
-        return;
+        return (
+          <div className={styles.LoginBottomHeading}>
+            <div>{translate("Do_not_have_an_account")}</div>
+            <div
+              className={styles.Loginpagelink}
+              onClick={() => {
+                changePage();
+              }}
+              id="Signup-page-link-button"
+            >
+              {translate("Create_one_now")}
+            </div>
+          </div>
+        );
       }
     }
   };
@@ -172,9 +189,9 @@ const LoginUI = (props) => {
     if (blockScreenState.otpBlock && blockScreenState.passwordBlock) {
       return null;
     } else if (blockScreenState.otpBlock || blockScreenState.passwordBlock) {
-      if (blockScreenState.passwordBlock) {
+      if (blockScreenState.passwordBlock && onlyPasswordLock) {
         return <PasswordBlockScreen blockScreenToggle={blockScreenToggle} />;
-      } else {
+      } else if (blockScreenState.otpBlock && onlyOTPLock) {
         return (
           <OtpBlockScreen
             onChange={onChange}
@@ -187,6 +204,33 @@ const LoginUI = (props) => {
             handleForgotPasswordClick={handleForgotPasswordClick}
             blockScreenState={blockScreenState}
           />
+        );
+      } else {
+        return (
+          <div className={styles.LoginRightWrapper}>
+            <Login
+              LoginError={LoginError}
+              onChange={onChange}
+              switchLogin={switchLogin}
+              onSubmit={onSubmit}
+              LoginForm={LoginForm}
+              onToggle={onToggle}
+              onPressContinue={onPressContinue}
+              Continue={Continue}
+              getOtp={getOtp}
+              validateEmail={validateEmail}
+              socialBtn={socialBtn}
+              hideEmail={hideEmail}
+              LoginText={LoginText}
+              otpValid={otpValid}
+              setOtpValid={setOtpValid}
+              handleForgotPasswordClick={handleForgotPasswordClick}
+              setTimer={setTimer}
+              trackClickEvent={trackClickEvent}
+              blockScreenState={blockScreenState}
+              locale={locale}
+            />
+          </div>
         );
       }
     } else {
@@ -239,8 +283,8 @@ const LoginUI = (props) => {
                       blockScreenState.otpBlock &&
                       blockScreenState.passwordBlock
                         ? "block"
-                        : blockScreenState.otpBlock ||
-                          blockScreenState.passwordBlock
+                        : (blockScreenState.otpBlock && onlyOTPLock) ||
+                          (blockScreenState.passwordBlock && onlyPasswordLock)
                         ? "none"
                         : "block",
                   }}

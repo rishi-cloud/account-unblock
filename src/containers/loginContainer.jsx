@@ -22,7 +22,8 @@ export default function LoginContainer(props) {
     databaseError: "",
     errorCode: "",
   });
-
+  const [onlyPasswordLock, setOnlyPasswordLock] = useState(false);
+  const [onlyOTPLock, setOnlyOTPLock] = useState(false);
   const { utagData, setUtagData } = useContext(TrackingContext);
   const [TimerState, setTimer] = useState({
     minutes: 3,
@@ -90,6 +91,7 @@ export default function LoginContainer(props) {
       } else {
         cookies.set("ua", { ...currentPage, at: "password" }, { path: "/" });
       }
+      setOnlyOTPLock(false);
     } else if (switchLogin === "login-with-password") {
       setLoginText({
         title: "We_will_send_you_a_otp_title",
@@ -194,6 +196,7 @@ export default function LoginContainer(props) {
         password: "",
         otpAvailable: false,
       });
+      setOnlyPasswordLock(false);
     } else if (whichLink === "with-otp") {
       setToggle("login-with-otp");
       setLoginText({
@@ -212,11 +215,32 @@ export default function LoginContainer(props) {
         password: "",
         otpAvailable: false,
       });
+      setOnlyPasswordLock(false);
+    } else if (whichLink === "both-locked") {
+      setToggle("login-with-password");
+      setLoginText({
+        title: "Sign_into_your_McAfee_account",
+        subtitle: "choose_your_signIn_method_continue",
+      });
+      setLoginError({
+        ...LoginError,
+        email: "",
+        databaseError: "",
+        errorCode: "",
+      });
+      setLoginForm({
+        ...LoginForm,
+        email: "",
+        password: "",
+        otpAvailable: false,
+      });
+      setOnlyPasswordLock(false);
+      setOnlyOTPLock(false);
+      setBlockScreenState({
+        otpBlock: false,
+        passwordBlock: false,
+      });
     }
-    setBlockScreenState({
-      otpBlock: false,
-      passwordBlock: false,
-    });
   };
 
   const onChange = (e) => {
@@ -249,6 +273,7 @@ export default function LoginContainer(props) {
           ...blockScreenState,
           passwordBlock: true,
         });
+        setOnlyPasswordLock(true);
         if (blockScreenState.otpBlock) {
           setLoginText({
             title: "login_lock_title",
@@ -345,29 +370,45 @@ export default function LoginContainer(props) {
       }
     } catch (err) {
       if (err.code === "too_many_attempts") {
-        setLoginText({
-          title: "You_have_reached_the_maximum_number_of_passcode_attempts",
-          subtitle: "You_have_reached_the_maximum_number_of_passcode_attempts",
-        });
-        setLoginError({
-          ...LoginError,
-          // databaseError: err?.description,
-          // errorCode: err?.code === null ? err.original.message : err?.code,
-          databaseError: "Blocked user",
-          errorCode: "passwordless.passcode_lock",
-        });
         setBlockScreenState({
           ...blockScreenState,
           otpBlock: true,
         });
-        setHideEmail(false);
-        setLoginForm({
-          ...LoginForm,
-          password: "",
-          otp: "",
-          otpAvailable: false,
-          isSubmitting: false,
-        });
+        setOnlyOTPLock(true);
+        if (blockScreenState.passwordBlock) {
+          setLoginText({
+            title: "login_lock_title",
+            subtitle: "login_lock_subtitle",
+          });
+          setLoginError({
+            ...LoginError,
+            // databaseError: err?.description,
+            // errorCode: err?.code === null ? err.original.message : err?.code,
+            databaseError: "",
+            errorCode: "",
+          });
+        } else {
+          setLoginText({
+            title: "You_have_reached_the_maximum_number_of_passcode_attempts",
+            subtitle:
+              "You_have_reached_the_maximum_number_of_passcode_attempts",
+          });
+          setLoginError({
+            ...LoginError,
+            // databaseError: err?.description,
+            // errorCode: err?.code === null ? err.original.message : err?.code,
+            databaseError: "Blocked user",
+            errorCode: "passwordless.passcode_lock",
+          });
+          setHideEmail(false);
+          setLoginForm({
+            ...LoginForm,
+            password: "",
+            otp: "",
+            otpAvailable: false,
+            isSubmitting: false,
+          });
+        }
       } else {
         console.log("errorcode", `passwordless.${err?.code}`);
         setLoginError({
@@ -478,5 +519,7 @@ export default function LoginContainer(props) {
     handleForgotPasswordClick,
     blockScreenToggle,
     blockScreenState,
+    onlyPasswordLock,
+    onlyOTPLock,
   });
 }

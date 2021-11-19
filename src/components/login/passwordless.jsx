@@ -4,6 +4,7 @@ import translate from "../../localization/translate";
 import styles from "./style.module.css";
 import { ReactComponent as OutlineMail } from "../../svg/mailIcon.svg";
 import { ReactComponent as TickIcon } from "../../svg/tickIcon.svg";
+import { FormattedMessage } from "react-intl";
 
 const PasswordLessFlow = (props) => {
   const {
@@ -19,6 +20,13 @@ const PasswordLessFlow = (props) => {
     otpValid,
     locale,
   } = props;
+  console.log(
+    "check them",
+    !validateEmail(LoginForm.email),
+    LoginForm.isSubmitting,
+    !otpValid,
+    LoginForm.otpAvailable && !LoginForm.otp
+  );
 
   return (
     <>
@@ -55,15 +63,19 @@ const PasswordLessFlow = (props) => {
                   color: validateEmail(LoginForm.email) ? "green" : "",
                 }}
               />
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={LoginForm.email}
-                placeholder="Email"
-                className={styles.LoginInput}
-                onChange={onChange}
-              />
+              <FormattedMessage id="email">
+                {(msg) => (
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={LoginForm.email}
+                    placeholder={msg}
+                    className={styles.LoginInput}
+                    onChange={onChange}
+                  />
+                )}
+              </FormattedMessage>
               {validateEmail(LoginForm.email) &&
               LoginText.title === "Looks_like_you_already_have_an_account" ? (
                 <TickIcon
@@ -97,16 +109,20 @@ const PasswordLessFlow = (props) => {
                 {translate("one_time_passcode")}
               </div>
             ) : null}
-            <input
-              type="text"
-              pattern="\d*"
-              maxlength="6"
-              id="otp"
-              name="otp"
-              placeholder="One-time passcode"
-              className={styles.LoginInput}
-              onChange={onChange}
-            />
+            <FormattedMessage id="one_time_passcode">
+              {(msg) => (
+                <input
+                  type="text"
+                  pattern="\d*"
+                  maxlength="6"
+                  id="otp"
+                  name="otp"
+                  placeholder={msg}
+                  className={styles.LoginInput}
+                  onChange={onChange}
+                />
+              )}
+            </FormattedMessage>
           </div>
           <div className={styles.LoginOtpResendContainer} onClick={getOtp}>
             <div className={styles.LoginResendBtn}>
