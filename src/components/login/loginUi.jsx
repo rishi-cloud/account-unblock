@@ -41,8 +41,6 @@ const LoginUI = (props) => {
   } = props;
   const { LoginText, utagData, locale } = useContext(CommonDataContext);
 
-  console.log("what is happening to them", onlyPasswordLock, onlyOTPLock);
-
   const trackClickEvent = (navElement) => {
     let utag = window.utag;
     let updatedUtagData = { ...utagData };
@@ -262,7 +260,7 @@ const LoginUI = (props) => {
       );
     }
   };
-  console.log("error", LoginError.errorCode);
+
   return (
     <>
       {loader ? (

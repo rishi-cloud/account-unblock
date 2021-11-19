@@ -20,13 +20,6 @@ const PasswordLessFlow = (props) => {
     otpValid,
     locale,
   } = props;
-  console.log(
-    "check them",
-    !validateEmail(LoginForm.email),
-    LoginForm.isSubmitting,
-    !otpValid,
-    LoginForm.otpAvailable && !LoginForm.otp
-  );
 
   return (
     <>
