@@ -60,6 +60,25 @@ const en = {
           },
         },
       },
+      0: {
+        OptinFields: {
+          VirusThreats: {
+            id: "1",
+            display: "true",
+            checked: "true",
+          },
+          SpecialPromo: {
+            id: "2",
+            display: "true",
+            checked: "false",
+          },
+          PartnerPromo: {
+            id: "3",
+            display: "true",
+            checked: "true",
+          },
+        }
+      }
     },
   },
 };
