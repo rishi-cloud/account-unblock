@@ -22,6 +22,8 @@ const Signup = (props) => {
     isValid,
     SignupError,
     handleForgotPasswordClick,
+    handleOptinsCheckBoxes,
+    optinFields,
   } = props;
   const [showPassword, setShowPassword] = useState(false);
   const [displayRules, setDisplayRules] = useState(false);
@@ -258,6 +260,80 @@ const Signup = (props) => {
               {translate(SignupError.errorCode)}
             </div>
           )}
+          {optinFields && (
+            <div className={styles.optinFieldsWrapper}>
+              {optinFields.VirusThreats &&
+                optinFields.VirusThreats.display === "true" && (
+                  <div className={styles.optinField}>
+                    <input
+                      className={styles.optinFieldInput}
+                      type="checkbox"
+                      id="VirusThreats"
+                      name="VirusThreats"
+                      value="VirusThreats"
+                      onChange={(e) => {
+                        handleOptinsCheckBoxes(e.target.name);
+                      }}
+                      checked={
+                        optinFields.VirusThreats.checked === "true"
+                          ? true
+                          : false
+                      }
+                    />
+                    <label htmlFor="VirusThreats">
+                      {translate("optin_VirusThreats")}
+                    </label>
+                  </div>
+                )}
+              {optinFields.SpecialPromo &&
+                optinFields.SpecialPromo.display === "true" && (
+                  <div className={styles.optinField}>
+                    <input
+                      className={styles.optinFieldInput}
+                      type="checkbox"
+                      id="SpecialPromo"
+                      name="SpecialPromo"
+                      value="SpecialPromo"
+                      onChange={(e) => {
+                        handleOptinsCheckBoxes(e.target.name);
+                      }}
+                      checked={
+                        optinFields.SpecialPromo.checked === "true"
+                          ? true
+                          : false
+                      }
+                    />
+                    <label htmlFor="SpecialPromo">
+                    {translate("optin_SpecialPromo")}
+                    </label>
+                  </div>
+                )}
+              {optinFields.PartnerPromo &&
+                optinFields.PartnerPromo.display === "true" && (
+                  <div className={styles.optinField}>
+                    <input
+                      className={styles.optinFieldInput}
+                      type="checkbox"
+                      id="PartnerPromo"
+                      name="PartnerPromo"
+                      value="PartnerPromo"
+                      onChange={(e) => {
+                        handleOptinsCheckBoxes(e.target.name);
+                      }}
+                      checked={
+                        optinFields.PartnerPromo.checked === "true"
+                          ? true
+                          : false
+                      }
+                    />
+                    <label htmlFor="PartnerPromo">
+                    {translate("optin_PartnerPromo")}
+                    </label>
+                  </div>
+                )}
+            </div>
+          )}
+
           <div className={styles.PolicyLink}>
             <FormattedMessage
               id="By_clicking_Create_my_Account_you_accept_McAfee_License_Agreement_and_Privacy_Notice"
