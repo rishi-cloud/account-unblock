@@ -82,15 +82,19 @@ function ForgotPasswordUI(props) {
                 }}
               >
                 <AiOutlineMail className="ForgotPasswordEmailLogo" />
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={emailDetails.email}
-                  placeholder="Email"
-                  className="ForgotPasswordEmailInput"
-                  onChange={handleEmailChange}
-                />
+                <FormattedMessage id="email">
+                  {(msg) => (
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={emailDetails.email}
+                      placeholder={msg}
+                      className="ForgotPasswordEmailInput"
+                      onChange={handleEmailChange}
+                    />
+                  )}
+                </FormattedMessage>
               </div>
             </div>
             {emailDetails.emailError !== "" && (

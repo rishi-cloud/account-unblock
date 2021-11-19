@@ -7,12 +7,13 @@ import messages from "./messages";
 const LanguageProvider = ({ children, locale }) => {
   const { localizedContent } = useContext(SettingContext);
   console.log("localized content", localizedContent);
+
   return (
     <IntlProvider
       textComponent={Fragment}
-      locale="en-demo-us"
+      locale={locale}
       // messages={localizedContent ? localizedContent : messages["en-demo-us"]}
-      messages={messages["en-demo-us"]}
+      messages={messages[locale]}
     >
       {children}
     </IntlProvider>

@@ -1,30 +1,19 @@
-import { LOCALES } from "../constants";
 const en = {
-  [LOCALES.DEMO]: {
+  ["en-us"]: {
     "login.invalid_user_password":
-      "We couldn’t sign you with this email and password. Try again, <a_reset_pass>reset your password</a_reset_pass>, or <a_signin_otp>sign in with a one-time passcode.</a_signin_otp>",
+      "We couldn’t sign you with this email and password. Try again, <a_reset_pass>reset your password</a_reset_pass>, or <a_signin_otp>sign in with a one-time passcode.<a_signin_otp>",
     "login.ACT0104":
       "For your security, password sign in for <b>{email}</b> has been locked due to too many sign in attempts.",
     "login.ACT0105":
       "For your security, password sign in for <b>{email}</b> has been locked due to too many sign in attempts.",
     "login.invalid_passcode":
       "We couldn’t sign you with this passcode. Try again or <a_rotp>resend code</a_rotp>.",
-    "login.access_denied":
-      "We couldn’t sign you with this email and password. Try again, <a_reset_pass>reset your password</a_reset_pass>, or <a_signin_otp>sign in with a one-time passcode.</a_signin_otp>",
-
     "login.password_lock":
       "For your security, password sign in for <b>{email}</b> has been locked due to too many sign in attempts.",
     "login.auth0_password_lock":
       "We just sent an email with a link to unlock your account. You may sign in with a one-time passcode, <a_reset_pass>try resetting your password</a_reset_pass> or <a_contact_support>Contact Support.</a_contact_support>",
     "passwordless.bad.email":
       "Sorry, we couldn’t find an account for this email address.",
-    "passwordless.invalid_user_password":
-      "We couldn’t sign you with this passcode. <a_rotp>Try again or resend code.</a_rotp>",
-    "passwordless.access_denied":
-      "We couldn’t sign you with this passcode. <a_rotp>Try again or resend code.</a_rotp>",
-    "passwordless.passcode_lock":
-      "For your security, passcode sign in for <b>{email}</b> has been locked due to too many sign in attempts.",
-
     "forgotPassword.too_many_requests":
       "You've reached the maximum number of password change attempts. Wait a few minutes and try again.",
     "signUp.export_restriction":
@@ -80,8 +69,6 @@ const en = {
       "Sign in with a different email address",
     You_have_reached_the_maximum_number_of_password_attempts:
       "You’ve reached the maximum number of password attempts",
-    You_have_reached_the_maximum_number_of_passcode_attempts:
-      "You’ve reached the maximum number of passcode attempts",
     You_can_sign_in_with_a_otp_or_to_unlock_your_account_you_may_reset_your_password_or_Contact_Support:
       "You can sign in with a one-time passcode, or to unlock your account, you may <a_reset_pass>reset your password</a_reset_pass> or <a_contact_support>Contact Support.</a_contact_support>",
     We_sent_a_otp_to_email: "We sent a one-time passcode to <b>{email}</b>",
@@ -93,7 +80,7 @@ const en = {
     Forgot_password: "Forgot password?",
     Reset_Password: "Reset password",
     Enter_email_to_reset_password:
-      "Enter the email you used to create your McAfee account and we’ll send you a link to reset your password.",
+      "Enter the email you used to create your McAfee account and we'll send you a link to reset your password.",
     Forgot_your_password_contact_support:
       "Forgot which email you used? <a_contact_support>Contact Support</a_contact_support>",
     Email_me: "Email me",
@@ -102,12 +89,14 @@ const en = {
     Check_inbox: "Check your inbox",
     Password_reset_link_sent:
       "Password reset link sent. Use it within 72 hours to reset your password.",
-    "Didn't_receive_reset_password_link":
+    Did_not_receive_reset_password_link_request_another_email_forgot_email_need_help_contact_support:
       "If you didn't receive a link, check your spam folder or <a_request_another_mail>request another email</a_request_another_mail>. Forgot which email you used or need help? <a_contact_support>Contact Support</a_contact_support>",
     Enter_new_password: "Enter your new password for {email}.",
-    "Password_successfully_reset!": "Password successfully reset!",
+    Password_successfully_reset: "Password successfully reset!",
     Close_tab_to_previous_page_to_signin:
       "Close this tab to return to the previous page and sign in.",
+    "passwordless.invalid_user_password":
+      "We couldn’t sign you with this passcode. <a_rotp>Try again or resend code.</a_rotp>",
     Need_help: "Need help?",
     Contact_support: "Contact support",
     login_lock_title:

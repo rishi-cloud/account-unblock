@@ -7,6 +7,7 @@ import { ReactComponent as TickIcon } from "../../svg/tickIcon.svg";
 import { ReactComponent as FillEye } from "../../svg/eyeIcon.svg";
 import { ReactComponent as PasswordCross } from "../../svg/errorCross.svg";
 import { TealiumTagValueConstans } from "../../constants/TealiumConstants";
+import { FormattedMessage } from "react-intl";
 
 const PasswordFlow = (props) => {
   const {
@@ -64,15 +65,20 @@ const PasswordFlow = (props) => {
                 color: validateEmail(LoginForm.email) ? "green" : "",
               }}
             />
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={LoginForm.email}
-              placeholder="Email"
-              className={styles.LoginInput}
-              onChange={onChange}
-            />
+            <FormattedMessage id="email">
+              {(msg) => (
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={LoginForm.email}
+                  placeholder={msg}
+                  className={styles.LoginInput}
+                  onChange={onChange}
+                />
+              )}
+            </FormattedMessage>
+
             {validateEmail(LoginForm.email) &&
             LoginText.title === "Looks_like_you_already_have_an_account" ? (
               <TickIcon
@@ -130,14 +136,19 @@ const PasswordFlow = (props) => {
             }}
           >
             <LockOutline className={styles.LoginInputLogo} />
-            <input
-              type={showPassword ? "text" : "password"}
-              id="password"
-              name="password"
-              placeholder="Password"
-              className={styles.LoginInput}
-              onChange={onChange}
-            />
+            <FormattedMessage id="password">
+              {(msg) => (
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  name="password"
+                  placeholder={msg}
+                  className={styles.LoginInput}
+                  onChange={onChange}
+                />
+              )}
+            </FormattedMessage>
+
             <FillEye
               style={{
                 height: "2rem",

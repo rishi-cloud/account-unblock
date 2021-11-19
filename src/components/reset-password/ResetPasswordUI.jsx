@@ -30,7 +30,7 @@ function ResetPasswordUI(props) {
           {resetPasswordSuccessful ? (
             <>
               <div className="ForgotPasswordIntro">
-                {translate("Password_successfully_reset")}
+                {translate("Password_successfully_reset!")}
               </div>
               <div className="ForgotPasswordIntroSubHeading">
                 {translate("Close_tab_to_previous_page_to_signin")}

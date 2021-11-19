@@ -53,10 +53,10 @@ function ForgotPasswordEmail(props) {
             </button>
             <div className="contactSupportWrapper">
               <FormattedMessage
-                id="Did_not_receive_reset_password_link_request_another_email_forgot_email_need_help_contact_support"
-                defaultMessage={translate(
-                  "Did_not_receive_reset_password_link_request_another_email_forgot_email_need_help_contact_support"
-                )}
+                id="Didn't_receive_reset_password_link"
+                defaultMessage={
+                  "If you didn't receive a link, check your spam folder or <a_request_another_mail>request another email</a_request_another_mail>. Forgot which email you used or need help? <a_contact_support>Contact Support</a_contact_support>"
+                }
                 values={{
                   ...FORMATVALUES,
                   a: (chunks) => (

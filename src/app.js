@@ -45,10 +45,8 @@ const App = ({ pageConfig, passwordResetConfig }) => {
     localStorage.setItem("lang", lang);
   }
 
-  if (lang === "en-us") {
-    locale.current = LOCALES.ENGLISH;
-  } else if (lang === "fr-ca") {
-    locale.current = LOCALES.FRENCH;
+  if (lang) {
+    locale.current = lang;
   } else {
     locale.current = "en-us";
   }
@@ -59,7 +57,10 @@ const App = ({ pageConfig, passwordResetConfig }) => {
 
   return (
     <TrackingProvider config={pageConfig}>
-      <SettingProvider locale={locale.current} affiliateId={affiliateId.current}>
+      <SettingProvider
+        locale={locale.current}
+        affiliateId={affiliateId.current}
+      >
         <CommonDataProvider
           config={pageConfig}
           passwordResetConfig={passwordResetConfig}

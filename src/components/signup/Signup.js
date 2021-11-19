@@ -87,17 +87,23 @@ const Signup = (props) => {
             style={{ background: SignupForm.isEmailDisable ? "#EFF0F2" : "" }}
           >
             <OutlineMail className={styles.emailSVG} />
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={SignupForm.email}
-              placeholder="Email"
-              className={styles.Input}
-              onChange={onChange}
-              disabled={SignupForm.isEmailDisable}
-              style={{ background: SignupForm.isEmailDisable ? "#EFF0F2" : "" }}
-            />
+            <FormattedMessage id="email">
+              {(msg) => (
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={SignupForm.email}
+                  placeholder={msg}
+                  className={styles.Input}
+                  onChange={onChange}
+                  disabled={SignupForm.isEmailDisable}
+                  style={{
+                    background: SignupForm.isEmailDisable ? "#EFF0F2" : "",
+                  }}
+                />
+              )}
+            </FormattedMessage>
           </div>
           <div>
             {SignupForm.password !== "" ? (
@@ -127,20 +133,24 @@ const Signup = (props) => {
               }}
             >
               <LockOutline className={styles.lockSVG} />
-              <input
-                type={showPassword ? "text" : "password"}
-                id="password"
-                name="password"
-                value={SignupForm.password}
-                placeholder="Password"
-                className={styles.Input}
-                onChange={onChange}
-                onFocus={() => {
-                  onClick();
-                  setDisplayRules(true);
-                }}
-                onBlur={() => setDisplayRules(false)}
-              />
+              <FormattedMessage id="password">
+                {(msg) => (
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    name="password"
+                    value={SignupForm.password}
+                    placeholder={msg}
+                    className={styles.Input}
+                    onChange={onChange}
+                    onFocus={() => {
+                      onClick();
+                      setDisplayRules(true);
+                    }}
+                    onBlur={() => setDisplayRules(false)}
+                  />
+                )}
+              </FormattedMessage>
               <FillEye
                 style={{
                   height: "2rem",
@@ -221,16 +231,20 @@ const Signup = (props) => {
               }}
             >
               <LockOutline className={styles.lockSVG} />
-              <input
-                type={showPassword ? "text" : "password"}
-                id="confirmPassword"
-                name="confirmPassword"
-                value={SignupForm.confirmPassword}
-                placeholder="Confirm password"
-                className={styles.Input}
-                onChange={onChange}
-                onBlur={() => setDisplayRules(false)}
-              />
+              <FormattedMessage id="confirm_password">
+                {(msg) => (
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    value={SignupForm.confirmPassword}
+                    placeholder={msg}
+                    className={styles.Input}
+                    onChange={onChange}
+                    onBlur={() => setDisplayRules(false)}
+                  />
+                )}
+              </FormattedMessage>
               <FillEye
                 style={{
                   height: "2rem",
@@ -304,7 +318,7 @@ const Signup = (props) => {
                       }
                     />
                     <label htmlFor="SpecialPromo">
-                    {translate("optin_SpecialPromo")}
+                      {translate("optin_SpecialPromo")}
                     </label>
                   </div>
                 )}
@@ -327,7 +341,7 @@ const Signup = (props) => {
                       }
                     />
                     <label htmlFor="PartnerPromo">
-                    {translate("optin_PartnerPromo")}
+                      {translate("optin_PartnerPromo")}
                     </label>
                   </div>
                 )}

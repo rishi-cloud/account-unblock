@@ -19,13 +19,20 @@ const Footer = () => {
           {" "}
           <a
             target="_blank"
-            href={`https://www.mcafee.com/legal?culture=${locale.toUpperCase()}&affid=916#privacytop`}
+            href={`https://www.mcafee.com/legal?culture=${locale.toUpperCase()}#privacytop`}
           >
             {" "}
             {translate("privacyNotice")}
           </a>
         </div>
-        <div className={styles.FooterLinkContainer}>FAQs </div>
+        <div className={styles.FooterLinkContainer}>
+          <a
+            target="_blank"
+            href={`https://home.mcafee.com/support/commonFAQ?culture=${locale.toUpperCase()}`}
+          >
+            {translate("FAQs")}{" "}
+          </a>
+        </div>
       </div>
       <div className={styles.FooterRightWrapper}>
         <div>{translate("Copyright_Text")}</div>
