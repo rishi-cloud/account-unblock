@@ -25,6 +25,7 @@ const Signup = (props) => {
     handleForgotPasswordClick,
     handleOptinsCheckBoxes,
     optinFields,
+    validateEmail,
   } = props;
   const [showPassword, setShowPassword] = useState(false);
   const [displayRules, setDisplayRules] = useState(false);
@@ -379,7 +380,7 @@ const Signup = (props) => {
           <button
             className={
               SignupForm.email !== "" &&
-              validate(SignupForm.email) &&
+              validateEmail(SignupForm.email) &&
               SignupForm.password !== "" &&
               SignupForm.confirmPassword !== "" &&
               SignupForm.password === SignupForm.confirmPassword &&

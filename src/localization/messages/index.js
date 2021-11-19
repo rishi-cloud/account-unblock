@@ -39,8 +39,6 @@ import zhhk from "./locally/zh-hk";
 import zhtw from "./locally/zh-tw";
 
 const messages = {
-  ...en,
-  ...fr,
   ...dm,
   ...arae,
   ...cscz,

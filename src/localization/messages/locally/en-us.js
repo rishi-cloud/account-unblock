@@ -1,7 +1,7 @@
 const en = {
   ["en-us"]: {
     "login.invalid_user_password":
-      "We couldn’t sign you with this email and password. Try again, <a_reset_pass>reset your password</a_reset_pass>, or <a_signin_otp>sign in with a one-time passcode.<a_signin_otp>",
+      "We couldn’t sign you with this email and password. Try again, <a_reset_pass>reset your password</a_reset_pass>, or <a_signin_otp>sign in with a one-time passcode.</a_signin_otp>",
     "login.ACT0104":
       "For your security, password sign in for <b>{email}</b> has been locked due to too many sign in attempts.",
     "login.ACT0105":
