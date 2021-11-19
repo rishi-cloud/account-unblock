@@ -116,6 +116,13 @@ const en = {
       "We sent an email to <b>{email}</b> to unlock your account. Or you can <a_reset_pass>reset your password</a_reset_pass> or <a_contact_support>Contact Support</a_contact_support> to verify your identity and unlock your account.",
     otp_lock_bottom_Message:
       "You may sign in with a password, try <a_reset_pass>resetting your password</a_reset_pass> or <a_contact_support>Contact Support.</a_contact_support>",
+
+    optin_VirusThreats:
+      "I want to receive information about the latest viruses(available in English only).",
+    optin_SpecialPromo:
+      " I would like to receive information about McAfee special offers.",
+    optin_PartnerPromo:
+      "I would like to receive information about special offers from McAfee partners.",
   },
 };
 export default en;

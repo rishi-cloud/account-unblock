@@ -54,7 +54,7 @@ const AccountProvider = (props) => {
     });
   };
 
-  const SignupWithPassword = (email, password) => {
+  const SignupWithPassword = (email, password, optinFields) => {
     const userMetadata = {
       lang: locale,
     };
@@ -64,6 +64,7 @@ const AccountProvider = (props) => {
         // connection: "Username-Password-Authentication",
         email,
         password,
+        ...{ optinFields: optinFields },
         userMetadata,
       };
       webAuth.signup(variables, (err, authResult) => {
