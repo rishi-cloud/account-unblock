@@ -1,62 +1,47 @@
 import { LOCALES } from "../constants";
 
-const en = {
-  [LOCALES.ENGLISH]: {
-    nameorderswap: true,
+const sk_sk = {
+  [LOCALES.Slovakia]: {
     OptinFields: {
       VirusThreats: {
         id: "1",
         display: "false",
-        checked: "true",
+        checked: "false",
+        optinvalue: "81",
       },
       SpecialPromo: {
         id: "2",
         display: "false",
-        checked: "true",
+        checked: "false",
+        optinvalue: "82",
       },
       PartnerPromo: {
         id: "3",
         display: "false",
-        checked: "true",
+        checked: "false",
+        optinvalue: "83",
       },
     },
     affiliates: {
-      105: {
+      550: {
         OptinFields: {
           VirusThreats: {
             id: "1",
             display: "true",
             checked: "true",
+            optinvalue: "81",
           },
           SpecialPromo: {
             id: "2",
             display: "true",
-            checked: "false",
+            checked: "true",
+            optinvalue: "82",
           },
           PartnerPromo: {
             id: "3",
             display: "true",
             checked: "true",
-          },
-        },
-        nameorderswap: false,
-      },
-      741: {
-        OptinFields: {
-          VirusThreats: {
-            id: "1",
-            display: "false",
-            checked: "true",
-          },
-          SpecialPromo: {
-            id: "2",
-            display: "false",
-            checked: "true",
-          },
-          PartnerPromo: {
-            id: "3",
-            display: "false",
-            checked: "true",
+            optinvalue: "83",
           },
         },
       },
@@ -64,22 +49,26 @@ const en = {
         OptinFields: {
           VirusThreats: {
             id: "1",
-            display: "true",
+            display: "false",
             checked: "true",
+            default: "true",
+            optinvalue: "81",
           },
           SpecialPromo: {
             id: "2",
             display: "true",
-            checked: "false",
+            checked: "true",
+            optinvalue: "82",
           },
           PartnerPromo: {
             id: "3",
             display: "true",
-            checked: "true",
+            checked: "false",
+            optinvalue: "83",
           },
-        }
-      }
+        },
+      },
     },
   },
 };
-export default en;
+export default sk_sk;
