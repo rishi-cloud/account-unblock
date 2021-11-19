@@ -262,7 +262,7 @@ const LoginUI = (props) => {
       );
     }
   };
-  console.log("error", typeof LoginError.errorCode);
+  console.log("error", LoginError.errorCode);
   return (
     <>
       {loader ? (
