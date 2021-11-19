@@ -45,13 +45,21 @@ const App = ({ pageConfig, passwordResetConfig }) => {
     localStorage.setItem("lang", lang);
   }
 
-  if (lang === "en-us") {
-    locale.current = LOCALES.ENGLISH;
-  } else if (lang === "fr-ca") {
-    locale.current = LOCALES.FRENCH;
-  } else {
-    locale.current = "en-us";
-  }
+  locale.current = (()=>{
+    switch (lang) {
+      case "en-us":
+        return LOCALES.ENGLISH;
+      case "fr-ca":
+        return LOCALES.FRENCH;
+      case "en-gb":
+        return LOCALES.United_Kingdom;
+      case "sk-sk":
+        return LOCALES.Slovakia;
+      default:
+        return "en-us";
+    }
+  })()
+
 
   const attachAccountProvider = (Component) => {
     return <AccountProvider config={pageConfig}>{Component}</AccountProvider>;
@@ -59,7 +67,10 @@ const App = ({ pageConfig, passwordResetConfig }) => {
 
   return (
     <TrackingProvider config={pageConfig}>
-      <SettingProvider locale={locale.current} affiliateId={affiliateId.current}>
+      <SettingProvider
+        locale={locale.current}
+        affiliateId={affiliateId.current}
+      >
         <CommonDataProvider
           config={pageConfig}
           passwordResetConfig={passwordResetConfig}
