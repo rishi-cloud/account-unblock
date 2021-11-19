@@ -234,6 +234,7 @@ export default function LoginContainer(props) {
         password: "",
         otpAvailable: false,
       });
+      hideEmail(false);
       setOnlyPasswordLock(false);
       setOnlyOTPLock(false);
       setBlockScreenState({
