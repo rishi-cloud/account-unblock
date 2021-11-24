@@ -201,6 +201,12 @@ input:-webkit-autofill {
   font-weight: 600;
   cursor: pointer;
 }
+.LoginResendingBtn {
+  color: gray;
+}
+.LoginOtpCodeSent {
+  color: gray;
+}
 .RightContainerLogin {
   display: flex;
   flex-direction: column;

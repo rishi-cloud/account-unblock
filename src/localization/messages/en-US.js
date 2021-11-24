@@ -37,6 +37,8 @@ const en = {
     confirm_password: "Confirm password",
     Request_one_time_passcode: "Request one-time passcode",
     ResendCode: "Resend code",
+    ResendingCode: "Resending code...",
+    CodeSent: "Code sent.",
     Create_my_Account: "Create my account",
     Sign_into_your_McAfee_account: "Sign into your McAfee account",
     Sign_In: "Sign In",

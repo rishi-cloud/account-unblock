@@ -40,9 +40,9 @@ const CommonDataProvider = (props) => {
 
   const getCommonData = async () => {
     try {
-      // `/client/soKVdT2wmzd71LKYoZpv6FJMTg6yQ238.js`
+      // `https://${props.config.auth0Domain}/client/${props.config.clientID}.js`
       const res = await axios.get(
-        `https://${props.config.auth0Domain}/client/${props.config.clientID}.js`
+        `/client/soKVdT2wmzd71LKYoZpv6FJMTg6yQ238.js`
       );
       const data = res.data;
       if (typeof data === "string") {

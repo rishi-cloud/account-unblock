@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { TealiumTagValueConstans } from "../../constants/TealiumConstants";
 import translate from "../../localization/translate";
 import styles from "./style.module.css";
 import { ReactComponent as OutlineMail } from "../../svg/mailIcon.svg";
 import { ReactComponent as TickIcon } from "../../svg/tickIcon.svg";
 import { FormattedMessage } from "react-intl";
+
 
 const PasswordLessFlow = (props) => {
   const {
@@ -20,6 +21,17 @@ const PasswordLessFlow = (props) => {
     otpValid,
     locale,
   } = props;
+
+  const [resendingCode, setResendingCode] = useState("");
+
+  const handleClickResendCode = (e) => {
+    const callGetOtp = () => {
+      setResendingCode("sent");
+      getOtp(e)
+    }
+    setResendingCode("sending");
+    setTimeout(callGetOtp,3000)
+  }
 
   return (
     <>
@@ -117,9 +129,12 @@ const PasswordLessFlow = (props) => {
               )}
             </FormattedMessage>
           </div>
-          <div className={styles.LoginOtpResendContainer} onClick={getOtp}>
-            <div className={styles.LoginResendBtn}>
-              {translate("ResendCode")}
+          <div className={styles.LoginOtpResendContainer} onClick={handleClickResendCode}>
+            <div className={`${styles.LoginResendBtn} ${resendingCode==="sending"?styles.LoginResendingBtn:""}`}>
+              {resendingCode === "" ? translate("ResendCode"): (
+                resendingCode === "sending" ? translate("ResendingCode") : 
+                (<><span className={styles.LoginOtpCodeSent}>{translate("CodeSent")}</span> {translate("ResendCode")}</>)
+              )}
             </div>
           </div>
         </div>
