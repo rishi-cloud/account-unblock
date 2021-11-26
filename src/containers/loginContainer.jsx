@@ -14,14 +14,14 @@ export default function LoginContainer(props) {
   const { loginWithPassword, otpLogin, otpStart, getSocialLogin } =
     useContext(AccountContext);
   const [otpValid, setOtpValid] = useState(true);
-  const { LoginForm, setLoginForm } = useContext(CommonDataContext);
+  const { LoginForm, setLoginForm, LoginError, setLoginError } = useContext(CommonDataContext);
   const { trackClickEvent } = useContext(TrackingContext);
-  const [LoginError, setLoginError] = useState({
-    email: "",
-    isEmailError: "",
-    databaseError: "",
-    errorCode: "",
-  });
+  // const [LoginError, setLoginError] = useState({
+  //   email: "",
+  //   isEmailError: "",
+  //   databaseError: "",
+  //   errorCode: "",
+  // });
   const [onlyPasswordLock, setOnlyPasswordLock] = useState(false);
   const [onlyOTPLock, setOnlyOTPLock] = useState(false);
   const { utagData, setUtagData } = useContext(TrackingContext);

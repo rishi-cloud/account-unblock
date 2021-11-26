@@ -20,6 +20,12 @@ const CommonDataProvider = (props) => {
     subtitle:
       "Enter_your_email_address_set_password_and_well_get_your_account_created",
   });
+  const [LoginError, setLoginError] = useState({
+    email: "",
+    isEmailError: "",
+    databaseError: "",
+    errorCode: "",
+  });
   const [LoginForm, setLoginForm] = useState({
     email: props.email || "",
     password: "",
@@ -81,6 +87,8 @@ const CommonDataProvider = (props) => {
         setSignupForm,
         passwordResetConfig,
         locale,
+        LoginError, 
+        setLoginError
       }}
     >
       {props.children}

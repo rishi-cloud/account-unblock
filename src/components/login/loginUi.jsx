@@ -287,7 +287,7 @@ const LoginUI = (props) => {
                         : "block",
                   }}
                 >
-                  <FormattedMessage
+                  { LoginText?.subtitle && (<FormattedMessage
                     id={LoginText.subtitle}
                     defaultMessage="We sent a one-time passcode to <b>{email}</b>"
                     values={{
@@ -300,7 +300,7 @@ const LoginUI = (props) => {
                     }}
                   >
                     {(chunks) => <p>{chunks}</p>}
-                  </FormattedMessage>
+                  </FormattedMessage>)}
                 </div>
                 {otpTimer && !LoginError.errorCode ? (
                   <Timer
