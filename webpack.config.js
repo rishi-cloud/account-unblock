@@ -10,7 +10,7 @@ module.exports = {
     main: lModules,
   },
   output: {
-    filename: "bundle_nonuser_otp_redirection_2.min.js",
+    filename: "bundle_nonuser_otp_redirection_3.min.js",
     path: path.resolve(__dirname, "dist"),
   },
   module: {
