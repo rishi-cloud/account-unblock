@@ -49,17 +49,17 @@ window.LoginWidget = class LoginWidget {
     }
 
     const providerConfig = {
-      domain: pageConfig.config.auth0Domain,
-      clientID: pageConfig.config.clientID,
-      redirectUri: pageConfig.config?.callbackURL,
-      responseType: pageConfig.config?.extraParams?.response_type,
-      scope: pageConfig.config?.extraParams?.scope,
-      state: pageConfig.config?.extraParams?.state,
-      nonce: pageConfig.config?.extraParams?.nonce,
-      _csrf: pageConfig.config?.extraParams?._csrf,
-      audience: pageConfig.config?.extraParams?.audience,
-      overrides: { __tenant: pageConfig.config?.auth0Tenant },
-      ...(config.audience ? { audience: config.audience } : null),
+      domain: pageConfig.auth0Domain,
+      clientID: pageConfig.clientID,
+      redirectUri: pageConfig.callbackURL,
+      responseType: pageConfig.extraParams.response_type,
+      scope: pageConfig.extraParams.scope,
+      state: pageConfig.extraParams.state,
+      nonce: pageConfig.extraParams.nonce,
+      _csrf: pageConfig.extraParams._csrf,
+      audience: pageConfig.extraParams.audience,
+      overrides: { __tenant: pageConfig.auth0Tenant },
+      ...(pageConfig.audience ? { audience: pageConfig.audience } : null),
       redirectUri: window.location.origin,
       onRedirectCallback,
     };
@@ -75,10 +75,8 @@ window.LoginWidget = class LoginWidget {
 };
 // new window.LoginWidget().init({
 //   pageConfig: {
-//     config: {
-//       auth0Domain: "mcafee-mpc.us.auth0.com",
-//       clientID: "6WH8NFEgHi9gcCfzVS78fZRmR54DeNS4",
-//     },
+//     auth0Domain: "mcafee-mpc.us.auth0.com",
+//     clientID: "6WH8NFEgHi9gcCfzVS78fZRmR54DeNS4",
 //   },
 // });
 
