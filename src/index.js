@@ -73,14 +73,14 @@ window.LoginWidget = class LoginWidget {
     );
   }
 };
-new window.LoginWidget().init({
-  pageConfig: {
-    config: {
-      auth0Domain: "mcafee-mpc.us.auth0.com",
-      clientID: "6WH8NFEgHi9gcCfzVS78fZRmR54DeNS4",
-    },
-  },
-});
+// new window.LoginWidget().init({
+//   pageConfig: {
+//     config: {
+//       auth0Domain: "mcafee-mpc.us.auth0.com",
+//       clientID: "6WH8NFEgHi9gcCfzVS78fZRmR54DeNS4",
+//     },
+//   },
+// });
 
 window.PasswordResetWidget = class PasswordResetWidget {
   init(opts) {
