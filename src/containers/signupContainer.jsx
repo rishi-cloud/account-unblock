@@ -14,7 +14,7 @@ export default function SignupContainer(props) {
   const { connections, setLoginText } = useContext(CommonDataContext);
   const { trackClickEvent } = useContext(TrackingContext);
   const { setWhichPage } = useContext(AppContext);
-  const { LoginForm, setLoginForm } = useContext(CommonDataContext);
+  const { LoginForm, setLoginForm, LoginError, setLoginError } = useContext(CommonDataContext);
   const { setSignupText } = useContext(CommonDataContext);
   const { setting } = useContext(SettingContext);
   // Context Data
@@ -107,7 +107,12 @@ export default function SignupContainer(props) {
         if (e.code === "invalid_signup") {
           setLoginText({
             title: "Looks_like_you_already_have_an_account",
-            subtitle: "This_email_already_exists",
+            subtitle: "",
+          });
+          setLoginError({
+            ...LoginError,
+            databaseError: e.description,
+            errorCode: "This_email_already_exists",
           });
           setLoginForm({
             ...LoginForm,
