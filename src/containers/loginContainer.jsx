@@ -39,6 +39,7 @@ export default function LoginContainer(props) {
     passwordBlock: false,
   });
 
+  const [resendingCode, setResendingCode] = useState("");
   const [hideEmail, setHideEmail] = useState(false);
   const { setWhichPage } = useContext(AppContext);
   const { setLoginText } = useContext(CommonDataContext);
@@ -58,6 +59,15 @@ export default function LoginContainer(props) {
       );
     }
   };
+
+  const handleClickResendCode = (e) => {
+    const callGetOtp = () => {
+      setResendingCode("sent");
+      getOtp(e)
+    }
+    setResendingCode("sending");
+    setTimeout(callGetOtp,3000)
+  }
 
   const fireOtpPageViewCall = (pageName) => {
     let utag = window.utag;
@@ -527,5 +537,7 @@ export default function LoginContainer(props) {
     blockScreenState,
     onlyPasswordLock,
     onlyOTPLock,
+    resendingCode,
+    handleClickResendCode,
   });
 }
