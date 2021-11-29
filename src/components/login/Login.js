@@ -59,6 +59,7 @@ const Login = (props) => {
             setOtpValid={setOtpValid}
             blockScreenState={blockScreenState}
             locale={locale}
+            onToggle={onToggle}
           />
         )}
       </form>

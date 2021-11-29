@@ -38,6 +38,12 @@ window.LoginWidget = class LoginWidget {
 //     clientID: "6WH8NFEgHi9gcCfzVS78fZRmR54DeNS4",
 //   },
 // });
+ReactDOM.render(
+  <BrowserRouter>
+      <App  />
+  </BrowserRouter>,
+  document.getElementById("root")
+);
 
 window.PasswordResetWidget = class PasswordResetWidget {
   init(opts) {

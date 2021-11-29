@@ -14,7 +14,8 @@ export default function LoginContainer(props) {
   const { loginWithPassword, otpLogin, otpStart, getSocialLogin } =
     useContext(AccountContext);
   const [otpValid, setOtpValid] = useState(true);
-  const { LoginForm, setLoginForm, LoginError, setLoginError } = useContext(CommonDataContext);
+  const { LoginForm, setLoginForm, LoginError, setLoginError } =
+    useContext(CommonDataContext);
   const { trackClickEvent } = useContext(TrackingContext);
   // const [LoginError, setLoginError] = useState({
   //   email: "",
@@ -242,6 +243,25 @@ export default function LoginContainer(props) {
         otpBlock: false,
         passwordBlock: false,
       });
+    } else if (whichLink === "with-otp-user-unlocked") {
+      setToggle("login-with-otp");
+      setLoginText({
+        title: "We_will_send_you_a_otp_title",
+        subtitle: "We_will_send_you_a_otp_subtitle",
+      });
+      setLoginError({
+        ...LoginError,
+        email: "",
+        databaseError: "",
+        errorCode: "",
+      });
+      setLoginForm({
+        ...LoginForm,
+        email: "",
+        password: "",
+        otpAvailable: false,
+      });
+      setOnlyOTPLock(false);
     }
   };
 

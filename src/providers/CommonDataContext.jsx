@@ -87,8 +87,8 @@ const CommonDataProvider = (props) => {
         setSignupForm,
         passwordResetConfig,
         locale,
-        LoginError, 
-        setLoginError
+        LoginError,
+        setLoginError,
       }}
     >
       {props.children}

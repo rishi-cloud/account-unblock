@@ -132,16 +132,16 @@ const LoginUI = (props) => {
         return (
           <div className={styles.LoginBottomHeading}>
             <p>
-              <FormattedMessage
-                id="login.auth0_password_lock"
-                defaultMessage="We sent a one-time passcode to <b>{email}</b>"
-                values={{
+              {translate(
+                "login.auth0_password_lock",
+                "We sent a one-time passcode to <b>{email}</b>",
+                {
                   ...FORMATVALUES,
                   a: (chunks) => (
                     <strong className={styles.important}>{chunks}</strong>
                   ),
-                }}
-              ></FormattedMessage>
+                }
+              )}
             </p>
           </div>
         );
@@ -149,10 +149,10 @@ const LoginUI = (props) => {
         return (
           <div className={styles.LoginBottomHeading}>
             <p>
-              <FormattedMessage
-                id="otp_lock_bottom_Message"
-                defaultMessage="You may sign in with a password, try <a>resetting your password</a> or <b>Contact Support.</b>"
-                values={{
+              {translate(
+                "otp_lock_bottom_Message",
+                "You may sign in with a password, try <a>resetting your password</a> or <b>Contact Support.</b>",
+                {
                   ...FORMATVALUES,
                   a: (chunks) => (
                     <strong className={styles.important}>{chunks}</strong>
@@ -160,8 +160,8 @@ const LoginUI = (props) => {
                   b: (chunks) => (
                     <strong className={styles.important}>{chunks}</strong>
                   ),
-                }}
-              ></FormattedMessage>
+                }
+              )}
             </p>
           </div>
         );
@@ -201,6 +201,7 @@ const LoginUI = (props) => {
             LoginText={LoginText}
             handleForgotPasswordClick={handleForgotPasswordClick}
             blockScreenState={blockScreenState}
+            blockScreenToggle={blockScreenToggle}
           />
         );
       } else {
@@ -287,20 +288,19 @@ const LoginUI = (props) => {
                         : "block",
                   }}
                 >
-                  { LoginText?.subtitle && (<FormattedMessage
-                    id={LoginText.subtitle}
-                    defaultMessage="We sent a one-time passcode to <b>{email}</b>"
-                    values={{
-                      ...FORMATVALUES,
-                      b: (chunks) => <strong>{chunks}</strong>,
-                      email: `${LoginForm.email}`,
-                      a: (chunks) => (
-                        <strong className={styles.important}>{chunks}</strong>
-                      ),
-                    }}
-                  >
-                    {(chunks) => <p>{chunks}</p>}
-                  </FormattedMessage>)}
+                  {LoginText?.subtitle &&
+                    translate(
+                      LoginText.subtitle,
+                      "We sent a one-time passcode to <b>{email}</b>",
+                      {
+                        ...FORMATVALUES,
+                        b: (chunks) => <strong>{chunks}</strong>,
+                        email: `${LoginForm.email}`,
+                        a: (chunks) => (
+                          <strong className={styles.important}>{chunks}</strong>
+                        ),
+                      }
+                    )}
                 </div>
                 {otpTimer && !LoginError.errorCode ? (
                   <Timer

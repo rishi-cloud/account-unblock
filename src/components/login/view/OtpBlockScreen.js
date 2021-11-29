@@ -2,6 +2,7 @@ import React from "react";
 
 import PasswordFlow from "../password";
 import styles from "../style.module.css";
+import translate from "../../../localization/translate";
 
 function OtpBlockScreen(props) {
   const {
@@ -14,6 +15,7 @@ function OtpBlockScreen(props) {
     LoginText,
     handleForgotPasswordClick,
     blockScreenState,
+    blockScreenToggle,
   } = props;
 
   return (
@@ -32,6 +34,25 @@ function OtpBlockScreen(props) {
             blockScreenState={blockScreenState}
           />
         </form>
+        <div className={styles.SwitchContainer}>
+          <div className={styles.Switch}>
+            <div className={styles.Horizontaldashedline}></div>
+            <div className={styles.ordiv}>{translate("or")}</div>
+            <div className={styles.Horizontaldashedline}></div>
+          </div>
+          <>
+            <button
+              className={styles.SwitchBtn}
+              onClick={() => blockScreenToggle("with-otp-user-unlocked")}
+              id="Sigin-With-OTP"
+            >
+              {translate("Sign_in_with_a_onetime_passcode")}
+            </button>
+            <div className={styles.otpinfo}>
+              {translate("we_will_send_otp")}
+            </div>
+          </>
+        </div>
       </div>
     </div>
   );
