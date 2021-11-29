@@ -121,6 +121,8 @@ const en = {
       "You’ve reached the maximum number of passcode attempts",
     We_just_sent_an_email_with_a_link_to_unlock_your_account_You_may_sign_in_with_a_password:
       "We just sent an email with a link to unlock your account. You may sign in with a password, <a_reset_pass>try resetting your password</a_reset_pass> or <a_contact_support>Contact Support.</a_contact_support>",
+    sorry_no_account_found:
+      "Sorry, we couldn't find an account with this email address."
   },
 };
 export default en;

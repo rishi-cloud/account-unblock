@@ -415,7 +415,28 @@ export default function LoginContainer(props) {
             isSubmitting: false,
           });
         }
-      } else {
+      } else if(  
+          err.code === "extensibility_error" &&
+          err.description === "Denied user registration as the user doesnt exist") 
+          {
+            setLoginText({
+              title: "We_will_send_you_a_otp_title",
+              subtitle: "choose_your_signIn_method_continue",
+            });
+            //console.log("Wrong email credentials");
+            setLoginError({
+              ...LoginError,
+              databaseError: `passwordless.${err?.description}`,
+              errorCode: "sorry_no_account_found",
+            });
+            setLoginForm({
+              ...LoginForm,
+              password: "",
+              otp: "",
+              isSubmitting: false,
+            });
+          }
+      else {
         console.log("errorcode", `passwordless.${err?.code}`);
         setLoginError({
           ...LoginError,
