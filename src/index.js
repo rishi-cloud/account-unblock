@@ -1,9 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./app";
-import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
-import history from "./history";
-import { getConfig } from "./config";
 
 import "./index.css";
 
@@ -19,28 +16,6 @@ import "./index.css";
 
 import { BrowserRouter } from "react-router-dom";
 
-// window.LoginWidget = class LoginWidget {
-//   init(opts) {
-//     const pageConfig = opts.pageConfig;
-//     if (!pageConfig) {
-//       throw new Error("pageConfig must be provided in opts");
-//     }
-
-//     ReactDOM.render(
-//       <BrowserRouter>
-//         <App pageConfig={pageConfig} />
-//       </BrowserRouter>,
-//       document.getElementById("root")
-//     );
-//   }
-// };
-const onRedirectCallback = (appState) => {
-  history.push(
-    appState && appState.returnTo ? appState.returnTo : window.location.pathname
-  );
-};
-const config = getConfig();
-
 window.LoginWidget = class LoginWidget {
   init(opts) {
     const pageConfig = opts.pageConfig;
@@ -48,31 +23,15 @@ window.LoginWidget = class LoginWidget {
       throw new Error("pageConfig must be provided in opts");
     }
 
-    const providerConfig = {
-      domain: pageConfig.auth0Domain,
-      clientID: pageConfig.clientID,
-      redirectUri: pageConfig.callbackURL,
-      responseType: pageConfig.extraParams.response_type,
-      scope: pageConfig.extraParams.scope,
-      state: pageConfig.extraParams.state,
-      nonce: pageConfig.extraParams.nonce,
-      _csrf: pageConfig.extraParams._csrf,
-      audience: pageConfig.extraParams.audience,
-      overrides: { __tenant: pageConfig.auth0Tenant },
-      ...(pageConfig.audience ? { audience: pageConfig.audience } : null),
-      redirectUri: window.location.origin,
-      onRedirectCallback,
-    };
     ReactDOM.render(
       <BrowserRouter>
-        <Auth0Provider {...providerConfig}>
-          <App pageConfig={pageConfig} />
-        </Auth0Provider>
+        <App pageConfig={pageConfig} />
       </BrowserRouter>,
       document.getElementById("root")
     );
   }
 };
+
 // new window.LoginWidget().init({
 //   pageConfig: {
 //     auth0Domain: "mcafee-mpc.us.auth0.com",

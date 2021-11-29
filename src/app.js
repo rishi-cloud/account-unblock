@@ -18,9 +18,6 @@ import { AppProvider } from "./providers/AppContext";
 import { SettingProvider } from "./providers/SettingProvider";
 import { TrackingProvider } from "./providers/TrackingProvider";
 import { ResetPasswordProvider } from "./providers/ResetPasswordContext";
-import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
-import history from "./history";
-import { getConfig } from "./config";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -54,7 +51,6 @@ const App = ({ pageConfig, passwordResetConfig }) => {
     locale.current = "en-us";
   }
 
-  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const attachAccountProvider = (Component) => {
     return <AccountProvider config={pageConfig}>{Component}</AccountProvider>;
   };
@@ -77,14 +73,6 @@ const App = ({ pageConfig, passwordResetConfig }) => {
                 <div className={styles.ContentWrap}>
                   <div id="app">
                     <Switch>
-                      <Route path="/" exact>
-                        <div>Error User is not present in the database</div>
-                        <button onClick={() => loginWithRedirect({
-                          fragment: "errorCode=your account do not exist"
-                        })}>
-                          go back to login
-                        </button>
-                      </Route>
                       <Route path="/login" exact>
                         {attachAccountProvider(<Main />)}
                       </Route>
