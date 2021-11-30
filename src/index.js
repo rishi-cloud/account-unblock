@@ -32,18 +32,12 @@ window.LoginWidget = class LoginWidget {
   }
 };
 
-// new window.LoginWidget().init({
-//   pageConfig: {
-//     auth0Domain: "mcafee-mpc.us.auth0.com",
-//     clientID: "6WH8NFEgHi9gcCfzVS78fZRmR54DeNS4",
-//   },
-// });
-ReactDOM.render(
-  <BrowserRouter>
-      <App  />
-  </BrowserRouter>,
-  document.getElementById("root")
-);
+// ReactDOM.render(
+//   <BrowserRouter>
+//       <App  />
+//   </BrowserRouter>,
+//   document.getElementById("root")
+// );
 
 window.PasswordResetWidget = class PasswordResetWidget {
   init(opts) {
