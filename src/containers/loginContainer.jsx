@@ -177,6 +177,13 @@ export default function LoginContainer(props) {
       title: "Sign_into_your_McAfee_account",
       subtitle: "choose_your_signIn_method_continue",
     });
+    setLoginForm({
+      email: "",
+      password: "",
+      otp: "",
+      otpAvailable: false,
+      isSubmitting: false,
+    });
 
     const cookies = new Cookies();
     const checkCookies = cookies.get("ua");
@@ -188,6 +195,7 @@ export default function LoginContainer(props) {
     const currentCount = cookies.get("ua");
     console.log(currentCount);
   };
+
   const blockScreenToggle = (whichLink) => {
     if (whichLink === "with-password") {
       setToggle("login-with-password");
