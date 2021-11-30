@@ -87,7 +87,6 @@ const Signup = (props) => {
           ) : null}
           <div
             className={styles.InputAndLogoSignup}
-            style={{ background: SignupForm.isEmailDisable ? "#EFF0F2" : "" }}
           >
             <OutlineMail className={styles.emailSVG} />
             <FormattedMessage id="email">
@@ -100,10 +99,6 @@ const Signup = (props) => {
                   placeholder={msg}
                   className={styles.Input}
                   onChange={onChange}
-                  disabled={SignupForm.isEmailDisable}
-                  style={{
-                    background: SignupForm.isEmailDisable ? "#EFF0F2" : "",
-                  }}
                 />
               )}
             </FormattedMessage>
