@@ -38,6 +38,8 @@ const LoginUI = (props) => {
     blockScreenState,
     onlyPasswordLock,
     onlyOTPLock,
+    resendingCode,
+    handleClickResendCode,
   } = props;
   const { LoginText, utagData, locale } = useContext(CommonDataContext);
 
@@ -201,6 +203,8 @@ const LoginUI = (props) => {
             LoginText={LoginText}
             handleForgotPasswordClick={handleForgotPasswordClick}
             blockScreenState={blockScreenState}
+            resendingCode={resendingCode}
+            handleClickResendCode={handleClickResendCode}
           />
         );
       } else {
@@ -227,6 +231,8 @@ const LoginUI = (props) => {
               trackClickEvent={trackClickEvent}
               blockScreenState={blockScreenState}
               locale={locale}
+              resendingCode={resendingCode}
+              handleClickResendCode={handleClickResendCode}
             />
           </div>
         );
@@ -255,6 +261,8 @@ const LoginUI = (props) => {
             trackClickEvent={trackClickEvent}
             blockScreenState={blockScreenState}
             locale={locale}
+            resendingCode={resendingCode}
+            handleClickResendCode={handleClickResendCode}
           />
         </div>
       );

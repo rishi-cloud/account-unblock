@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { TealiumTagValueConstans } from "../../constants/TealiumConstants";
 import translate from "../../localization/translate";
 import styles from "./style.module.css";
@@ -19,6 +19,8 @@ const PasswordLessFlow = (props) => {
     LoginText,
     otpValid,
     locale,
+    resendingCode,
+    handleClickResendCode,
   } = props;
 
   return (
@@ -117,9 +119,12 @@ const PasswordLessFlow = (props) => {
               )}
             </FormattedMessage>
           </div>
-          <div className={styles.LoginOtpResendContainer} onClick={getOtp}>
-            <div className={styles.LoginResendBtn}>
-              {translate("ResendCode")}
+          <div className={styles.LoginOtpResendContainer} onClick={handleClickResendCode}>
+            <div className={`${styles.LoginResendBtn} ${resendingCode==="sending"?styles.LoginResendingBtn:""}`}>
+              {resendingCode === "" ? translate("ResendCode"): (
+                resendingCode === "sending" ? translate("Resending_code") : 
+                (<><span className={styles.LoginOtpCodeSent}>{translate("Code_sent")}</span> {translate("ResendCode")}</>)
+              )}
             </div>
           </div>
         </div>

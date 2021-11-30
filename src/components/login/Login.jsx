@@ -23,6 +23,8 @@ const Login = (props) => {
     handleForgotPasswordClick,
     blockScreenState,
     locale,
+    resendingCode,
+    handleClickResendCode,
   } = props;
   const { utagData } = useContext(CommonDataContext);
 
@@ -59,6 +61,8 @@ const Login = (props) => {
             setOtpValid={setOtpValid}
             blockScreenState={blockScreenState}
             locale={locale}
+            resendingCode={resendingCode}
+            handleClickResendCode={handleClickResendCode}
           />
         )}
       </form>
