@@ -47,6 +47,8 @@ const SettingProvider = (props) => {
         " I would like to receive information about McAfee special offers.",
       optin_PartnerPromo:
         "I would like to receive information about special offers from McAfee partners.",
+      sorry_no_account_found:
+        "Sorry, we couldn't find an account with this email address."
     };
   };
 
