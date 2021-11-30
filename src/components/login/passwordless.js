@@ -109,21 +109,36 @@ const PasswordLessFlow = (props) => {
                 <input
                   type="text"
                   pattern="\d*"
-                  maxlength="6"
                   id="otp"
                   name="otp"
                   placeholder={msg}
                   className={styles.LoginInput}
                   onChange={onChange}
+                  value={LoginForm.otp}
                 />
               )}
             </FormattedMessage>
           </div>
-          <div className={styles.LoginOtpResendContainer} onClick={handleClickResendCode}>
-            <div className={`${styles.LoginResendBtn} ${resendingCode==="sending"?styles.LoginResendingBtn:""}`}>
-              {resendingCode === "" ? translate("ResendCode"): (
-                resendingCode === "sending" ? translate("Resending_code") : 
-                (<><span className={styles.LoginOtpCodeSent}>{translate("Code_sent")}</span> {translate("ResendCode")}</>)
+          <div
+            className={styles.LoginOtpResendContainer}
+            onClick={handleClickResendCode}
+          >
+            <div
+              className={`${styles.LoginResendBtn} ${
+                resendingCode === "sending" ? styles.LoginResendingBtn : ""
+              }`}
+            >
+              {resendingCode === "" ? (
+                translate("ResendCode")
+              ) : resendingCode === "sending" ? (
+                translate("Resending_code")
+              ) : (
+                <>
+                  <span className={styles.LoginOtpCodeSent}>
+                    {translate("Code_sent")}
+                  </span>{" "}
+                  {translate("ResendCode")}
+                </>
               )}
             </div>
           </div>
