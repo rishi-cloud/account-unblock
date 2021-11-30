@@ -276,10 +276,24 @@ export default function LoginContainer(props) {
   };
 
   const onChange = (e) => {
-    setLoginForm({
-      ...LoginForm,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.name === "otp") {
+      const otpRegex = /^[0-9\b]+$/;
+      if (
+        (e.target.value === "" || otpRegex.test(e.target.value)) &&
+        e.target.value.length <= 6
+      ) {
+        setLoginForm({
+          ...LoginForm,
+          [e.target.name]: e.target.value,
+        });
+      }
+    } else {
+      setLoginForm({
+        ...LoginForm,
+        [e.target.name]: e.target.value,
+      });
+    }
+
     onBlur(e);
   };
 
