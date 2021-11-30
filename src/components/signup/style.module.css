@@ -16,7 +16,6 @@
   flex-direction: row;
   padding: 0.5rem 1rem;
   border-radius: 18px;
-  border: 1px solid RGB(212, 213, 219);
   color: RGB(38, 41, 77);
   font-size: inherit;
   outline: none;
@@ -33,6 +32,12 @@
   font-size: 3rem;
   font-weight: 600;
   color: red;
+}
+.Error {
+  color: red;
+  padding: 0.4rem 0rem 0rem 0.4rem;
+  font-size: 12px;
+  border-radius: 5px;
 }
 .Intro {
   font-size: 2rem;
@@ -267,9 +272,8 @@
   margin-top: 0.5rem;
   color: rgb(175, 174, 174);
 }
-.optinFieldsWrapper{
+.optinFieldsWrapper {
   margin-top: 1rem;
-  
 }
 .optinField {
   border: 1px solid rgb(212, 213, 219);
@@ -279,7 +283,7 @@
   margin: 0.5rem 0rem;
 }
 
-.optinFieldInput{
+.optinFieldInput {
   zoom: 1.5;
   margin: 0.2rem 0.5rem 0rem 0rem;
 }

@@ -145,30 +145,20 @@ export default function LoginContainer(props) {
   };
 
   const onBlur = (e) => {
-    switch (e.target.name) {
-      case "email":
-        if (!e.target.value) {
-          setLoginError({
-            ...LoginError,
-            isEmailError: true,
-            [e.target.name]: "Email is required",
-          });
-        } else if (e.target.value && !validateEmail(e.target.value)) {
-          setLoginError({
-            ...LoginError,
-            isEmailError: true,
-            [e.target.name]: "Email is not valid",
-          });
-        } else {
-          setLoginError({
-            ...LoginError,
-            isEmailError: false,
-            [e.target.name]: "",
-          });
-        }
-        break;
-      default:
-        break;
+    if (e.target.name === "email") {
+      if (e.target.value && !validateEmail(e.target.value)) {
+        setLoginError({
+          ...LoginError,
+          isEmailError: true,
+          [e.target.name]: "Email_is_not_valid",
+        });
+      } else {
+        setLoginError({
+          ...LoginError,
+          isEmailError: false,
+          [e.target.name]: "",
+        });
+      }
     }
   };
   const changePage = () => {

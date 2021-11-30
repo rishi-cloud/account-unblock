@@ -14,7 +14,8 @@ export default function SignupContainer(props) {
   const { connections, setLoginText } = useContext(CommonDataContext);
   const { trackClickEvent } = useContext(TrackingContext);
   const { setWhichPage } = useContext(AppContext);
-  const { LoginForm, setLoginForm, LoginError, setLoginError } = useContext(CommonDataContext);
+  const { LoginForm, setLoginForm, LoginError, setLoginError } =
+    useContext(CommonDataContext);
   const { setSignupText } = useContext(CommonDataContext);
   const { setting } = useContext(SettingContext);
   // Context Data
@@ -67,6 +68,23 @@ export default function SignupContainer(props) {
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
+  };
+  const onBlur = (e) => {
+    if (e.target.name === "email") {
+      if (e.target.value && !validateEmail(e.target.value)) {
+        setSignupError({
+          ...SignupError,
+          isEmailError: true,
+          [e.target.name]: "Email_is_not_valid",
+        });
+      } else {
+        setSignupError({
+          ...SignupError,
+          isEmailError: false,
+          [e.target.name]: "",
+        });
+      }
+    }
   };
 
   const onSubmit = async (e) => {
@@ -186,11 +204,14 @@ export default function SignupContainer(props) {
         setPasswordPolicyState,
         setIsValid
       );
+    } else {
+      setSignupForm({
+        ...SignupForm,
+        [e.target.name]: e.target.value,
+      });
     }
-    setSignupForm({
-      ...SignupForm,
-      [e.target.name]: e.target.value,
-    });
+
+    onBlur(e);
   };
   const handleForgotPasswordClick = (e) => {
     e.preventDefault();

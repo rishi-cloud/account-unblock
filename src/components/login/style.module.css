@@ -113,8 +113,8 @@ input:-webkit-autofill {
 }
 .Error {
   color: red;
-  padding: 1rem;
-  font-size: 14px;
+  padding: 0rem 0rem 0rem 0.4rem;
+  font-size: 12px;
   border-radius: 5px;
 }
 .importantBold {
@@ -221,6 +221,7 @@ input:-webkit-autofill {
 }
 .ordiv {
   margin: 0 0.5rem;
+  white-space: nowrap;
 }
 
 .SwitchBtn {
@@ -401,6 +402,7 @@ input:-webkit-autofill {
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
+  white-space: nowrap;
 }
 .forgotPassword:focus {
   outline: none;
