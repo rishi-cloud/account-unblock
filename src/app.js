@@ -29,10 +29,15 @@ const App = ({ pageConfig, passwordResetConfig }) => {
   let query = useQuery();
   let locale = useRef("");
   const affiliateId = useRef(query.get("aff_id") || parsedHash.get("aff_id"));
-  let email = useRef("");
-  email.current = query.get("email") ? parsedHash.get("email") : "";
+  const email = useRef(query.get("aai") || parsedHash.get("aai"));
   let lang;
   let culture = query.get("culture") ?? parsedHash.get("culture");
+
+  try {
+    email.current = JSON.parse(email.current).ea;
+  } catch {
+    email.current = "";
+  }
 
   if (culture === null) {
     if (localStorage.getItem("lang") === null) {

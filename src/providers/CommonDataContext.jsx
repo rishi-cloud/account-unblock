@@ -38,7 +38,6 @@ const CommonDataProvider = (props) => {
     password: "",
     confirmPassword: "",
     isSubmitting: false,
-    isEmailDisable: props.email ? true : false,
   });
 
   // Tracking Event function from Context
