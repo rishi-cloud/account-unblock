@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { TealiumTagKeyConstants } from "../constants/TealiumConstants";
 import Cookies from "universal-cookie";
+import { SettingContext } from "./SettingProvider";
 
 const TrackingContext = React.createContext({});
 
@@ -13,6 +14,7 @@ const populateTealiumData = (props, location) => {
     }),
     // [TealiumTagKeyConstants.TEALIUM_CLIENT_ID]: props.config.clientName,
     [TealiumTagKeyConstants.TEALIUM_CULTURE_CODE]: getCulture(location),
+    [TealiumTagKeyConstants.TEALIUM_AFFILIATE_ID]: props.affiliateId,
   };
 };
 
@@ -30,30 +32,74 @@ const TrackingProvider = (props) => {
   const [utagData, setUtagData] = useState(
     populateTealiumData(props, location)
   );
-  const trackClickEvent = (navElement) => {
+  console.log("at every stage", utagData);
+  const fireDifferentPageViewCall = (pageName) => {
     let utag = window.utag;
-    let updatedUtagData = { ...utagData };
-    updatedUtagData["tm_global_tealium_calltype"] = "manual";
-    updatedUtagData["tm_global_navigation_element"] = navElement;
-    updatedUtagData["tm_global_navigation_element_click"] = "true";
+    let updatedUtagData = {
+      ...utagData,
+      [TealiumTagKeyConstants.TEALIUM_NAVIGATION_ELEMENT]: null,
+      [TealiumTagKeyConstants.TEALIUM_PAGE_NAME]: pageName,
+      [TealiumTagKeyConstants.TEALIUM_SITESECTION]: pageName,
+    };
+    utag.view({
+      ...updatedUtagData,
+      [TealiumTagKeyConstants.TEALIUM_PAGE_PUBLISH_DATE]: new Date(),
+    });
+    setUtagData(updatedUtagData);
+  };
+
+  const trackClickEvent = (navElement) => {
+    console.log(
+      "inside this",
+      utagData[TealiumTagKeyConstants.TEALIUM_PAGE_NAME]
+    );
+    let utag = window.utag;
+    let updatedUtagData = {
+      ...utagData,
+      tm_global_tealium_calltype: "manual",
+      tm_global_navigation_element: navElement,
+      tm_global_navigation_element_click: "true",
+      [TealiumTagKeyConstants.TEALIUM_PAGE_PUBLISH_DATE]: new Date(),
+    };
+    setUtagData(updatedUtagData);
     utag?.link(updatedUtagData);
   };
-  const onClickTracker = (e) => {
-    if (e.target.id) {
-      console.log("now only", e.target.id);
-      trackClickEvent(e.target.id);
-    }
-  };
+
   useEffect(() => {
+    const onClickTracker = (e) => {
+      console.log("element", e.target.getAttribute("data-nav-element-click"));
+      if (e.target.getAttribute("data-nav-element-click")) {
+        console.log(
+          "inside this",
+          utagData[TealiumTagKeyConstants.TEALIUM_PAGE_NAME]
+        );
+        let utag = window.utag;
+        let updatedUtagData = {
+          ...utagData,
+          tm_global_tealium_calltype: "manual",
+          tm_global_navigation_element: e.target.getAttribute(
+            "data-nav-element-click"
+          ),
+          tm_global_navigation_element_click: "true",
+          [TealiumTagKeyConstants.TEALIUM_PAGE_PUBLISH_DATE]: new Date(),
+        };
+        setUtagData(updatedUtagData);
+        utag?.link(updatedUtagData);
+      }
+    };
     window.addEventListener("click", onClickTracker);
     return () => {
       window.removeEventListener("click", onClickTracker);
     };
-  }, []);
+  }, [utagData]);
 
   return (
     <TrackingContext.Provider
-      value={{ trackClickEvent, utagData, setUtagData }}
+      value={{
+        trackClickEvent,
+        utagData,
+        setUtagData,
+      }}
     >
       {props.children}
     </TrackingContext.Provider>

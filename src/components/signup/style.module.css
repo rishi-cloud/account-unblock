@@ -7,8 +7,13 @@
   justify-content: flex-start;
 }
 .leftContainer {
-  flex: 1;
+  flex: 0.5;
   padding: 1rem 0rem;
+}
+.SignupWelcomeContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
 }
 .InputAndLogoSignup {
   display: flex;
@@ -21,6 +26,7 @@
   outline: none;
 }
 .RightContainerSignup {
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -95,6 +101,7 @@
   color: RGB(38, 41, 77);
   font-size: 1.3rem;
   outline: none;
+  width: -webkit-fill-available;
 }
 .InputLabel {
   position: absolute;
@@ -113,6 +120,9 @@
   margin-top: 1rem;
   background-color: #fff;
   padding: 5px;
+}
+.RightContainerWrapper {
+  flex: 1;
 }
 .InputWrapper {
   flex: 1;
@@ -295,6 +305,9 @@
     flex-direction: row;
   }
   .RightContainerSignup {
+    flex: 1;
+  }
+  .leftContainer {
     flex: 1;
   }
   .formWrapper {

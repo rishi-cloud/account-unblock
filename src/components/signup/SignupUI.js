@@ -35,67 +35,68 @@ const SignupUI = (props) => {
       {loader ? (
         <LoaderScreen text="Creating_your_account" />
       ) : (
-        <>
-          <div className={styles.SignupWrapper}>
-            <div className={styles.leftContainer}>
-              <McAfeeLogo className={styles.Logo} />
-              <div className={styles.Intro}>{translate(SignupText.title)}</div>
-              {showSignupForm ? (
-                <div className={styles.IntroSubHeading}>
+        <div className={styles.SignupWrapper}>
+          <div className={styles.leftContainer}>
+            <McAfeeLogo className={styles.Logo} />
+            <div className={styles.Intro}>{translate(SignupText.title)}</div>
+            {showSignupForm ? (
+              <div className={styles.IntroSubHeading}>
+                <div className={styles.Points}>
+                  {translate(SignupText.subtitle)}
+                </div>
+              </div>
+            ) : null}
+            {SignupError.errorCode ? (
+              <>
+                <div className={styles.IntroSubHeadingWithError}>
+                  <div className={styles.ErrorPoints}>
+                    <FormattedMessage
+                      id={SignupError.errorCode}
+                      defaultMessage="We can’t create an account for <b>{email}</b> because your email is from a country subject to US export restrictions, or your company is on a list of prohibited organizations, either by the US or foreign government agency."
+                      values={{
+                        b: (chunks) => <strong>{chunks}</strong>,
+                        email: `${errorEmail}`,
+                      }}
+                    />
+                  </div>
                   <div className={styles.Points}>
-                    {translate(SignupText.subtitle)}
+                    <FormattedMessage
+                      id="Email_us_at"
+                      defaultMessage="Email us at <b>export@mcafee.com</b> if you have any questions."
+                      values={{
+                        b: (chunks) => (
+                          <p className={styles.boldid}>{chunks}</p>
+                        ),
+                      }}
+                    />
                   </div>
                 </div>
-              ) : null}
-              {SignupError.errorCode ? (
-                <>
-                  <div className={styles.IntroSubHeadingWithError}>
-                    <div className={styles.ErrorPoints}>
-                      <FormattedMessage
-                        id={SignupError.errorCode}
-                        defaultMessage="We can’t create an account for <b>{email}</b> because your email is from a country subject to US export restrictions, or your company is on a list of prohibited organizations, either by the US or foreign government agency."
-                        values={{
-                          b: (chunks) => <strong>{chunks}</strong>,
-                          email: `${errorEmail}`,
-                        }}
-                      />
-                    </div>
-                    <div className={styles.Points}>
-                      <FormattedMessage
-                        id="Email_us_at"
-                        defaultMessage="Email us at <b>export@mcafee.com</b> if you have any questions."
-                        values={{
-                          b: (chunks) => (
-                            <p className={styles.boldid}>{chunks}</p>
-                          ),
-                        }}
-                      />
-                    </div>
-                  </div>
-                </>
-              ) : null}
-              <div className={styles.HorizontalSignupdashedline}></div>
-              {showSignupForm ? (
-                <div className={styles.BottomHeadingSignUp}>
-                  {translate("Already_have_an_account")}
-                  <p
-                    className={styles.Signuppagelink}
-                    onClick={() => changePage()}
-                    id="Signin-page-redirect-from-signup"
-                  >
-                    {translate("Sign_in_now")}
-                  </p>
-                </div>
-              ) : (
-                <div
+              </>
+            ) : null}
+            <div className={styles.HorizontalSignupdashedline}></div>
+            {showSignupForm ? (
+              <div className={styles.BottomHeadingSignUp}>
+                {translate("Already_have_an_account")}
+                <p
                   className={styles.Signuppagelink}
-                  onClick={() => changePage()}
-                  id="Signin-with-different-email-redirect-link"
+                  onClick={(e) => changePage(e)}
+                  data-navelement="Signin-page-redirect-from-signup"
                 >
-                  {translate("Sign_in_with_a_different_email_address")}
-                </div>
-              )}
-            </div>
+                  {translate("Sign_in_now")}
+                </p>
+              </div>
+            ) : (
+              <div
+                className={styles.Signuppagelink}
+                onClick={(e) => changePage(e)}
+                data-navelement="Signin-with-different-email-redirect-link"
+              >
+                {translate("Sign_in_with_a_different_email_address")}
+              </div>
+            )}
+          </div>
+
+          <div className={styles.RightContainerWrapper}>
             <div className={styles.RightContainerSignup}>
               {showSignupForm ? (
                 <Signup
@@ -114,7 +115,7 @@ const SignupUI = (props) => {
               ) : null}
             </div>
           </div>
-        </>
+        </div>
       )}
     </>
   );

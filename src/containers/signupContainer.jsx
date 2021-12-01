@@ -7,9 +7,14 @@ import { validatePassword } from "../validator/PasswordValidator";
 import { TrackingContext } from "../providers/TrackingProvider";
 import { SettingContext } from "../providers/SettingProvider";
 import Cookies from "universal-cookie";
+import {
+  TealiumTagKeyConstants,
+  TealiumTagValueConstans,
+} from "../constants/TealiumConstants";
 
 export default function SignupContainer(props) {
   // Context Data
+  const { utagData, setUtagData } = useContext(TrackingContext);
   const { SignupWithPassword, loginWithPassword } = useContext(AccountContext);
   const { connections, setLoginText } = useContext(CommonDataContext);
   const { trackClickEvent } = useContext(TrackingContext);
@@ -85,6 +90,20 @@ export default function SignupContainer(props) {
         });
       }
     }
+  };
+  const fireDifferentPageViewCall = (pageName) => {
+    let utag = window.utag;
+    let updatedUtagData = {
+      ...utagData,
+      [TealiumTagKeyConstants.TEALIUM_NAVIGATION_ELEMENT]: null,
+      [TealiumTagKeyConstants.TEALIUM_PAGE_NAME]: pageName,
+      [TealiumTagKeyConstants.TEALIUM_SITESECTION]: pageName,
+    };
+    utag.view({
+      ...updatedUtagData,
+      [TealiumTagKeyConstants.TEALIUM_PAGE_PUBLISH_DATE]: new Date(),
+    });
+    setUtagData(updatedUtagData);
   };
 
   const onSubmit = async (e) => {
@@ -167,8 +186,10 @@ export default function SignupContainer(props) {
       setLoader(false);
     }
   };
-  const changePage = () => {
+  const changePage = (e) => {
     const checkCookies = cookies.get("ua");
+    trackClickEvent(e.target.getAttribute("data-navelement"));
+    fireDifferentPageViewCall(TealiumTagValueConstans.LOGIN_PAGE_NAME);
     if (!checkCookies) {
       cookies.set("ua", { at: "password" }, { path: "/" });
     } else {

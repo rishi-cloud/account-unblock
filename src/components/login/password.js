@@ -161,6 +161,7 @@ const PasswordFlow = (props) => {
               onClick={() => {
                 showPassword ? setShowPassword(false) : setShowPassword(true);
               }}
+              data-nav-element-click="show-password"
             />
             {LoginError.errorCode &&
               LoginError.errorCode !== "login.password_lock" &&
@@ -174,7 +175,7 @@ const PasswordFlow = (props) => {
             type="button"
             className={styles.forgotPassword}
             onClick={handleForgotPasswordClick}
-            id="forgot-password-button-click"
+            data-navelement="forgot-password-button-click"
           >
             {translate("Forgot_password")}
           </button>
@@ -183,8 +184,7 @@ const PasswordFlow = (props) => {
       <button
         className={styles.SigninWithPassword}
         onClick={(e) => {
-          onSubmit(e) &&
-            trackClickEvent(TealiumTagValueConstans.SIGNIN_CONTINUE_BUTTON);
+          onSubmit(e);
         }}
         disabled={
           !validateEmail(LoginForm.email) ||
@@ -202,7 +202,7 @@ const PasswordFlow = (props) => {
               : "",
           cursor: LoginForm.isSubmitting ? "progress" : "pointer",
         }}
-        id="Signin-with-password-submit-button-click"
+        data-nav-element-click="Signin-with-password-submit-button-click"
       >
         {translate("signIn")}
       </button>

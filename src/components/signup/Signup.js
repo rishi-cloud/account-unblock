@@ -61,7 +61,7 @@ const Signup = (props) => {
         type="button"
         className={styles.forgotPassword}
         onClick={handleForgotPasswordClick}
-        id="forgot-password-button-click"
+        data-navelement="forgot-password-button-click"
       >
         {chunks}
       </button>
@@ -176,6 +176,7 @@ const Signup = (props) => {
                 onClick={() => {
                   showPassword ? setShowPassword(false) : setShowPassword(true);
                 }}
+                data-nav-element-click="show-password"
               />
               {isValid ? (
                 <TickIcon
@@ -271,6 +272,7 @@ const Signup = (props) => {
                 onClick={() => {
                   showPassword ? setShowPassword(false) : setShowPassword(true);
                 }}
+                data-nav-element-click="show-password"
               />
               {SignupForm.password === SignupForm.confirmPassword &&
               SignupForm.confirmPassword !== "" ? (
@@ -402,7 +404,7 @@ const Signup = (props) => {
                 : styles.SubmitButton
             }
             onClick={onSubmit}
-            id="Signup-submit-button-click"
+            data-nav-element-click="Signup-submit-button-click"
           >
             {translate("Create_my_Account")}
           </button>

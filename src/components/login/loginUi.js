@@ -76,8 +76,8 @@ const LoginUI = (props) => {
       <strong
         className={styles.important}
         style={{ color: "rgb(66, 88, 255)" }}
-        onClick={handleForgotPasswordClick}
-        id="forgot-password-button-click"
+        onClick={(e) => handleForgotPasswordClick(e)}
+        data-navelement="forgot-password-button-click"
       >
         {chunks}
       </strong>
@@ -86,7 +86,7 @@ const LoginUI = (props) => {
       <strong
         className={styles.important}
         onClick={onToggle}
-        id="Sigin-With-OTP"
+        data-navelement="Sigin-With-OTP"
       >
         {translate("Sign_in_with_a_onetime_passcode")}
       </strong>
@@ -109,10 +109,10 @@ const LoginUI = (props) => {
           <div>{translate("Do_not_have_an_account")}</div>
           <div
             className={styles.Loginpagelink}
-            onClick={() => {
-              changePage();
+            onClick={(e) => {
+              changePage(e);
             }}
-            id="Signup-page-link-button"
+            data-navelement="Signup-page-link-button"
           >
             {translate("Create_one_now")}
           </div>
@@ -123,8 +123,8 @@ const LoginUI = (props) => {
         return (
           <div
             className={styles.Signuppagelink}
-            onClick={() => blockScreenToggle("both-locked")}
-            id="Signin-redirect-from-blockscreen"
+            onClick={(e) => blockScreenToggle("both-locked", e)}
+            data-navelement="Signin-redirect-from-blockscreen"
           >
             {translate("Sign_in_with_a_different_email_address")}
           </div>
@@ -173,10 +173,10 @@ const LoginUI = (props) => {
             <div>{translate("Do_not_have_an_account")}</div>
             <div
               className={styles.Loginpagelink}
-              onClick={() => {
-                changePage();
+              onClick={(e) => {
+                changePage(e);
               }}
-              id="Signup-page-link-button"
+              navElement="Signup-page-link-button"
             >
               {translate("Create_one_now")}
             </div>
@@ -341,6 +341,7 @@ const LoginUI = (props) => {
                             <strong
                               className={styles.important}
                               onClick={getOtp}
+                              data-nav-element-click="requesting-otp-for-login"
                             >
                               {chunks}
                             </strong>

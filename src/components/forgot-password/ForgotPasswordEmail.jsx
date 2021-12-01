@@ -48,6 +48,7 @@ function ForgotPasswordEmail(props) {
               className={"emailMeBtn"}
               style={{ width: "100%", maxWidth: "350px" }}
               onClick={backToSignIn}
+              data-navelement="Signin-With-password"
             >
               <div>{translate("Back_to_signin")}</div>
             </button>

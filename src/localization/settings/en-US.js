@@ -24,7 +24,8 @@ const en = {
     },
 
     affiliates: {
-      422: {
+      105: {
+        affiliate_name: "del",
         OptinFields: {
           SpecialPromo: {
             id: "2",

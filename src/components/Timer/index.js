@@ -33,7 +33,11 @@ const Timer = (props) => {
       {TimerState.minutes === 0 && TimerState.seconds === 0 ? (
         <div className="timer-inactive">
           {translate("This_passcode_has_expired")}
-          <div className="resend-passcode" onClick={getOtp}>
+          <div
+            className="resend-passcode"
+            onClick={getOtp}
+            data-nav-element-click="resend-otp"
+          >
             {translate("Send_new_code")}
           </div>
         </div>

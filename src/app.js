@@ -61,7 +61,7 @@ const App = ({ pageConfig, passwordResetConfig }) => {
   };
 
   return (
-    <TrackingProvider config={pageConfig}>
+    <TrackingProvider config={pageConfig} affiliateId={affiliateId.current}>
       <SettingProvider
         locale={locale.current}
         affiliateId={affiliateId.current}

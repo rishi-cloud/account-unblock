@@ -70,11 +70,13 @@ export default function LoginContainer(props) {
     setTimeout(callGetOtp, 3000);
   };
 
-  const fireOtpPageViewCall = (pageName) => {
+  const fireDifferentPageViewCall = (pageName) => {
     let utag = window.utag;
     let updatedUtagData = {
       ...utagData,
-      [TealiumTagKeyConstants.TEALIUM_PAGE_NAME]: [pageName],
+      [TealiumTagKeyConstants.TEALIUM_NAVIGATION_ELEMENT]: null,
+      [TealiumTagKeyConstants.TEALIUM_PAGE_NAME]: pageName,
+      [TealiumTagKeyConstants.TEALIUM_SITESECTION]: pageName,
     };
     utag.view({
       ...updatedUtagData,
@@ -94,8 +96,10 @@ export default function LoginContainer(props) {
       setHideEmail(false);
       setLoginForm({ ...LoginForm, otpAvailable: false, otp: "" });
       setToggle("login-with-password");
-      trackClickEvent(e.target.id);
-      fireOtpPageViewCall(TealiumTagValueConstans.LOGIN_PAGE_NAME);
+      // trackClickEvent(e.target.getAttribute("data-navelment"));
+      trackClickEvent(e.target.getAttribute("data-navelement"));
+      fireDifferentPageViewCall(TealiumTagValueConstans.LOGIN_PAGE_NAME);
+      console.log("------------->login", utagData);
       const currentPage = cookies.get("ua");
       if (!currentPage) {
         cookies.set("ua", { at: "password" }, { path: "/" });
@@ -109,8 +113,10 @@ export default function LoginContainer(props) {
         subtitle: "We_will_send_you_a_otp_subtitle",
       });
       setToggle("login-with-otp");
-      trackClickEvent(e.target.id);
-      fireOtpPageViewCall(TealiumTagValueConstans.OTP_PAGE_NAME);
+      // trackClickEvent(e.target.id);
+      trackClickEvent(e.target.getAttribute("data-navelement"));
+      fireDifferentPageViewCall(TealiumTagValueConstans.OTP_PAGE_NAME);
+      console.log("------------->otp", utagData);
       const currentPage = cookies.get("ua");
       if (!currentPage) {
         cookies.set("ua", { at: "otp" }, { path: "/" });
@@ -161,7 +167,9 @@ export default function LoginContainer(props) {
       }
     }
   };
-  const changePage = () => {
+  const changePage = (e) => {
+    trackClickEvent(e.target.getAttribute("data-navelement"));
+    fireDifferentPageViewCall(TealiumTagValueConstans.SIGNUP_PAGE_NAME);
     setWhichPage("signup-page");
     setLoginText({
       title: "Sign_into_your_McAfee_account",
@@ -186,8 +194,10 @@ export default function LoginContainer(props) {
     console.log(currentCount);
   };
 
-  const blockScreenToggle = (whichLink) => {
+  const blockScreenToggle = (whichLink, element) => {
     if (whichLink === "with-password") {
+      trackClickEvent(element.target.getAttribute("data-navelement"));
+      fireDifferentPageViewCall(TealiumTagValueConstans.LOGIN_PAGE_NAME);
       setToggle("login-with-password");
       setLoginText({
         title: "Sign_into_your_McAfee_account",
@@ -207,6 +217,8 @@ export default function LoginContainer(props) {
       });
       setOnlyPasswordLock(false);
     } else if (whichLink === "with-otp") {
+      trackClickEvent(element.target.getAttribute("data-navelement"));
+      fireDifferentPageViewCall(TealiumTagValueConstans.OTP_PAGE_NAME);
       setToggle("login-with-otp");
       setLoginText({
         title: "We_will_send_you_a_otp_title",
@@ -226,6 +238,8 @@ export default function LoginContainer(props) {
       });
       setOnlyPasswordLock(false);
     } else if (whichLink === "both-locked") {
+      trackClickEvent(element.target.getAttribute("data-navelement"));
+      fireDifferentPageViewCall(TealiumTagValueConstans.LOGIN_PAGE_NAME);
       setToggle("login-with-password");
       setLoginText({
         title: "Sign_into_your_McAfee_account",
@@ -252,6 +266,8 @@ export default function LoginContainer(props) {
         passwordBlock: false,
       });
     } else if (whichLink === "with-otp-user-unlocked") {
+      trackClickEvent(element.target.getAttribute("data-navelement"));
+      fireDifferentPageViewCall(TealiumTagValueConstans.OTP_PAGE_NAME);
       setToggle("login-with-otp");
       setLoginText({
         title: "We_will_send_you_a_otp_title",
@@ -296,205 +312,203 @@ export default function LoginContainer(props) {
   };
 
   const submitForLoginWithPassword = async () => {
-    try {
-      setLoader(true);
-      trackClickEvent("submitting-for-login-with-password");
-      const response = await loginWithPassword(
-        LoginForm.email,
-        LoginForm.password
-      );
+    // try {
+    //   setLoader(true);
+    //   trackClickEvent("submitting-for-login-with-password");
+    //   const response = await loginWithPassword(
+    //     LoginForm.email,
+    //     LoginForm.password
+    //   );
+    //   setLoginError({
+    //     ...LoginError,
+    //     databaseError: "",
+    //   });
+    //   setLoginForm({
+    //     ...LoginForm,
+    //     isSubmitting: false,
+    //   });
+    // } catch (err) {
+    //   if (err.code === "too_many_attempts") {
+    setBlockScreenState({
+      ...blockScreenState,
+      passwordBlock: true,
+    });
+    setOnlyPasswordLock(true);
+    if (blockScreenState.otpBlock) {
+      setLoginText({
+        title: "login_lock_title",
+        subtitle: "login_lock_subtitle",
+      });
       setLoginError({
         ...LoginError,
+        // databaseError: err?.description,
+        // errorCode: err?.code === null ? err.original.message : err?.code,
         databaseError: "",
+        errorCode: "",
       });
-      setLoginForm({
-        ...LoginForm,
-        isSubmitting: false,
+    } else {
+      setLoginText({
+        title: "You_have_reached_the_maximum_number_of_password_attempts",
+        subtitle: "You_have_reached_the_maximum_number_of_password_attempts",
       });
-    } catch (err) {
-      if (err.code === "too_many_attempts") {
-        setBlockScreenState({
-          ...blockScreenState,
-          passwordBlock: true,
-        });
-        setOnlyPasswordLock(true);
-        if (blockScreenState.otpBlock) {
-          setLoginText({
-            title: "login_lock_title",
-            subtitle: "login_lock_subtitle",
-          });
-          setLoginError({
-            ...LoginError,
-            // databaseError: err?.description,
-            // errorCode: err?.code === null ? err.original.message : err?.code,
-            databaseError: "",
-            errorCode: "",
-          });
-        } else {
-          setLoginText({
-            title: "You_have_reached_the_maximum_number_of_password_attempts",
-            subtitle:
-              "You_have_reached_the_maximum_number_of_password_attempts",
-          });
-          setLoginError({
-            ...LoginError,
-            // databaseError: err?.description,
-            // errorCode: err?.code === null ? err.original.message : err?.code,
-            databaseError: "Blocked user",
-            errorCode: `login.password_lock`,
-          });
-        }
-      } else {
-        setToggle("login-with-password");
-        if (!blockScreenState.otpBlock) {
-          setLoginText({
-            title: "Sign_into_your_McAfee_account",
-            subtitle: "choose_your_signIn_method_continue",
-          });
-        }
-
-        setLoginError({
-          ...LoginError,
-          databaseError: err?.description,
-          errorCode:
-            err?.code === null
-              ? `login.${err.original.message}`
-              : `login.${err?.code}`,
-        });
-      }
-      setLoginForm({
-        ...LoginForm,
-        password: "",
-        isSubmitting: false,
+      setLoginError({
+        ...LoginError,
+        // databaseError: err?.description,
+        // errorCode: err?.code === null ? err.original.message : err?.code,
+        databaseError: "Blocked user",
+        errorCode: `login.password_lock`,
       });
-      settingCookies();
-      trackClickEvent("email-password-login-failure");
     }
+    // } else {
+    //   setToggle("login-with-password");
+    //   if (!blockScreenState.otpBlock) {
+    //     setLoginText({
+    //       title: "Sign_into_your_McAfee_account",
+    //       subtitle: "choose_your_signIn_method_continue",
+    //     });
+    //   }
+
+    //   setLoginError({
+    //     ...LoginError,
+    //     databaseError: err?.description,
+    //     errorCode:
+    //       err?.code === null
+    //         ? `login.${err.original.message}`
+    //         : `login.${err?.code}`,
+    //   });
+    // }
+    setLoginForm({
+      ...LoginForm,
+      password: "",
+      isSubmitting: false,
+    });
+    settingCookies();
+    trackClickEvent("email-password-login-failure");
+    // }
     setLoader(false);
   };
   const submitForLoginWithOTP = async () => {
-    try {
-      if (LoginForm.otpAvailable) {
-        trackClickEvent("submitting-for-login-with-otp");
-        if (!otpValid) {
-          setLoginForm({
-            ...LoginForm,
-            isSubmitting: false,
-          });
-          setLoginError({
-            ...LoginError,
-            databaseError: "Otp has expired please resend the otp",
-            errorCode: "Otp has expired please resend the otp",
-          });
-        } else {
-          setLoader(true);
-          await otpLogin(LoginForm.email, LoginForm.otp);
-          setLoginForm({
-            ...LoginForm,
-            isSubmitting: false,
-          });
-        }
-      } else {
-        trackClickEvent("submitting-for-requesting-otp");
-        await otpStart(LoginForm.email);
-        setLoginText({
-          title: "Welcome_back_to",
-          subtitle: "We_sent_a_otp_to_email",
-        });
-        setOtpTimer(true);
-        setLoginForm({
-          ...LoginForm,
-          isSubmitting: false,
-        });
-        setLoginForm({
-          ...LoginForm,
-          otpAvailable: true,
-        });
-        setHideEmail(true);
-      }
-    } catch (err) {
-      if (err.code === "too_many_attempts") {
-        setBlockScreenState({
-          ...blockScreenState,
-          otpBlock: true,
-        });
-        setOnlyOTPLock(true);
-        if (blockScreenState.passwordBlock) {
-          setLoginText({
-            title: "login_lock_title",
-            subtitle: "login_lock_subtitle",
-          });
-          setLoginError({
-            ...LoginError,
-            // databaseError: err?.description,
-            // errorCode: err?.code === null ? err.original.message : err?.code,
-            databaseError: "",
-            errorCode: "",
-          });
-          setLoginForm({
-            ...LoginForm,
-            isSubmitting: false,
-          });
-        } else {
-          setLoginText({
-            title: "You_have_reached_the_maximum_number_of_passcode_attempts",
-            subtitle:
-              "You_have_reached_the_maximum_number_of_passcode_attempts",
-          });
-          setLoginError({
-            ...LoginError,
-            // databaseError: err?.description,
-            // errorCode: err?.code === null ? err.original.message : err?.code,
-            databaseError: "Blocked user",
-            errorCode: "passwordless.passcode_lock",
-          });
-          setHideEmail(false);
-          setLoginForm({
-            ...LoginForm,
-            password: "",
-            otp: "",
-            otpAvailable: false,
-            isSubmitting: false,
-          });
-        }
-      } else if (
-        err.code === "extensibility_error" &&
-        err.description === "Denied user registration as the user doesnt exist"
-      ) {
-        setLoginText({
-          title: "We_will_send_you_a_otp_title",
-          subtitle: "choose_your_signIn_method_continue",
-        });
-        //console.log("Wrong email credentials");
-        setLoginError({
-          ...LoginError,
-          databaseError: `passwordless.${err?.description}`,
-          errorCode: "sorry_no_account_found",
-        });
-        setLoginForm({
-          ...LoginForm,
-          password: "",
-          otp: "",
-          isSubmitting: false,
-        });
-      } else {
-        console.log("errorcode", `passwordless.${err?.code}`);
-        setLoginError({
-          ...LoginError,
-          databaseError: `passwordless.${err?.description}`,
-          errorCode: `passwordless.${err?.code}` ?? err?.message,
-        });
-        setLoginForm({
-          ...LoginForm,
-          password: "",
-          otp: "",
-          isSubmitting: false,
-        });
-      }
-      setOtpTimer(false);
-      settingCookies();
-      trackClickEvent("otp-login-failure");
+    // try {
+    //   if (LoginForm.otpAvailable) {
+    //     trackClickEvent("submitting-for-otp-login");
+    //     if (!otpValid) {
+    //       setLoginForm({
+    //         ...LoginForm,
+    //         isSubmitting: false,
+    //       });
+    //       setLoginError({
+    //         ...LoginError,
+    //         databaseError: "Otp has expired please resend the otp",
+    //         errorCode: "Otp has expired please resend the otp",
+    //       });
+    //     } else {
+    //       setLoader(true);
+    //       await otpLogin(LoginForm.email, LoginForm.otp);
+    //       setLoginForm({
+    //         ...LoginForm,
+    //         isSubmitting: false,
+    //       });
+    //     }
+    //   } else {
+    //     await otpStart(LoginForm.email);
+    //     trackClickEvent("reqesting-for-otp");
+    //     setLoginText({
+    //       title: "Welcome_back_to",
+    //       subtitle: "We_sent_a_otp_to_email",
+    //     });
+    //     setOtpTimer(true);
+    //     setLoginForm({
+    //       ...LoginForm,
+    //       isSubmitting: false,
+    //     });
+    //     setLoginForm({
+    //       ...LoginForm,
+    //       otpAvailable: true,
+    //     });
+    //     setHideEmail(true);
+    //   }
+    // } catch (err) {
+    //   if (err.code === "too_many_attempts") {
+    setBlockScreenState({
+      ...blockScreenState,
+      otpBlock: true,
+    });
+    setOnlyOTPLock(true);
+    if (blockScreenState.passwordBlock) {
+      setLoginText({
+        title: "login_lock_title",
+        subtitle: "login_lock_subtitle",
+      });
+      setLoginError({
+        ...LoginError,
+        // databaseError: err?.description,
+        // errorCode: err?.code === null ? err.original.message : err?.code,
+        databaseError: "",
+        errorCode: "",
+      });
+      setLoginForm({
+        ...LoginForm,
+        isSubmitting: false,
+      });
+    } else {
+      setLoginText({
+        title: "You_have_reached_the_maximum_number_of_passcode_attempts",
+        subtitle: "You_have_reached_the_maximum_number_of_passcode_attempts",
+      });
+      setLoginError({
+        ...LoginError,
+        // databaseError: err?.description,
+        // errorCode: err?.code === null ? err.original.message : err?.code,
+        databaseError: "Blocked user",
+        errorCode: "passwordless.passcode_lock",
+      });
+      setHideEmail(false);
+      setLoginForm({
+        ...LoginForm,
+        password: "",
+        otp: "",
+        otpAvailable: false,
+        isSubmitting: false,
+      });
     }
+    // } else if (
+    //   err.code === "extensibility_error" &&
+    //   err.description === "Denied user registration as the user doesnt exist"
+    // ) {
+    //   setLoginText({
+    //     title: "We_will_send_you_a_otp_title",
+    //     subtitle: "choose_your_signIn_method_continue",
+    //   });
+    //   //console.log("Wrong email credentials");
+    //   setLoginError({
+    //     ...LoginError,
+    //     databaseError: `passwordless.${err?.description}`,
+    //     errorCode: "sorry_no_account_found",
+    //   });
+    //   setLoginForm({
+    //     ...LoginForm,
+    //     password: "",
+    //     otp: "",
+    //     isSubmitting: false,
+    //   });
+    // } else {
+    //   console.log("errorcode", `passwordless.${err?.code}`);
+    //   setLoginError({
+    //     ...LoginError,
+    //     databaseError: `passwordless.${err?.description}`,
+    //     errorCode: `passwordless.${err?.code}` ?? err?.message,
+    //   });
+    //   setLoginForm({
+    //     ...LoginForm,
+    //     password: "",
+    //     otp: "",
+    //     isSubmitting: false,
+    //   });
+    // }
+    setOtpTimer(false);
+    settingCookies();
+    trackClickEvent("otp-login-failure");
+    // }
   };
 
   const onSubmit = async (e) => {
@@ -557,6 +571,10 @@ export default function LoginContainer(props) {
   };
   const handleForgotPasswordClick = (e) => {
     e.preventDefault();
+    trackClickEvent(e.target.getAttribute("data-navelement"));
+    fireDifferentPageViewCall(
+      TealiumTagValueConstans.FORGOT_PASSWORD_PAGE_NAME
+    );
     setWhichPage("forgotPassword-page");
   };
 

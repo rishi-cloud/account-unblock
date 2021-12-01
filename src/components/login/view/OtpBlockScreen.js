@@ -43,8 +43,8 @@ function OtpBlockScreen(props) {
           <>
             <button
               className={styles.SwitchBtn}
-              onClick={() => blockScreenToggle("with-otp-user-unlocked")}
-              id="Sigin-With-OTP"
+              onClick={(e) => blockScreenToggle("with-otp-user-unlocked", e)}
+              data-navelement="Sigin-With-OTP"
             >
               {translate("Sign_in_with_a_onetime_passcode")}
             </button>

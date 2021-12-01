@@ -12,6 +12,7 @@ const Footer = () => {
             target="_blank"
             href={`https://home.mcafee.com/root/support.aspx?culture=${locale.toUpperCase()}`}
             style={{ whiteSpace: "nowrap" }}
+            data-navelement="contact-us-link"
           >
             {translate("contactUs")}
           </a>

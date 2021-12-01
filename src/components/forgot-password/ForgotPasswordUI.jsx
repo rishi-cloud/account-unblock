@@ -136,7 +136,7 @@ function ForgotPasswordUI(props) {
                 <button
                   className="signInBtn"
                   onClick={backToSignIn}
-                  id="Signin-page-redirect-from-forgotpassword"
+                  data-navelement="Signin-page-redirect-from-forgotpassword"
                 >
                   {translate("Go_back_to_signin")}
                 </button>
