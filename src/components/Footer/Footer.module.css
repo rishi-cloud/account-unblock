@@ -22,9 +22,11 @@
   padding: 0 1rem;
   cursor: pointer;
   border-right: 1px solid lightgray;
+  white-space: nowrap;
 }
 .FooterLinkContainer:last-child {
   border-right: unset;
+  white-space: nowrap;
 }
 
 @media only screen and (min-width: 700px) {
@@ -34,6 +36,7 @@
     justify-content: space-between;
     background-color: #ffffff;
     padding: 2rem;
+    white-space: nowrap;
   }
   .FooterLeftWrapper {
     font-size: 1rem;

@@ -11,6 +11,7 @@ const Footer = () => {
           <a
             target="_blank"
             href={`https://home.mcafee.com/root/support.aspx?culture=${locale.toUpperCase()}`}
+            style={{ whiteSpace: "nowrap" }}
           >
             {translate("contactUs")}
           </a>
@@ -20,6 +21,7 @@ const Footer = () => {
           <a
             target="_blank"
             href={`https://www.mcafee.com/legal?culture=${locale.toUpperCase()}#privacytop`}
+            style={{ whiteSpace: "nowrap" }}
           >
             {" "}
             {translate("privacyNotice")}
@@ -29,6 +31,7 @@ const Footer = () => {
           <a
             target="_blank"
             href={`https://home.mcafee.com/support/commonFAQ?culture=${locale.toUpperCase()}`}
+            style={{ whiteSpace: "nowrap" }}
           >
             {translate("FAQs")}{" "}
           </a>

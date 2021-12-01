@@ -83,11 +83,24 @@ const Signup = (props) => {
       <form className={styles.InputWrapper}>
         <>
           {SignupForm.email !== "" ? (
-            <div className={styles.InputLabel}>{translate("email")}</div>
+            <div
+              className={styles.InputLabel}
+              style={{
+                color: `${
+                  SignupError.isEmailError ? "red" : "rgb(175, 174, 174)"
+                }`,
+              }}
+            >
+              {translate("email")}
+            </div>
           ) : null}
           <div
             className={styles.InputAndLogoSignup}
-            style={{ background: SignupForm.isEmailDisable ? "#EFF0F2" : "" }}
+            style={{
+              border: `1px solid ${
+                SignupError.isEmailError ? "red" : "RGB(212, 213, 219)"
+              }`,
+            }}
           >
             <OutlineMail className={styles.emailSVG} />
             <FormattedMessage id="email">
@@ -100,14 +113,13 @@ const Signup = (props) => {
                   placeholder={msg}
                   className={styles.Input}
                   onChange={onChange}
-                  disabled={SignupForm.isEmailDisable}
-                  style={{
-                    background: SignupForm.isEmailDisable ? "#EFF0F2" : "",
-                  }}
                 />
               )}
             </FormattedMessage>
           </div>
+          {SignupError.email && (
+            <div className={styles.Error}>{translate(SignupError.email)}</div>
+          )}
           <div>
             {SignupForm.password !== "" ? (
               <div
