@@ -113,7 +113,6 @@ const Signup = (props) => {
                   placeholder={msg}
                   className={styles.Input}
                   onChange={onChange}
-                  disabled={SignupForm.isEmailDisable}
                 />
               )}
             </FormattedMessage>
