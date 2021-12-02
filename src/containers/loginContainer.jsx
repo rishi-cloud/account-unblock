@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { AccountContext } from "../providers/AccountContext";
 import { CommonDataContext } from "../providers/CommonDataContext";
+import { useLocation } from "react-router-dom";
+
 import { AppContext } from "../providers/AppContext";
 import {
   TealiumTagKeyConstants,
@@ -14,7 +16,7 @@ export default function LoginContainer(props) {
   const { loginWithPassword, otpLogin, otpStart, getSocialLogin } =
     useContext(AccountContext);
   const [otpValid, setOtpValid] = useState(true);
-  const { LoginForm, setLoginForm, LoginError, setLoginError } =
+  const { LoginForm, setLoginForm, LoginError, setLoginError, customization } =
     useContext(CommonDataContext);
   const { trackClickEvent } = useContext(TrackingContext);
   // const [LoginError, setLoginError] = useState({
@@ -60,7 +62,6 @@ export default function LoginContainer(props) {
       );
     }
   };
-
   const handleClickResendCode = (e) => {
     const callGetOtp = () => {
       setResendingCode("sent");
@@ -70,11 +71,13 @@ export default function LoginContainer(props) {
     setTimeout(callGetOtp, 3000);
   };
 
-  const fireOtpPageViewCall = (pageName) => {
+  const fireDifferentPageViewCall = (pageName) => {
     let utag = window.utag;
     let updatedUtagData = {
       ...utagData,
-      [TealiumTagKeyConstants.TEALIUM_PAGE_NAME]: [pageName],
+      [TealiumTagKeyConstants.TEALIUM_NAVIGATION_ELEMENT]: null,
+      [TealiumTagKeyConstants.TEALIUM_PAGE_NAME]: pageName,
+      [TealiumTagKeyConstants.TEALIUM_SITESECTION]: pageName,
     };
     utag.view({
       ...updatedUtagData,
@@ -94,8 +97,10 @@ export default function LoginContainer(props) {
       setHideEmail(false);
       setLoginForm({ ...LoginForm, otpAvailable: false, otp: "" });
       setToggle("login-with-password");
-      trackClickEvent(e.target.id);
-      fireOtpPageViewCall(TealiumTagValueConstans.LOGIN_PAGE_NAME);
+      // trackClickEvent(e.target.getAttribute("data-navelment"));
+      trackClickEvent(e.target.getAttribute("data-navelement"));
+      fireDifferentPageViewCall(TealiumTagValueConstans.LOGIN_PAGE_NAME);
+      console.log("------------->login", utagData);
       const currentPage = cookies.get("ua");
       if (!currentPage) {
         cookies.set("ua", { at: "password" }, { path: "/" });
@@ -109,8 +114,10 @@ export default function LoginContainer(props) {
         subtitle: "We_will_send_you_a_otp_subtitle",
       });
       setToggle("login-with-otp");
-      trackClickEvent(e.target.id);
-      fireOtpPageViewCall(TealiumTagValueConstans.OTP_PAGE_NAME);
+      // trackClickEvent(e.target.id);
+      trackClickEvent(e.target.getAttribute("data-navelement"));
+      fireDifferentPageViewCall(TealiumTagValueConstans.OTP_PAGE_NAME);
+      console.log("------------->otp", utagData);
       const currentPage = cookies.get("ua");
       if (!currentPage) {
         cookies.set("ua", { at: "otp" }, { path: "/" });
@@ -126,6 +133,44 @@ export default function LoginContainer(props) {
     });
     const currentPageCheck = cookies.get("ua");
     console.log(currentPageCheck);
+  };
+
+  // const getQueryCustomization = (location) => {
+  //   const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+  //   let query = new URLSearchParams(location);
+  //   let cc = query.get("cc") ?? parsedHash.get("cc");
+  //   return cc;
+  // }
+
+  // const getClient = (location) => {
+  // const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+  // let query = new URLSearchParams(location);
+  // let client = query.get("client") ?? parsedHash.get("client");
+  // return client;
+  // }
+
+  // const getClientCustomizations = (client)=> {
+  // return possibleCustomizationPaths[client]
+  // }
+
+  // const possibleCustomizationPaths = {
+  // 'O3UVxh3N5iBepGHU8DctBlUb3cIshpG8': require('../customization/O3UVxh3N5iBepGHU8DctBlUb3cIshpG8.json')
+  // }
+
+  // const location = useLocation().search;
+
+  const onLoad = () => {
+    console.log("onload executing");
+    //setCustomizationData();
+    //const client = getClient(location);
+    // const clientCustomization = getClientCustomizations(client);
+    //const queryCustomization=  JSON.parse(getQueryCustomization(location));
+    setLoginForm({
+      ...LoginForm,
+      customizations:
+        customization?.Login !== undefined ? customization.Login : "",
+      //(queryCustomization !== undefined && queryCustomization?.Login !== undefined) ? queryCustomization.Login:((clientCustomization !== undefined && clientCustomization?.Login !== undefined) ? clientCustomization.Login:""),
+    });
   };
 
   const onPressContinue = () => {
@@ -161,7 +206,9 @@ export default function LoginContainer(props) {
       }
     }
   };
-  const changePage = () => {
+  const changePage = (e) => {
+    trackClickEvent(e.target.getAttribute("data-navelement"));
+    fireDifferentPageViewCall(TealiumTagValueConstans.SIGNUP_PAGE_NAME);
     setWhichPage("signup-page");
     setLoginText({
       title: "Sign_into_your_McAfee_account",
@@ -173,6 +220,12 @@ export default function LoginContainer(props) {
       otp: "",
       otpAvailable: false,
       isSubmitting: false,
+    });
+    setLoginError({
+      email: "",
+      isEmailError: "",
+      databaseError: "",
+      errorCode: "",
     });
 
     const cookies = new Cookies();
@@ -186,8 +239,10 @@ export default function LoginContainer(props) {
     console.log(currentCount);
   };
 
-  const blockScreenToggle = (whichLink) => {
+  const blockScreenToggle = (whichLink, element) => {
     if (whichLink === "with-password") {
+      trackClickEvent(element.target.getAttribute("data-navelement"));
+      fireDifferentPageViewCall(TealiumTagValueConstans.LOGIN_PAGE_NAME);
       setToggle("login-with-password");
       setLoginText({
         title: "Sign_into_your_McAfee_account",
@@ -207,6 +262,8 @@ export default function LoginContainer(props) {
       });
       setOnlyPasswordLock(false);
     } else if (whichLink === "with-otp") {
+      trackClickEvent(element.target.getAttribute("data-navelement"));
+      fireDifferentPageViewCall(TealiumTagValueConstans.OTP_PAGE_NAME);
       setToggle("login-with-otp");
       setLoginText({
         title: "We_will_send_you_a_otp_title",
@@ -226,6 +283,8 @@ export default function LoginContainer(props) {
       });
       setOnlyPasswordLock(false);
     } else if (whichLink === "both-locked") {
+      trackClickEvent(element.target.getAttribute("data-navelement"));
+      fireDifferentPageViewCall(TealiumTagValueConstans.LOGIN_PAGE_NAME);
       setToggle("login-with-password");
       setLoginText({
         title: "Sign_into_your_McAfee_account",
@@ -252,6 +311,8 @@ export default function LoginContainer(props) {
         passwordBlock: false,
       });
     } else if (whichLink === "with-otp-user-unlocked") {
+      trackClickEvent(element.target.getAttribute("data-navelement"));
+      fireDifferentPageViewCall(TealiumTagValueConstans.OTP_PAGE_NAME);
       setToggle("login-with-otp");
       setLoginText({
         title: "We_will_send_you_a_otp_title",
@@ -375,7 +436,7 @@ export default function LoginContainer(props) {
   const submitForLoginWithOTP = async () => {
     try {
       if (LoginForm.otpAvailable) {
-        trackClickEvent("submitting-for-login-with-otp");
+        trackClickEvent("submitting-for-otp-login");
         if (!otpValid) {
           setLoginForm({
             ...LoginForm,
@@ -395,8 +456,8 @@ export default function LoginContainer(props) {
           });
         }
       } else {
-        trackClickEvent("submitting-for-requesting-otp");
         await otpStart(LoginForm.email);
+        trackClickEvent("reqesting-for-otp");
         setLoginText({
           title: "Welcome_back_to",
           subtitle: "We_sent_a_otp_to_email",
@@ -512,7 +573,7 @@ export default function LoginContainer(props) {
       }
     } else if (
       switchLogin === "login-with-otp" &&
-      LoginError.errorCode === "passwordless.passcode_lock"
+      LoginError?.errorCode === "passwordless.passcode_lock"
     ) {
       if (
         (validateEmail(LoginForm.email) && LoginForm.password !== "") ||
@@ -557,7 +618,24 @@ export default function LoginContainer(props) {
   };
   const handleForgotPasswordClick = (e) => {
     e.preventDefault();
+    trackClickEvent(e.target.getAttribute("data-navelement"));
+    fireDifferentPageViewCall(
+      TealiumTagValueConstans.FORGOT_PASSWORD_PAGE_NAME
+    );
     setWhichPage("forgotPassword-page");
+    setLoginForm({
+      email: "",
+      password: "",
+      otp: "",
+      otpAvailable: false,
+      isSubmitting: false,
+    });
+    setLoginError({
+      email: "",
+      isEmailError: "",
+      databaseError: "",
+      errorCode: "",
+    });
   };
 
   const child = React.Children.only(props.children);
@@ -591,5 +669,6 @@ export default function LoginContainer(props) {
     onlyOTPLock,
     resendingCode,
     handleClickResendCode,
+    onLoad,
   });
 }

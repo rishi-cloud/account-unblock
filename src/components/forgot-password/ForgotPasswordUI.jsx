@@ -15,12 +15,14 @@ function ForgotPasswordUI(props) {
     updateEmailDetails,
   } = props;
   const { locale } = useContext(CommonDataContext);
+  const {isAffiliateLogo} = useContext(CommonDataContext);
   const FORMATVALUES = {
     a_contact_support: (chunks) => (
       <a
         target="_blank"
         style={{ color: "rgb(66, 88, 255)" }}
         href={`https://home.mcafee.com/root/support.aspx?culture=${locale.toUpperCase()}`}
+        data-nav-element-click="contact-support"
       >
         {chunks}
       </a>
@@ -38,11 +40,20 @@ function ForgotPasswordUI(props) {
         <div className="ForgotPasswordContainer">
           <div className="ForgotPasswordLeftWrapper">
             <div className="ForgotPasswordLeftContainer">
-              <img
+            {isAffiliateLogo?
+                (<div class="container-header">
+                <span class="container-logo" >
+                    <img  alt="McAfee" title="McAfee" src="https://cdn.jsdelivr.net/gh/atulrana007/McAfee-odrplat-auth0-ui/public/images/McAfee-Document-Logo1.png" class="logo"/>
+                </span>
+                    <span class="container-logo aff-logo-container">
+                        <span class="logo-seperator">| </span><img  alt="McAfee" title="Dell" src="https://secureimages.mcafee.com/common/affiliateImages/dell/logo_dell_new_58x59.gif" width="20" 
+                height="20"/>
+                    </span>
+            </div>): (<img
                 alt="McAfeeLogo"
                 className="McAfeeLogo"
                 src="https://cdn.jsdelivr.net/gh/atulrana007/McAfee-React-Appp/public/images/McAfee-Logo.png"
-              />
+              />)}
               <div className="ForgotPasswordIntro">
                 {translate("Reset_Password")}
               </div>
@@ -113,7 +124,7 @@ function ForgotPasswordUI(props) {
                   disabled={
                     emailDetails.emailError !== "" || emailDetails.email === ""
                   }
-                  id="Sending-email-for-reset-password-submit-button"
+                  data-nav-element-click="Sending-email-for-reset-password-submit-button"
                 >
                   {translate("Email_me")}
                 </button>
@@ -136,7 +147,7 @@ function ForgotPasswordUI(props) {
                 <button
                   className="signInBtn"
                   onClick={backToSignIn}
-                  id="Signin-page-redirect-from-forgotpassword"
+                  data-navelement="Signin-page-redirect-from-forgotpassword"
                 >
                   {translate("Go_back_to_signin")}
                 </button>

@@ -12,6 +12,7 @@ const Footer = () => {
             target="_blank"
             href={`https://home.mcafee.com/root/support.aspx?culture=${locale.toUpperCase()}`}
             style={{ whiteSpace: "nowrap" }}
+            data-nav-element-click="contact-us-link"
           >
             {translate("contactUs")}
           </a>
@@ -22,6 +23,7 @@ const Footer = () => {
             target="_blank"
             href={`https://www.mcafee.com/legal?culture=${locale.toUpperCase()}#privacytop`}
             style={{ whiteSpace: "nowrap" }}
+            data-nav-element-click="privacy-notice-link"
           >
             {" "}
             {translate("privacyNotice")}
@@ -32,6 +34,7 @@ const Footer = () => {
             target="_blank"
             href={`https://home.mcafee.com/support/commonFAQ?culture=${locale.toUpperCase()}`}
             style={{ whiteSpace: "nowrap" }}
+            data-nav-element-click="faq-link"
           >
             {translate("FAQs")}{" "}
           </a>

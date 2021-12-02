@@ -43,7 +43,7 @@ const PasswordLessFlow = (props) => {
                 flex: 1,
                 display: "flex",
                 border:
-                  LoginError.isEmailError === true
+                  LoginError?.isEmailError === true
                     ? "1px solid red"
                     : validateEmail(LoginForm.email)
                     ? "1px solid #0CA77D"
@@ -86,8 +86,8 @@ const PasswordLessFlow = (props) => {
           </div>
         </div>
       )}
-      {LoginError.email && (
-        <div className={styles.Error}>{translate(LoginError.email)}</div>
+      {LoginError?.email && (
+        <div className={styles.Error}>{translate(LoginError?.email)}</div>
       )}
 
       {LoginForm.otpAvailable && (
@@ -122,6 +122,7 @@ const PasswordLessFlow = (props) => {
           <div
             className={styles.LoginOtpResendContainer}
             onClick={handleClickResendCode}
+            data-navelement="Resend-otp-link"
           >
             <div
               className={`${styles.LoginResendBtn} ${
@@ -163,7 +164,7 @@ const PasswordLessFlow = (props) => {
               : "",
           cursor: LoginForm.isSubmitting ? "progress" : "pointer",
         }}
-        id="otp-signin-button-click"
+        // data-nav-element-click="otp-button-clicked"
       >
         {translate("continue")}
       </button>
@@ -189,6 +190,7 @@ const PasswordLessFlow = (props) => {
               <a
                 target="_blank"
                 href={`https://home.mcafee.com/root/support.aspx?culture=${locale.toUpperCase()}`}
+                data-nav-element-click="contact-us-link"
               >
                 {translate("Contact_support")}
               </a>

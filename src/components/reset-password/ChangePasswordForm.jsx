@@ -30,7 +30,7 @@ function ChangePasswordForm(props) {
   return (
     <div className="ForgotPasswordRightWrapper">
       <div className="flexGrow">
-        <form className="InputWrapper" style={{height: '100%'}}>
+        <form className="InputWrapper" style={{ height: "100%" }}>
           <>
             <div>
               {ResetPasswordForm.password !== "" ? (
@@ -85,6 +85,7 @@ function ChangePasswordForm(props) {
                       ? setShowPassword(false)
                       : setShowPassword(true);
                   }}
+                  data-nav-element-click="show-password"
                 />
                 {isValid && (
                   <TickIcon
@@ -182,6 +183,7 @@ function ChangePasswordForm(props) {
                       ? setShowPassword(false)
                       : setShowPassword(true);
                   }}
+                  data-nav-element-click="show-password"
                 />
                 {ResetPasswordForm.password ===
                   ResetPasswordForm.confirmPassword &&
@@ -216,8 +218,9 @@ function ChangePasswordForm(props) {
                 }
                 onClick={handleResetPassword}
                 disabled={ResetPasswordForm.isSubmitting}
+                data-navelement="reset-password-redirect"
               >
-                {translate('Reset_Password')}
+                {translate("Reset_Password")}
               </button>
             </div>
           </>

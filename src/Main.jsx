@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AppContext } from "./providers/AppContext";
 import Login from "./components/login/index";
 import Signup from "./components/signup/index";
@@ -10,10 +10,44 @@ import { ReactComponent as McAfeeLogo } from "./svg/Mcafee-Logo.svg";
 import ForgotPassword from "./components/forgot-password/index";
 import translate from "./localization/translate";
 import styles from "./app.module.css";
+import {
+  TealiumTagKeyConstants,
+  TealiumTagValueConstans,
+} from "./constants/TealiumConstants";
+import { TrackingContext } from "./providers/TrackingProvider";
 
 function Main() {
   const { whichPage, setWhichPage } = useContext(AppContext);
   const { setting, localizedContent } = useContext(SettingContext);
+  const { utagData, setUtagData } = useContext(TrackingContext);
+  const { affiliate_name } = useContext(SettingContext);
+
+  console.log(affiliate_name);
+  const SettingUtagData = () => {
+    console.log("how many times");
+    let utag = window.utag;
+    let updatedUtagData;
+    updatedUtagData = {
+      ...utagData,
+      [TealiumTagKeyConstants.TEALIUM_AFFILIATE_NAME]: affiliate_name,
+      [TealiumTagKeyConstants.TEALIUM_PAGE_NAME]:
+        TealiumTagValueConstans.LOGIN_PAGE_NAME,
+      [TealiumTagKeyConstants.TEALIUM_SITESECTION]:
+        TealiumTagValueConstans.LOGIN_PAGE_NAME,
+    };
+    utag.view({
+      ...updatedUtagData,
+      [TealiumTagKeyConstants.TEALIUM_PAGE_PUBLISH_DATE]: new Date(),
+    });
+    setUtagData(updatedUtagData);
+  };
+
+  useEffect(() => {
+    if (affiliate_name) {
+      SettingUtagData();
+    }
+  }, [affiliate_name]);
+
   const returnPage = (whichPage) => {
     // if (!setting && !localizedContent) {
     //   return <LoaderScreen text="" />;

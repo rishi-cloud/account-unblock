@@ -1,0 +1,61 @@
+ {
+	"nameorderswap": true,
+	"OptinFields": {
+		"VirusThreats": {
+			"id": "1",
+			"display": "false",
+			"checked": "true"
+		},
+		"SpecialPromo": {
+			"id": "2",
+			"display": "false",
+			"checked": "true"
+		},
+		"PartnerPromo": {
+			"id": "3",
+			"display": "false",
+			"checked": "true"
+		}
+	},
+	"affiliates": {
+		"105": {
+			"OptinFields": {
+				"VirusThreats": {
+					"id": "1",
+					"display": "false",
+					"checked": "true"
+				},
+				"SpecialPromo": {
+					"id": "2",
+					"display": "false",
+					"checked": "true"
+				},
+				"PartnerPromo": {
+					"id": "3",
+					"display": "false",
+					"checked": "true"
+				}
+			},
+			"affiliateLogo": true
+		},
+		"741": {
+			"OptinFields": {
+				"VirusThreats": {
+					"id": "1",
+					"display": "false",
+					"checked": "true"
+				},
+				"SpecialPromo": {
+					"id": "2",
+					"display": "false",
+					"checked": "true"
+				},
+				"PartnerPromo": {
+					"id": "3",
+					"display": "false",
+					"checked": "true"
+				}
+			}
+		}
+	}
+}

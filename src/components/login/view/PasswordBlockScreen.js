@@ -9,8 +9,8 @@ function PasswordBlockScreen(props) {
       <div className={styles.BlockUserDiv}>
         <button
           className={styles.EmailBlockSwitchBtn}
-          onClick={() => blockScreenToggle("with-otp")}
-          id="Sigin-With-OTP"
+          onClick={(e) => blockScreenToggle("with-otp", e)}
+          data-navelement="Sigin-With-OTP"
         >
           {translate("Sign_in_with_a_onetime_passcode")}
         </button>
@@ -22,8 +22,8 @@ function PasswordBlockScreen(props) {
 
         <div
           className={styles.Signuppagelink}
-          onClick={() => blockScreenToggle("with-password")}
-          id="Signin-redirect-from-blockscreen"
+          onClick={(e) => blockScreenToggle("with-password", e)}
+          data-navelement="Signin-redirect-from-blockscreen"
         >
           {translate("Sign_in_with_a_different_email_address")}
         </div>

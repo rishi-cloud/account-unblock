@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { TrackingContext } from "./TrackingProvider";
+
 import settings from "../localization/settings";
 const SettingContext = React.createContext({});
 
 const SettingProvider = (props) => {
   const [setting, setSetting] = useState(null);
+  const [affiliate_name, setAffiliateName] = useState(null);
   const [localizedContent, setLocalizedContent] = useState(null);
-  const { trackClickEvent } = useContext(TrackingContext);
+
   const [optinFields, setOptinFields] = useState();
   const ExtractingLocalizedContent = (jsonData) => {
     const errorMessage = {
@@ -66,6 +67,13 @@ const SettingProvider = (props) => {
           typeof settingResponse.data.affiliates === "object"
         ) {
           setSetting(settingResponse.data.affiliates[props.affiliateId]);
+          console.log(
+            "getting something",
+            settingResponse.data.affiliates[props.affiliateId].affiliate_name
+          );
+          setAffiliateName(
+            settingResponse.data.affiliates[props.affiliateId].affiliate_name
+          );
         }
         const localeForMessageLink =
           props?.locale.slice(0, -2) +
@@ -86,7 +94,9 @@ const SettingProvider = (props) => {
   }, [props.affiliateId, props.locale]);
 
   return (
-    <SettingContext.Provider value={{ setting, localizedContent, optinFields }}>
+    <SettingContext.Provider
+      value={{ setting, localizedContent, optinFields, affiliate_name }}
+    >
       {props.children}
     </SettingContext.Provider>
   );
