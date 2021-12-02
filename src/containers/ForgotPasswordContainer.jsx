@@ -2,6 +2,11 @@ import React, { useState, useContext } from "react";
 import { AccountContext } from "../providers/AccountContext";
 import { AppContext } from "../providers/AppContext";
 import { CommonDataContext } from "../providers/CommonDataContext";
+import { TrackingContext } from "../providers/TrackingProvider";
+import {
+  TealiumTagKeyConstants,
+  TealiumTagValueConstans,
+} from "../constants/TealiumConstants";
 
 function ForgotPasswordContainer(props) {
   const [emailDetails, updateEmailDetails] = useState({
@@ -10,7 +15,8 @@ function ForgotPasswordContainer(props) {
     emailSent: false,
   });
   const { setLoginText, setLoginForm } = useContext(CommonDataContext);
-
+  const { utagData, setUtagData, trackClickEvent } =
+    useContext(TrackingContext);
   const { sendForgotPasswordLink } = useContext(AccountContext);
   const { setWhichPage } = useContext(AppContext);
 
@@ -70,7 +76,23 @@ function ForgotPasswordContainer(props) {
       });
     }
   };
-  const backToSignIn = () => {
+  const fireDifferentPageViewCall = (pageName) => {
+    let utag = window.utag;
+    let updatedUtagData = {
+      ...utagData,
+      [TealiumTagKeyConstants.TEALIUM_NAVIGATION_ELEMENT]: null,
+      [TealiumTagKeyConstants.TEALIUM_PAGE_NAME]: pageName,
+      [TealiumTagKeyConstants.TEALIUM_SITESECTION]: pageName,
+    };
+    utag.view({
+      ...updatedUtagData,
+      [TealiumTagKeyConstants.TEALIUM_PAGE_PUBLISH_DATE]: new Date(),
+    });
+    setUtagData(updatedUtagData);
+  };
+  const backToSignIn = (e) => {
+    trackClickEvent(e.target.getAttribute("data-navelement"));
+    fireDifferentPageViewCall(TealiumTagValueConstans.LOGIN_PAGE_NAME);
     setLoginText({
       title: "Sign_into_your_McAfee_account",
       subtitle: "choose_your_signIn_method_continue",

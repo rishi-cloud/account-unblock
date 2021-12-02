@@ -58,6 +58,7 @@ const LoginUI = (props) => {
         className={styles.external_link}
         target="_blank"
         href={`https://home.mcafee.com/root/support.aspx?culture=${locale.toUpperCase()}`}
+        data-nav-element-click="contact-support"
       >
         {chunks}
       </a>
@@ -68,6 +69,7 @@ const LoginUI = (props) => {
         className={styles.external_link}
         target="_blank"
         href={`https://www.mcafee.com/en-au/consumer-support/policy/legal.html?culture=${locale.toUpperCase()}#eula`}
+        data-nav-element-click="McAfee-License-link-click"
       >
         {chunks}
       </a>
@@ -97,6 +99,7 @@ const LoginUI = (props) => {
         className={styles.external_link}
         target="_blank"
         href={`https://www.mcafee.com/legal?culture=${locale.toUpperCase()}&affid=916#privacytop`}
+        data-nav-element-click="privacy-notice-link-clicked"
       >
         {chunks}
       </a>

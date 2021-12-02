@@ -182,6 +182,12 @@ export default function LoginContainer(props) {
       otpAvailable: false,
       isSubmitting: false,
     });
+    setLoginError({
+      email: "",
+      isEmailError: "",
+      databaseError: "",
+      errorCode: "",
+    });
 
     const cookies = new Cookies();
     const checkCookies = cookies.get("ua");
@@ -312,203 +318,205 @@ export default function LoginContainer(props) {
   };
 
   const submitForLoginWithPassword = async () => {
-    // try {
-    //   setLoader(true);
-    //   trackClickEvent("submitting-for-login-with-password");
-    //   const response = await loginWithPassword(
-    //     LoginForm.email,
-    //     LoginForm.password
-    //   );
-    //   setLoginError({
-    //     ...LoginError,
-    //     databaseError: "",
-    //   });
-    //   setLoginForm({
-    //     ...LoginForm,
-    //     isSubmitting: false,
-    //   });
-    // } catch (err) {
-    //   if (err.code === "too_many_attempts") {
-    setBlockScreenState({
-      ...blockScreenState,
-      passwordBlock: true,
-    });
-    setOnlyPasswordLock(true);
-    if (blockScreenState.otpBlock) {
-      setLoginText({
-        title: "login_lock_title",
-        subtitle: "login_lock_subtitle",
-      });
+    try {
+      setLoader(true);
+      trackClickEvent("submitting-for-login-with-password");
+      const response = await loginWithPassword(
+        LoginForm.email,
+        LoginForm.password
+      );
       setLoginError({
         ...LoginError,
-        // databaseError: err?.description,
-        // errorCode: err?.code === null ? err.original.message : err?.code,
         databaseError: "",
-        errorCode: "",
-      });
-    } else {
-      setLoginText({
-        title: "You_have_reached_the_maximum_number_of_password_attempts",
-        subtitle: "You_have_reached_the_maximum_number_of_password_attempts",
-      });
-      setLoginError({
-        ...LoginError,
-        // databaseError: err?.description,
-        // errorCode: err?.code === null ? err.original.message : err?.code,
-        databaseError: "Blocked user",
-        errorCode: `login.password_lock`,
-      });
-    }
-    // } else {
-    //   setToggle("login-with-password");
-    //   if (!blockScreenState.otpBlock) {
-    //     setLoginText({
-    //       title: "Sign_into_your_McAfee_account",
-    //       subtitle: "choose_your_signIn_method_continue",
-    //     });
-    //   }
-
-    //   setLoginError({
-    //     ...LoginError,
-    //     databaseError: err?.description,
-    //     errorCode:
-    //       err?.code === null
-    //         ? `login.${err.original.message}`
-    //         : `login.${err?.code}`,
-    //   });
-    // }
-    setLoginForm({
-      ...LoginForm,
-      password: "",
-      isSubmitting: false,
-    });
-    settingCookies();
-    trackClickEvent("email-password-login-failure");
-    // }
-    setLoader(false);
-  };
-  const submitForLoginWithOTP = async () => {
-    // try {
-    //   if (LoginForm.otpAvailable) {
-    //     trackClickEvent("submitting-for-otp-login");
-    //     if (!otpValid) {
-    //       setLoginForm({
-    //         ...LoginForm,
-    //         isSubmitting: false,
-    //       });
-    //       setLoginError({
-    //         ...LoginError,
-    //         databaseError: "Otp has expired please resend the otp",
-    //         errorCode: "Otp has expired please resend the otp",
-    //       });
-    //     } else {
-    //       setLoader(true);
-    //       await otpLogin(LoginForm.email, LoginForm.otp);
-    //       setLoginForm({
-    //         ...LoginForm,
-    //         isSubmitting: false,
-    //       });
-    //     }
-    //   } else {
-    //     await otpStart(LoginForm.email);
-    //     trackClickEvent("reqesting-for-otp");
-    //     setLoginText({
-    //       title: "Welcome_back_to",
-    //       subtitle: "We_sent_a_otp_to_email",
-    //     });
-    //     setOtpTimer(true);
-    //     setLoginForm({
-    //       ...LoginForm,
-    //       isSubmitting: false,
-    //     });
-    //     setLoginForm({
-    //       ...LoginForm,
-    //       otpAvailable: true,
-    //     });
-    //     setHideEmail(true);
-    //   }
-    // } catch (err) {
-    //   if (err.code === "too_many_attempts") {
-    setBlockScreenState({
-      ...blockScreenState,
-      otpBlock: true,
-    });
-    setOnlyOTPLock(true);
-    if (blockScreenState.passwordBlock) {
-      setLoginText({
-        title: "login_lock_title",
-        subtitle: "login_lock_subtitle",
-      });
-      setLoginError({
-        ...LoginError,
-        // databaseError: err?.description,
-        // errorCode: err?.code === null ? err.original.message : err?.code,
-        databaseError: "",
-        errorCode: "",
       });
       setLoginForm({
         ...LoginForm,
         isSubmitting: false,
       });
-    } else {
-      setLoginText({
-        title: "You_have_reached_the_maximum_number_of_passcode_attempts",
-        subtitle: "You_have_reached_the_maximum_number_of_passcode_attempts",
-      });
-      setLoginError({
-        ...LoginError,
-        // databaseError: err?.description,
-        // errorCode: err?.code === null ? err.original.message : err?.code,
-        databaseError: "Blocked user",
-        errorCode: "passwordless.passcode_lock",
-      });
-      setHideEmail(false);
+    } catch (err) {
+      if (err.code === "too_many_attempts") {
+        setBlockScreenState({
+          ...blockScreenState,
+          passwordBlock: true,
+        });
+        setOnlyPasswordLock(true);
+        if (blockScreenState.otpBlock) {
+          setLoginText({
+            title: "login_lock_title",
+            subtitle: "login_lock_subtitle",
+          });
+          setLoginError({
+            ...LoginError,
+            // databaseError: err?.description,
+            // errorCode: err?.code === null ? err.original.message : err?.code,
+            databaseError: "",
+            errorCode: "",
+          });
+        } else {
+          setLoginText({
+            title: "You_have_reached_the_maximum_number_of_password_attempts",
+            subtitle:
+              "You_have_reached_the_maximum_number_of_password_attempts",
+          });
+          setLoginError({
+            ...LoginError,
+            // databaseError: err?.description,
+            // errorCode: err?.code === null ? err.original.message : err?.code,
+            databaseError: "Blocked user",
+            errorCode: `login.password_lock`,
+          });
+        }
+      } else {
+        setToggle("login-with-password");
+        if (!blockScreenState.otpBlock) {
+          setLoginText({
+            title: "Sign_into_your_McAfee_account",
+            subtitle: "choose_your_signIn_method_continue",
+          });
+        }
+
+        setLoginError({
+          ...LoginError,
+          databaseError: err?.description,
+          errorCode:
+            err?.code === null
+              ? `login.${err.original.message}`
+              : `login.${err?.code}`,
+        });
+      }
       setLoginForm({
         ...LoginForm,
         password: "",
-        otp: "",
-        otpAvailable: false,
         isSubmitting: false,
       });
+      settingCookies();
+      trackClickEvent("email-password-login-failure");
     }
-    // } else if (
-    //   err.code === "extensibility_error" &&
-    //   err.description === "Denied user registration as the user doesnt exist"
-    // ) {
-    //   setLoginText({
-    //     title: "We_will_send_you_a_otp_title",
-    //     subtitle: "choose_your_signIn_method_continue",
-    //   });
-    //   //console.log("Wrong email credentials");
-    //   setLoginError({
-    //     ...LoginError,
-    //     databaseError: `passwordless.${err?.description}`,
-    //     errorCode: "sorry_no_account_found",
-    //   });
-    //   setLoginForm({
-    //     ...LoginForm,
-    //     password: "",
-    //     otp: "",
-    //     isSubmitting: false,
-    //   });
-    // } else {
-    //   console.log("errorcode", `passwordless.${err?.code}`);
-    //   setLoginError({
-    //     ...LoginError,
-    //     databaseError: `passwordless.${err?.description}`,
-    //     errorCode: `passwordless.${err?.code}` ?? err?.message,
-    //   });
-    //   setLoginForm({
-    //     ...LoginForm,
-    //     password: "",
-    //     otp: "",
-    //     isSubmitting: false,
-    //   });
-    // }
-    setOtpTimer(false);
-    settingCookies();
-    trackClickEvent("otp-login-failure");
-    // }
+    setLoader(false);
+  };
+  const submitForLoginWithOTP = async () => {
+    try {
+      if (LoginForm.otpAvailable) {
+        trackClickEvent("submitting-for-otp-login");
+        if (!otpValid) {
+          setLoginForm({
+            ...LoginForm,
+            isSubmitting: false,
+          });
+          setLoginError({
+            ...LoginError,
+            databaseError: "Otp has expired please resend the otp",
+            errorCode: "Otp has expired please resend the otp",
+          });
+        } else {
+          setLoader(true);
+          await otpLogin(LoginForm.email, LoginForm.otp);
+          setLoginForm({
+            ...LoginForm,
+            isSubmitting: false,
+          });
+        }
+      } else {
+        await otpStart(LoginForm.email);
+        trackClickEvent("reqesting-for-otp");
+        setLoginText({
+          title: "Welcome_back_to",
+          subtitle: "We_sent_a_otp_to_email",
+        });
+        setOtpTimer(true);
+        setLoginForm({
+          ...LoginForm,
+          isSubmitting: false,
+        });
+        setLoginForm({
+          ...LoginForm,
+          otpAvailable: true,
+        });
+        setHideEmail(true);
+      }
+    } catch (err) {
+      if (err.code === "too_many_attempts") {
+        setBlockScreenState({
+          ...blockScreenState,
+          otpBlock: true,
+        });
+        setOnlyOTPLock(true);
+        if (blockScreenState.passwordBlock) {
+          setLoginText({
+            title: "login_lock_title",
+            subtitle: "login_lock_subtitle",
+          });
+          setLoginError({
+            ...LoginError,
+            // databaseError: err?.description,
+            // errorCode: err?.code === null ? err.original.message : err?.code,
+            databaseError: "",
+            errorCode: "",
+          });
+          setLoginForm({
+            ...LoginForm,
+            isSubmitting: false,
+          });
+        } else {
+          setLoginText({
+            title: "You_have_reached_the_maximum_number_of_passcode_attempts",
+            subtitle:
+              "You_have_reached_the_maximum_number_of_passcode_attempts",
+          });
+          setLoginError({
+            ...LoginError,
+            // databaseError: err?.description,
+            // errorCode: err?.code === null ? err.original.message : err?.code,
+            databaseError: "Blocked user",
+            errorCode: "passwordless.passcode_lock",
+          });
+          setHideEmail(false);
+          setLoginForm({
+            ...LoginForm,
+            password: "",
+            otp: "",
+            otpAvailable: false,
+            isSubmitting: false,
+          });
+        }
+      } else if (
+        err.code === "extensibility_error" &&
+        err.description === "Denied user registration as the user doesnt exist"
+      ) {
+        setLoginText({
+          title: "We_will_send_you_a_otp_title",
+          subtitle: "choose_your_signIn_method_continue",
+        });
+        //console.log("Wrong email credentials");
+        setLoginError({
+          ...LoginError,
+          databaseError: `passwordless.${err?.description}`,
+          errorCode: "sorry_no_account_found",
+        });
+        setLoginForm({
+          ...LoginForm,
+          password: "",
+          otp: "",
+          isSubmitting: false,
+        });
+      } else {
+        console.log("errorcode", `passwordless.${err?.code}`);
+        setLoginError({
+          ...LoginError,
+          databaseError: `passwordless.${err?.description}`,
+          errorCode: `passwordless.${err?.code}` ?? err?.message,
+        });
+        setLoginForm({
+          ...LoginForm,
+          password: "",
+          otp: "",
+          isSubmitting: false,
+        });
+      }
+      setOtpTimer(false);
+      settingCookies();
+      trackClickEvent("otp-login-failure");
+    }
   };
 
   const onSubmit = async (e) => {
@@ -576,6 +584,19 @@ export default function LoginContainer(props) {
       TealiumTagValueConstans.FORGOT_PASSWORD_PAGE_NAME
     );
     setWhichPage("forgotPassword-page");
+    setLoginForm({
+      email: "",
+      password: "",
+      otp: "",
+      otpAvailable: false,
+      isSubmitting: false,
+    });
+    setLoginError({
+      email: "",
+      isEmailError: "",
+      databaseError: "",
+      errorCode: "",
+    });
   };
 
   const child = React.Children.only(props.children);

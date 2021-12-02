@@ -65,6 +65,7 @@ function ForgotPasswordEmail(props) {
                       className="contactSupportBtn"
                       target="_blank"
                       href="https://www.example.com/shoe"
+                      data-nav-element-click="contact-us"
                     >
                       {chunks}
                     </a>

@@ -21,6 +21,7 @@ function ForgotPasswordUI(props) {
         target="_blank"
         style={{ color: "rgb(66, 88, 255)" }}
         href={`https://home.mcafee.com/root/support.aspx?culture=${locale.toUpperCase()}`}
+        data-nav-element-click="contact-support"
       >
         {chunks}
       </a>
@@ -113,7 +114,7 @@ function ForgotPasswordUI(props) {
                   disabled={
                     emailDetails.emailError !== "" || emailDetails.email === ""
                   }
-                  id="Sending-email-for-reset-password-submit-button"
+                  data-nav-element-click="Sending-email-for-reset-password-submit-button"
                 >
                   {translate("Email_me")}
                 </button>
