@@ -57,7 +57,7 @@ const CommonDataProvider = (props) => {
         const filteredData = data.slice(16, -2);
         const jsonData = JSON.parse(filteredData);
         const DB_ARRAY = jsonData?.strategies[0]?.connections.filter(
-          (item) => item.name === "Test-CustomDB"
+          (item) => item.name === "AV-Password-Authentication"
         );
         console.log("DB ARRAY RECIVED", DB_ARRAY);
         setConn(DB_ARRAY);

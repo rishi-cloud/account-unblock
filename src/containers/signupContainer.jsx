@@ -243,13 +243,11 @@ export default function SignupContainer(props) {
         setPasswordPolicyState,
         setIsValid
       );
-    } else {
-      setSignupForm({
-        ...SignupForm,
-        [e.target.name]: e.target.value,
-      });
     }
-
+    setSignupForm({
+      ...SignupForm,
+      [e.target.name]: e.target.value,
+    });
     onBlur(e);
   };
   const handleForgotPasswordClick = (e) => {

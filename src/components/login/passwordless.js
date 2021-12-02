@@ -87,7 +87,7 @@ const PasswordLessFlow = (props) => {
         </div>
       )}
       {LoginError.email && (
-        <div className={styles.Error}>{LoginError.email}</div>
+        <div className={styles.Error}>{translate(LoginError.email)}</div>
       )}
 
       {LoginForm.otpAvailable && (
