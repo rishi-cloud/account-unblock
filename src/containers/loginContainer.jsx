@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { AccountContext } from "../providers/AccountContext";
 import { CommonDataContext } from "../providers/CommonDataContext";
+import { useLocation } from "react-router-dom";
+
 import { AppContext } from "../providers/AppContext";
 import {
   TealiumTagKeyConstants,
@@ -14,7 +16,7 @@ export default function LoginContainer(props) {
   const { loginWithPassword, otpLogin, otpStart, getSocialLogin } =
     useContext(AccountContext);
   const [otpValid, setOtpValid] = useState(true);
-  const { LoginForm, setLoginForm, LoginError, setLoginError } =
+  const { LoginForm, setLoginForm, LoginError, setLoginError, customization } =
     useContext(CommonDataContext);
   const { trackClickEvent } = useContext(TrackingContext);
   // const [LoginError, setLoginError] = useState({
@@ -60,7 +62,6 @@ export default function LoginContainer(props) {
       );
     }
   };
-
   const handleClickResendCode = (e) => {
     const callGetOtp = () => {
       setResendingCode("sent");
@@ -69,7 +70,6 @@ export default function LoginContainer(props) {
     setResendingCode("sending");
     setTimeout(callGetOtp, 3000);
   };
-
   const fireOtpPageViewCall = (pageName) => {
     let utag = window.utag;
     let updatedUtagData = {
@@ -126,6 +126,44 @@ export default function LoginContainer(props) {
     });
     const currentPageCheck = cookies.get("ua");
     console.log(currentPageCheck);
+  };
+
+  // const getQueryCustomization = (location) => {
+  //   const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+  //   let query = new URLSearchParams(location);
+  //   let cc = query.get("cc") ?? parsedHash.get("cc");
+  //   return cc;
+  // }
+
+  // const getClient = (location) => {
+  // const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+  // let query = new URLSearchParams(location);
+  // let client = query.get("client") ?? parsedHash.get("client");
+  // return client;
+  // }
+
+  // const getClientCustomizations = (client)=> {
+  // return possibleCustomizationPaths[client]
+  // }
+
+  // const possibleCustomizationPaths = {
+  // 'O3UVxh3N5iBepGHU8DctBlUb3cIshpG8': require('../customization/O3UVxh3N5iBepGHU8DctBlUb3cIshpG8.json')
+  // }
+
+  // const location = useLocation().search;
+
+  const onLoad = () => {
+    console.log("onload executing");
+    //setCustomizationData();
+    //const client = getClient(location);
+    // const clientCustomization = getClientCustomizations(client);
+    //const queryCustomization=  JSON.parse(getQueryCustomization(location));
+    setLoginForm({
+      ...LoginForm,
+      customizations:
+        customization?.Login !== undefined ? customization.Login : "",
+      //(queryCustomization !== undefined && queryCustomization?.Login !== undefined) ? queryCustomization.Login:((clientCustomization !== undefined && clientCustomization?.Login !== undefined) ? clientCustomization.Login:""),
+    });
   };
 
   const onPressContinue = () => {
@@ -185,7 +223,6 @@ export default function LoginContainer(props) {
     const currentCount = cookies.get("ua");
     console.log(currentCount);
   };
-
   const blockScreenToggle = (whichLink) => {
     if (whichLink === "with-password") {
       setToggle("login-with-password");
@@ -591,5 +628,6 @@ export default function LoginContainer(props) {
     onlyOTPLock,
     resendingCode,
     handleClickResendCode,
+    onLoad,
   });
 }

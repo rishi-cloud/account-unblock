@@ -7,6 +7,7 @@ import { validatePassword } from "../validator/PasswordValidator";
 import { TrackingContext } from "../providers/TrackingProvider";
 import { SettingContext } from "../providers/SettingProvider";
 import Cookies from "universal-cookie";
+import { useLocation } from "react-router-dom";
 
 export default function SignupContainer(props) {
   // Context Data
@@ -14,7 +15,7 @@ export default function SignupContainer(props) {
   const { connections, setLoginText } = useContext(CommonDataContext);
   const { trackClickEvent } = useContext(TrackingContext);
   const { setWhichPage } = useContext(AppContext);
-  const { LoginForm, setLoginForm, LoginError, setLoginError } =
+  const { LoginForm, setLoginForm, LoginError, setLoginError, customization } =
     useContext(CommonDataContext);
   const { setSignupText } = useContext(CommonDataContext);
   const { setting } = useContext(SettingContext);
@@ -85,6 +86,44 @@ export default function SignupContainer(props) {
         });
       }
     }
+  };
+
+  // const getQueryCustomization = (location) => {
+  //   const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+  //   let query = new URLSearchParams(location);
+  //   let cc = query.get("cc") ?? parsedHash.get("cc");
+  //   return cc;
+  // }
+
+  // const getClient = (location) => {
+  // const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+  // let query = new URLSearchParams(location);
+  // let client = query.get("client") ?? parsedHash.get("client");
+  // return client;
+  // }
+
+  // const getClientCustomizations = (client)=> {
+  // return possibleCustomizationPaths[client]
+  // }
+
+  // const possibleCustomizationPaths = {
+  // 'O3UVxh3N5iBepGHU8DctBlUb3cIshpG8': require('../customization/O3UVxh3N5iBepGHU8DctBlUb3cIshpG8.json')
+  // }
+
+  // const location = useLocation().search;
+
+  const onLoad = () => {
+    console.log("onload executing register");
+    //setCustomizationData();
+    // const client = getClient(location);
+    // const clientCustomization = getClientCustomizations(client);
+    // const queryCustomization=  JSON.parse(getQueryCustomization(location));   ;
+    setSignupForm({
+      ...SignupForm,
+      customizations:
+        customization?.SignUp !== undefined ? customization.SignUp : "",
+      //(queryCustomization !== undefined && queryCustomization?.SignUp !== undefined) ? queryCustomization.SignUp:((clientCustomization !== undefined && clientCustomization?.SignUp !== undefined) ? clientCustomization.SignUp:"")//customization.Login: clientCustomization.SignUp
+    });
   };
 
   const onSubmit = async (e) => {
@@ -247,5 +286,6 @@ export default function SignupContainer(props) {
     handleOptinsCheckBoxes,
     optinFields,
     validateEmail,
+    onLoad,
   });
 }

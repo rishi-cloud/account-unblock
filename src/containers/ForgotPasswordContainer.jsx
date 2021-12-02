@@ -9,7 +9,8 @@ function ForgotPasswordContainer(props) {
     emailError: "",
     emailSent: false,
   });
-  const { setLoginText, setLoginForm } = useContext(CommonDataContext);
+  const { setLoginText, setLoginForm, customization } =
+    useContext(CommonDataContext);
 
   const { sendForgotPasswordLink } = useContext(AccountContext);
   const { setWhichPage } = useContext(AppContext);
@@ -76,6 +77,7 @@ function ForgotPasswordContainer(props) {
       subtitle: "choose_your_signIn_method_continue",
     });
     setLoginForm({
+      customizations: customization,
       email: "",
       password: "",
       otp: "",

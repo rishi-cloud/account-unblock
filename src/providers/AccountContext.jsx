@@ -17,7 +17,6 @@ const AccountProvider = (props) => {
   };
   console.log("configs", props);
   const webAuth = new auth0.WebAuth({
-    // domain: "d1aza67fhfglew.cloudfront.net",
     domain: props.config.auth0Domain,
     clientID: props.config.clientID,
     redirectUri: props.config.callbackURL,
@@ -30,13 +29,11 @@ const AccountProvider = (props) => {
     overrides: { __tenant: props.config.auth0Tenant },
   });
   // const webAuth = new auth0.WebAuth({
-  //   // domain: "https://d1aza67fhfglew.cloudfront.net",
   //   domain: process.env.REACT_APP_AUTH0_DOMAIN,
   //   clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
   //   responseType: "token id_token",
   //   redirectUri: "http://localhost:4040/authorize",
   // });
-
   const getSocialLogin = (name) => {
     return new Promise((resolve, reject) => {
       webAuth.authorize(
@@ -62,7 +59,6 @@ const AccountProvider = (props) => {
     return new Promise((resolve, reject) => {
       const variables = {
         connection: "Test-CustomDB",
-        // connection: "custom-db",
         // connection: "Username-Password-Authentication",
         email,
         password,
@@ -85,7 +81,12 @@ const AccountProvider = (props) => {
 
   const otpStart = (email) => {
     return new Promise((resolve, reject) => {
-      const variables = { email, connection: "email", send: "code" };
+      const variables = {
+        email,
+        connection: "email",
+        send: "code",
+        xRequestLanguage: props.locale,
+      };
       webAuth.passwordlessStart(variables, (err, res) => {
         if (err) {
           console.log(err);
@@ -118,7 +119,6 @@ const AccountProvider = (props) => {
       webAuth.login(
         {
           realm: "Test-CustomDB",
-          // realm: "custom-db",
           // realm: "Username-Password-Authentication",
           username,
           password,

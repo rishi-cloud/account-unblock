@@ -1,0 +1,9 @@
+{
+    "Login":{
+        "hideSignUp":false
+              },
+	"SignUp":{
+		"hideLoginCTA":true		
+	        }
+}
+   
