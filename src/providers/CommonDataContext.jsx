@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useContext } from "react";
 import { TrackingContext } from "./TrackingProvider";
+import { useLocation } from "react-router-dom";
 
 import axios from "axios";
 
@@ -32,12 +33,14 @@ const CommonDataProvider = (props) => {
     otp: "",
     otpAvailable: false,
     isSubmitting: false,
+    customizations: "",
   });
   const [SignupForm, setSignupForm] = useState({
     email: props.email || "",
     password: "",
     confirmPassword: "",
     isSubmitting: false,
+    customizations: "",
   });
 
   // Tracking Event function from Context
@@ -72,6 +75,16 @@ const CommonDataProvider = (props) => {
     if (props.passwordResetConfig)
       setPasswordResetConfig(props.passwordResetConfig);
   }, []);
+
+  const location = useLocation().search;
+
+  const [customization, setCustomizationData] = useState(
+    populateCustomizationData(location)
+  );
+  const [isAffiliateLogo, setIsAffiliateLogo] = useState(
+    getAffiliateLogo(location)
+  );
+
   return (
     <CommonDataContext.Provider
       value={{
@@ -86,8 +99,12 @@ const CommonDataProvider = (props) => {
         setSignupForm,
         passwordResetConfig,
         locale,
+        customization,
+        isAffiliateLogo,
         LoginError,
         setLoginError,
+        setIsAffiliateLogo,
+        setCustomizationData,
       }}
     >
       {props.children}
@@ -95,4 +112,82 @@ const CommonDataProvider = (props) => {
   );
 };
 
+const populateCustomizationData = (location) => {
+  const client = getClient(location);
+  const clientCustomization = getClientCustomizations(client);
+  const queryCustomization = JSON.parse(getQueryCustomization(location));
+  const customization =
+    queryCustomization !== null && queryCustomization !== undefined
+      ? queryCustomization
+      : clientCustomization !== null && clientCustomization !== undefined
+      ? clientCustomization
+      : "";
+  return customization;
+};
+
+const getQueryCustomization = (location) => {
+  const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+  let query = new URLSearchParams(location);
+  let cc = query.get("cc") ?? parsedHash.get("cc");
+  return cc;
+};
+
+const getClient = (location) => {
+  const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+  let query = new URLSearchParams(location);
+  let client = query.get("client") ?? parsedHash.get("client");
+  return client;
+};
+
+const getClientCustomizations = (client) => {
+  return possibleCustomizationPaths[client];
+};
+
+const possibleCustomizationPaths = {
+  O3UVxh3N5iBepGHU8DctBlUb3cIshpG8: require("../customization/O3UVxh3N5iBepGHU8DctBlUb3cIshpG8.json"),
+};
+
+const getAffiliate = (location) => {
+  const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+  let query = new URLSearchParams(location);
+  let affiliate = query.get("affid") ?? parsedHash.get("affid");
+  return affiliate;
+};
+
+const getCulture = (location) => {
+  const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+  let query = new URLSearchParams(location);
+  let culture = query.get("culture") ?? parsedHash.get("culture");
+  return culture;
+};
+
+const possiblePaths = {
+  "en-us": require("../customization/en-us.json"),
+};
+
+const getCultureSettingsFile = (culture) => {
+  return possiblePaths[culture];
+};
+
+const getAffiliateLogo = (location) => {
+  let isAffiliateLogoAvailable = false;
+  const culture = getCulture(location);
+  const affiliate = getAffiliate(location);
+  if (culture) {
+    const cultureSettings = getCultureSettingsFile(culture);
+    if (
+      cultureSettings &&
+      affiliate &&
+      cultureSettings.affiliates &&
+      cultureSettings.affiliates[affiliate]
+    )
+      isAffiliateLogoAvailable =
+        cultureSettings.affiliates[affiliate].affiliateLogo !== null
+          ? cultureSettings.affiliates[affiliate].affiliateLogo
+          : false;
+    else if (cultureSettings && cultureSettings.affiliateLogo)
+      isAffiliateLogoAvailable = cultureSettings.affiliateLogo;
+  }
+  return isAffiliateLogoAvailable;
+};
 export { CommonDataProvider, CommonDataContext };

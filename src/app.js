@@ -57,7 +57,11 @@ const App = ({ pageConfig, passwordResetConfig }) => {
   }
 
   const attachAccountProvider = (Component) => {
-    return <AccountProvider config={pageConfig}>{Component}</AccountProvider>;
+    return (
+      <AccountProvider config={pageConfig} locale={locale.current}>
+        {Component}
+      </AccountProvider>
+    );
   };
 
   return (

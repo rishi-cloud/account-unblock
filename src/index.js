@@ -31,10 +31,9 @@ window.LoginWidget = class LoginWidget {
     );
   }
 };
-
 // ReactDOM.render(
 //   <BrowserRouter>
-//     <App />
+//     <App pageConfig={{ clientName: "Custom Client Name" }} />
 //   </BrowserRouter>,
 //   document.getElementById("root")
 // );

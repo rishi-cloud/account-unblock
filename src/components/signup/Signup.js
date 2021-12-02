@@ -135,9 +135,9 @@ const Signup = (props) => {
               className={styles.InputAndLogoSignup}
               // style={{
               //   border:
-              //     LoginError.isEmailError === true
+              //     LoginError?.isEmailError === true
               //       ? "2px solid red"
-              //       : LoginError.isEmailError === false
+              //       : LoginError?.isEmailError === false
               //       ? "2px solid green"
               //       : "",
               // }}
@@ -231,9 +231,9 @@ const Signup = (props) => {
               className={styles.InputAndLogoSignup}
               // style={{
               //   border:
-              //     LoginError.isEmailError === true
+              //     LoginError?.isEmailError === true
               //       ? "2px solid red"
-              //       : LoginError.isEmailError === false
+              //       : LoginError?.isEmailError === false
               //       ? "2px solid green"
               //       : "",
               // }}

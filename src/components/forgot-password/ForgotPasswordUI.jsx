@@ -15,6 +15,7 @@ function ForgotPasswordUI(props) {
     updateEmailDetails,
   } = props;
   const { locale } = useContext(CommonDataContext);
+  const {isAffiliateLogo} = useContext(CommonDataContext);
   const FORMATVALUES = {
     a_contact_support: (chunks) => (
       <a
@@ -39,11 +40,20 @@ function ForgotPasswordUI(props) {
         <div className="ForgotPasswordContainer">
           <div className="ForgotPasswordLeftWrapper">
             <div className="ForgotPasswordLeftContainer">
-              <img
+            {isAffiliateLogo?
+                (<div class="container-header">
+                <span class="container-logo" >
+                    <img  alt="McAfee" title="McAfee" src="https://cdn.jsdelivr.net/gh/atulrana007/McAfee-odrplat-auth0-ui/public/images/McAfee-Document-Logo1.png" class="logo"/>
+                </span>
+                    <span class="container-logo aff-logo-container">
+                        <span class="logo-seperator">| </span><img  alt="McAfee" title="Dell" src="https://secureimages.mcafee.com/common/affiliateImages/dell/logo_dell_new_58x59.gif" width="20" 
+                height="20"/>
+                    </span>
+            </div>): (<img
                 alt="McAfeeLogo"
                 className="McAfeeLogo"
                 src="https://cdn.jsdelivr.net/gh/atulrana007/McAfee-React-Appp/public/images/McAfee-Logo.png"
-              />
+              />)}
               <div className="ForgotPasswordIntro">
                 {translate("Reset_Password")}
               </div>

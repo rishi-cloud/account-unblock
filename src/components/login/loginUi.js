@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AppContext } from "../../providers/AppContext";
 import { CommonDataContext } from "../../providers/CommonDataContext";
 import styles from "./style.module.css";
@@ -11,6 +11,7 @@ import PasswordBlockScreen from "./view/PasswordBlockScreen";
 import OtpBlockScreen from "./view/OtpBlockScreen";
 import { FormattedMessage } from "react-intl";
 import { ReactComponent as McAfeeLogo } from "../../svg/Mcafee-Logo.svg";
+import { useLocation } from "react-router-dom";
 
 const LoginUI = (props) => {
   const {
@@ -40,8 +41,10 @@ const LoginUI = (props) => {
     onlyOTPLock,
     resendingCode,
     handleClickResendCode,
+    onLoad,
   } = props;
   const { LoginText, utagData, locale } = useContext(CommonDataContext);
+  const { isAffiliateLogo } = useContext(CommonDataContext);
 
   const trackClickEvent = (navElement) => {
     let utag = window.utag;
@@ -105,21 +108,71 @@ const LoginUI = (props) => {
       </a>
     ),
   };
+  useEffect(() => {
+    onLoad();
+  }, []);
+  const loginCustomization = LoginForm.customizations;
+
+  //   const location = useLocation().search;
+  //   const getAffiliate = (location) => {
+  //     const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+  //     let query = new URLSearchParams(location);
+  //     let affiliate = query.get("affid") ?? parsedHash.get("affid");
+  //     return affiliate;
+  // }
+
+  //   const getCulture = (location) => {
+  //     const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+  //     let query = new URLSearchParams(location);
+  //     let culture = query.get("culture") ?? parsedHash.get("culture");
+  //     return culture;
+  // }
+
+  // const culture = getCulture(location);
+  // const possiblePaths = {
+  //   'en-us': require('../../customization/en-us.json')
+  // }
+
+  // const getCultureSettingsFile = (culture)=> {
+  //  return possiblePaths[culture]
+  // }
+  // const affiliate = getAffiliate(location);
+
+  // const getAffiliateLogo = (culture)=>{
+  //   let isAffiliateLogoAvailable=false;
+  // if(culture)
+  // {
+  //   const cultureSettings= getCultureSettingsFile(culture);
+  //   if(cultureSettings && affiliate && cultureSettings.affiliates && cultureSettings.affiliates[affiliate])
+  //   isAffiliateLogoAvailable = cultureSettings.affiliates[affiliate].affiliateLogo !== null ? cultureSettings.affiliates[affiliate].affiliateLogo : false;
+  //   else if (cultureSettings && cultureSettings.affiliateLogo)
+  //   isAffiliateLogoAvailable=cultureSettings.affiliateLogo;
+  // }
+  // return isAffiliateLogoAvailable;
+  // }
+
+  // const isAffiliateLogo= getAffiliateLogo(culture);
+
+  // console.log(isAffiliateLogo);
+
   const BottomHeading = () => {
     if (!blockScreenState.passwordBlock && !blockScreenState.otpBlock) {
+      //const loginCustomization = LoginForm.customizations;
       return (
-        <div className={styles.LoginBottomHeading}>
-          <div>{translate("Do_not_have_an_account")}</div>
-          <div
-            className={styles.Loginpagelink}
-            onClick={(e) => {
-              changePage(e);
-            }}
-            data-navelement="Signup-page-link-button"
-          >
-            {translate("Create_one_now")}
+        !loginCustomization?.hideSignUp && (
+          <div className={styles.LoginBottomHeading}>
+            <div>{translate("Do_not_have_an_account")}</div>
+            <div
+              className={styles.Loginpagelink}
+              onClick={(e) => {
+                changePage(e);
+              }}
+              data-navelement="Signup-page-link-button"
+            >
+              {translate("Create_one_now")}
+            </div>
           </div>
-        </div>
+        )
       );
     } else {
       if (blockScreenState.otpBlock && blockScreenState.passwordBlock) {
@@ -172,18 +225,20 @@ const LoginUI = (props) => {
         );
       } else {
         return (
-          <div className={styles.LoginBottomHeading}>
-            <div>{translate("Do_not_have_an_account")}</div>
-            <div
-              className={styles.Loginpagelink}
-              onClick={(e) => {
-                changePage(e);
-              }}
-              navElement="Signup-page-link-button"
-            >
-              {translate("Create_one_now")}
+          !loginCustomization.hideSignUp && (
+            <div className={styles.LoginBottomHeading}>
+              <div>{translate("Do_not_have_an_account")}</div>
+              <div
+                className={styles.Loginpagelink}
+                onClick={(e) => {
+                  changePage(e);
+                }}
+                navElement="Signup-page-link-button"
+              >
+                {translate("Create_one_now")}
+              </div>
             </div>
-          </div>
+          )
         );
       }
     }
@@ -282,7 +337,30 @@ const LoginUI = (props) => {
           <div className={styles.LoginContainer}>
             <div className={styles.LoginLeftWrapper}>
               <div className={styles.LoginWelcomeContainer}>
-                <McAfeeLogo className={styles.Logo} />
+                {isAffiliateLogo ? (
+                  <div class="container-header">
+                    <span class="container-logo">
+                      <img
+                        alt="McAfee"
+                        title="McAfee"
+                        src="https://cdn.jsdelivr.net/gh/atulrana007/McAfee-odrplat-auth0-ui/public/images/McAfee-Document-Logo1.png"
+                        class="logo"
+                      />
+                    </span>
+                    <span class="container-logo aff-logo-container">
+                      <span class="logo-seperator">| </span>
+                      <img
+                        alt="McAfee"
+                        title="Dell"
+                        src="https://secureimages.mcafee.com/common/affiliateImages/dell/logo_dell_new_58x59.gif"
+                        width="20"
+                        height="20"
+                      />
+                    </span>
+                  </div>
+                ) : (
+                  <McAfeeLogo className={styles.Logo} />
+                )}
                 <div className={styles.LoginIntro}>
                   {translate(LoginText.title)}
                 </div>
