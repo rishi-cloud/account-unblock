@@ -161,7 +161,6 @@ export default function SignupContainer(props) {
         isSubmitting: true,
       });
       try {
-        trackClickEvent("submitting-for-signup");
         const res = await SignupWithPassword(
           SignupForm.email,
           SignupForm.password,

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import auth0 from "auth0-js";
+import { TrackingContext } from "./TrackingProvider";
 
 const AccountContext = React.createContext({});
 
 const AccountProvider = (props) => {
   const { locale } = props;
   const [isAuthenticated, setIsAuth] = useState(false);
+  const { trackClickEvent } = useContext(TrackingContext);
 
   const AuthenticateUser = (authToken) => {
     localStorage.setItem("auth_token", authToken);
@@ -102,7 +104,15 @@ const AccountProvider = (props) => {
   const otpLogin = (email, otp) => {
     return new Promise((resolve, reject) => {
       webAuth.passwordlessLogin(
-        { email, connection: "email", verificationCode: otp },
+        {
+          email,
+          connection: "email",
+          verificationCode: otp,
+          onRedirecting: function (done) {
+            trackClickEvent("login-success-otp");
+            done();
+          },
+        },
         (err, res) => {
           if (err) {
             reject(err);
@@ -125,6 +135,7 @@ const AccountProvider = (props) => {
           username,
           password,
           onRedirecting: function (done) {
+            trackClickEvent("login-success-password");
             done();
           },
         },

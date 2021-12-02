@@ -359,7 +359,7 @@ export default function LoginContainer(props) {
   const submitForLoginWithPassword = async () => {
     try {
       setLoader(true);
-      trackClickEvent("submitting-for-login-with-password");
+
       const response = await loginWithPassword(
         LoginForm.email,
         LoginForm.password

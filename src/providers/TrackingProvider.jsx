@@ -10,7 +10,7 @@ const populateTealiumData = (props, location) => {
   return {
     ...window.utag_data,
     ...(props.config && {
-      [TealiumTagKeyConstants.TEALIUM_CLIENT_ID]: props.config.clientName,
+      [TealiumTagKeyConstants.TEALIUM_CLIENT_ID]: props.config.clientID,
     }),
     // [TealiumTagKeyConstants.TEALIUM_CLIENT_ID]: props.config.clientName,
     [TealiumTagKeyConstants.TEALIUM_CULTURE_CODE]: getCulture(location),
@@ -33,20 +33,6 @@ const TrackingProvider = (props) => {
     populateTealiumData(props, location)
   );
   console.log("at every stage", utagData);
-  const fireDifferentPageViewCall = (pageName) => {
-    let utag = window.utag;
-    let updatedUtagData = {
-      ...utagData,
-      [TealiumTagKeyConstants.TEALIUM_NAVIGATION_ELEMENT]: null,
-      [TealiumTagKeyConstants.TEALIUM_PAGE_NAME]: pageName,
-      [TealiumTagKeyConstants.TEALIUM_SITESECTION]: pageName,
-    };
-    utag.view({
-      ...updatedUtagData,
-      [TealiumTagKeyConstants.TEALIUM_PAGE_PUBLISH_DATE]: new Date(),
-    });
-    setUtagData(updatedUtagData);
-  };
 
   const trackClickEvent = (navElement) => {
     console.log(
