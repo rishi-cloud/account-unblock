@@ -66,7 +66,7 @@ const CommonDataProvider = (props) => {
         setConn(DB_ARRAY);
       }
     } catch (err) {
-      trackClickEvent("Failure-while-fetching-password-policy");
+      // trackClickEvent("Failure-while-fetching-password-policy");
       console.log(err);
     }
   };

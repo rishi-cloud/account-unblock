@@ -10,7 +10,7 @@ function PasswordBlockScreen(props) {
         <button
           className={styles.EmailBlockSwitchBtn}
           onClick={(e) => blockScreenToggle("with-otp", e)}
-          data-navelement="Sigin-With-OTP"
+          data-navelement="Sigin With OTP"
         >
           {translate("Sign_in_with_a_onetime_passcode")}
         </button>

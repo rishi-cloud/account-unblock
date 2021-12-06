@@ -173,7 +173,7 @@ const PasswordFlow = (props) => {
             type="button"
             className={styles.forgotPassword}
             onClick={handleForgotPasswordClick}
-            data-navelement="forgot-password-button-click"
+            data-navelement="Forgot Password"
           >
             {translate("Forgot_password")}
           </button>
@@ -200,7 +200,7 @@ const PasswordFlow = (props) => {
               : "",
           cursor: LoginForm.isSubmitting ? "progress" : "pointer",
         }}
-        data-nav-element-click="Signin-with-password-submit-button-click"
+        data-nav-element-click="Signin With Password"
       >
         {translate("signIn")}
       </button>

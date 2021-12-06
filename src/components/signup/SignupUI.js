@@ -162,7 +162,7 @@ const SignupUI = (props) => {
                   <p
                     className={styles.Signuppagelink}
                     onClick={(e) => changePage(e)}
-                    data-navelement="Signin-page-redirect-from-signup"
+                    data-navelement="Sign In Now"
                   >
                     {translate("Sign_in_now")}
                   </p>

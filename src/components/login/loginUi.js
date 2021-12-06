@@ -82,7 +82,7 @@ const LoginUI = (props) => {
         className={styles.important}
         style={{ color: "rgb(66, 88, 255)" }}
         onClick={(e) => handleForgotPasswordClick(e)}
-        data-navelement="forgot-password-button-click"
+        data-navelement="Forgot Password | Error"
       >
         {chunks}
       </strong>
@@ -91,7 +91,7 @@ const LoginUI = (props) => {
       <strong
         className={styles.important}
         onClick={onToggle}
-        data-navelement="Sigin-With-OTP"
+        data-navelement="Sigin With OTP | Error"
       >
         {translate("Sign_in_with_a_onetime_passcode")}
       </strong>
@@ -102,7 +102,7 @@ const LoginUI = (props) => {
         className={styles.external_link}
         target="_blank"
         href={`https://www.mcafee.com/legal?culture=${locale.toUpperCase()}&affid=916#privacytop`}
-        data-nav-element-click="privacy-notice-link-clicked"
+        data-nav-element-click="Privacy Notice"
       >
         {chunks}
       </a>
@@ -167,7 +167,7 @@ const LoginUI = (props) => {
               onClick={(e) => {
                 changePage(e);
               }}
-              data-navelement="Signup-page-link-button"
+              data-navelement="Create one now"
             >
               {translate("Create_one_now")}
             </div>
@@ -233,7 +233,7 @@ const LoginUI = (props) => {
                 onClick={(e) => {
                   changePage(e);
                 }}
-                navElement="Signup-page-link-button"
+                navElement="Create one now"
               >
                 {translate("Create_one_now")}
               </div>

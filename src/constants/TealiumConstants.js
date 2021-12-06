@@ -7,15 +7,19 @@ const TealiumTagKeyConstants = {
   TEALIUM_AFFILIATE_NAME: "tm_global_affiliate_name",
   TEALIUM_NAVIGATION_ELEMENT: "tm_global_navigation_element",
   TEALIUM_SITESECTION: "tm_global_sitesection",
+  TEALIUM_GLOBAL_COUNTRY: "tm_global_country",
 };
 
 const TealiumTagValueConstans = {
-  LOGIN_PAGE_NAME: "login",
-  OTP_PAGE_NAME: "otp",
-  SIGNUP_PAGE_NAME: "signup",
-  FORGOT_PASSWORD_PAGE_NAME: "forgotpassword",
-  SIGNIN_CONTINUE_BUTTON: "signin-continue",
-  SIGNIN_BUTTON: "signin",
+  LOGIN_PAGE_NAME: "Login",
+  OTP_PAGE_NAME: "Otp",
+  SIGNUP_PAGE_NAME: "Signup",
+  FORGOT_PASSWORD_PAGE_NAME: "Forgotpassword",
+  SIGNIN_CONTINUE_BUTTON: "Signin-Continue",
+  SIGNIN_BUTTON: "Signin",
+  BASE_PAGE_NAME: "[consumer:web]|Auth0|",
+  LOGIN_OTP_SUCCESS: "Login-Otp-Success",
+  LOGIN_PASSWORD_SUCCESS: "Login-Password-Success"
 };
 
 export { TealiumTagKeyConstants, TealiumTagValueConstans };

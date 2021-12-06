@@ -8,7 +8,7 @@ const Timer = (props) => {
   const { setOtpValid, getOtp } = props;
 
   const [TimerState, setTimer] = useState({
-    minutes: 20,
+    minutes: 3,
     seconds: 0,
   });
   const [stop, setStop] = useState(1000);

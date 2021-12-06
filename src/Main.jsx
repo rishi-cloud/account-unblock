@@ -20,18 +20,19 @@ function Main() {
   const { whichPage, setWhichPage } = useContext(AppContext);
   // const { setting, localizedContent } = useContext(SettingContext);
   const { utagData, setUtagData } = useContext(TrackingContext);
-  const { affiliate_name } = useContext(SettingContext);
+  const { setting } = useContext(SettingContext);
 
-  console.log(affiliate_name);
+  console.log(setting?.affiliate_name);
   const SettingUtagData = () => {
     console.log("how many times");
     let utag = window.utag;
     let updatedUtagData;
     updatedUtagData = {
       ...utagData,
-      [TealiumTagKeyConstants.TEALIUM_AFFILIATE_NAME]: affiliate_name,
+      [TealiumTagKeyConstants.TEALIUM_AFFILIATE_NAME]: setting?.affiliate_name,
+      [TealiumTagKeyConstants.TEALIUM_GLOBAL_COUNTRY]: setting?.country,
       [TealiumTagKeyConstants.TEALIUM_PAGE_NAME]:
-        TealiumTagValueConstans.LOGIN_PAGE_NAME,
+        TealiumTagValueConstans.BASE_PAGE_NAME + TealiumTagValueConstans.LOGIN_PAGE_NAME,
       [TealiumTagKeyConstants.TEALIUM_SITESECTION]:
         TealiumTagValueConstans.LOGIN_PAGE_NAME,
     };
@@ -43,10 +44,10 @@ function Main() {
   };
 
   useEffect(() => {
-    if (affiliate_name) {
+    if (setting) {
       SettingUtagData();
     }
-  }, [affiliate_name]);
+  }, [setting]);
 
   const returnPage = (whichPage) => {
     // if (!setting && !localizedContent) {

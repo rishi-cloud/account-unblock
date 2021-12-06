@@ -120,7 +120,7 @@ const PasswordLessFlow = (props) => {
           <div
             className={styles.LoginOtpResendContainer}
             onClick={handleClickResendCode}
-            data-navelement="Resend-otp-link"
+            data-navelement="Resend OTP"
           >
             <div
               className={`${styles.LoginResendBtn} ${
@@ -188,7 +188,7 @@ const PasswordLessFlow = (props) => {
               <a
                 target="_blank"
                 href={`https://home.mcafee.com/root/support.aspx?culture=${locale.toUpperCase()}`}
-                data-nav-element-click="contact-us-link"
+                data-nav-element-click="Contact Us"
               >
                 {translate("Contact_support")}
               </a>

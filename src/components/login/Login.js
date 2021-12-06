@@ -79,7 +79,7 @@ const Login = (props) => {
             <button
               className={styles.SwitchBtn}
               onClick={onToggle}
-              data-navelement="Signin-With-OTP"
+              data-navelement="Signin With OTP"
             >
               {translate("Sign_in_with_a_onetime_passcode")}
             </button>
@@ -92,7 +92,7 @@ const Login = (props) => {
           <button
             className={styles.SwitchBtn}
             onClick={onToggle}
-            data-navelement="Signin-With-password"
+            data-navelement="Signin With Password"
           >
             {translate("signIn_with_password")}
           </button>

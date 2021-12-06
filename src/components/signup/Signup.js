@@ -62,7 +62,7 @@ const Signup = (props) => {
         type="button"
         className={styles.forgotPassword}
         onClick={handleForgotPasswordClick}
-        data-navelement="forgot-password-button-click"
+        data-navelement="Forgot Password"
       >
         {chunks}
       </button>
@@ -406,7 +406,7 @@ const Signup = (props) => {
                 : styles.SubmitButton
             }
             onClick={onSubmit}
-            data-nav-element-click="Signup-submit-button-click"
+            data-nav-element-click="Create My Account"
           >
             {translate("Create_my_Account")}
           </button>

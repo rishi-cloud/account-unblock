@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import auth0 from "auth0-js";
 import { TrackingContext } from "./TrackingProvider";
+import { TealiumTagValueConstans } from "../constants/TealiumConstants";
 
 const AccountContext = React.createContext({});
 
@@ -109,7 +110,7 @@ const AccountProvider = (props) => {
           connection: "email",
           verificationCode: otp,
           onRedirecting: function (done) {
-            trackClickEvent("login-success-otp");
+            trackClickEvent(TealiumTagValueConstans.LOGIN_OTP_SUCCESS);
             done();
           },
         },
@@ -135,7 +136,7 @@ const AccountProvider = (props) => {
           username,
           password,
           onRedirecting: function (done) {
-            trackClickEvent("login-success-password");
+            trackClickEvent(TealiumTagValueConstans.LOGIN_PASSWORD_SUCCESS);
             done();
           },
         },

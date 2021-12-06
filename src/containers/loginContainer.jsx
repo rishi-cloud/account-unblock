@@ -76,7 +76,7 @@ export default function LoginContainer(props) {
     let updatedUtagData = {
       ...utagData,
       [TealiumTagKeyConstants.TEALIUM_NAVIGATION_ELEMENT]: null,
-      [TealiumTagKeyConstants.TEALIUM_PAGE_NAME]: pageName,
+      [TealiumTagKeyConstants.TEALIUM_PAGE_NAME]: TealiumTagValueConstans.BASE_PAGE_NAME + pageName,
       [TealiumTagKeyConstants.TEALIUM_SITESECTION]: pageName,
     };
     utag.view({
@@ -432,7 +432,7 @@ export default function LoginContainer(props) {
   const submitForLoginWithOTP = async () => {
     try {
       if (LoginForm.otpAvailable) {
-        trackClickEvent("submitting-for-otp-login");
+        trackClickEvent("Submit OTP");
         if (!otpValid) {
           setLoginForm({
             ...LoginForm,
@@ -453,7 +453,7 @@ export default function LoginContainer(props) {
         }
       } else {
         await otpStart(LoginForm.email);
-        trackClickEvent("reqesting-for-otp");
+        trackClickEvent("Request OTP");
         setLoginText({
           title: "Welcome_back_to",
           subtitle: "We_sent_a_otp_to_email",

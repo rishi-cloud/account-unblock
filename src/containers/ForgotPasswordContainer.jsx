@@ -83,7 +83,7 @@ function ForgotPasswordContainer(props) {
     let updatedUtagData = {
       ...utagData,
       [TealiumTagKeyConstants.TEALIUM_NAVIGATION_ELEMENT]: null,
-      [TealiumTagKeyConstants.TEALIUM_PAGE_NAME]: pageName,
+      [TealiumTagKeyConstants.TEALIUM_PAGE_NAME]: TealiumTagValueConstans.BASE_PAGE_NAME + pageName,
       [TealiumTagKeyConstants.TEALIUM_SITESECTION]: pageName,
     };
     utag.view({
