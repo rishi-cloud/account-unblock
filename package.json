@@ -19,7 +19,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "universal-cookie": "^4.0.4"
+    "universal-cookie": "^4.0.4",
+    "webpack": "^4.44.2"
   },
   "scripts": {
     "start": "cross-env PORT=4040 react-scripts start",

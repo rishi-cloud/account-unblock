@@ -15,3 +15,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+/* @font-face {
+  font-family: "McAfee-Poppins";
+  src: local("Mcafee-Poppins"),
+    url("/src/fonts/Poppins-ExtraBold.ttf") format("truetype");
+} */

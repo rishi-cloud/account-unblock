@@ -1,6 +1,6 @@
 import Rules from "./Rules";
 export const DisplayRules = (passwordRules, PasswordPolicyState) => {
-  const displayablerule = [];
+  const displayableRule = [];
   const getKeys = [];
   const ruleMap =
     passwordRules &&
@@ -11,7 +11,7 @@ export const DisplayRules = (passwordRules, PasswordPolicyState) => {
     for (const key of Object.keys(PasswordPolicyState)) {
       if (key !== "Non_empty_Password_Required") {
         getKeys.push(key);
-        displayablerule.push(ruleMap[key]);
+        displayableRule.push(ruleMap[key]);
       }
     }
   } else if (passwordRules?.passwordPolicy === "good") {
@@ -24,7 +24,7 @@ export const DisplayRules = (passwordRules, PasswordPolicyState) => {
         key === "Special_characters"
       ) {
         getKeys.push(key);
-        displayablerule.push(ruleMap[key]);
+        displayableRule.push(ruleMap[key]);
       }
     }
   } else if (passwordRules?.passwordPolicy === "fair") {
@@ -36,23 +36,23 @@ export const DisplayRules = (passwordRules, PasswordPolicyState) => {
         key === "Length_Check"
       ) {
         getKeys.push(key);
-        displayablerule.push(ruleMap[key]);
+        displayableRule.push(ruleMap[key]);
       }
     }
   } else if (passwordRules?.passwordPolicy === "low") {
     for (const key of Object.keys(PasswordPolicyState)) {
       if (key === "Length_Check") {
         getKeys.push(key);
-        displayablerule.push(ruleMap[key]);
+        displayableRule.push(ruleMap[key]);
       }
     }
   } else if (passwordRules?.passwordPolicy === null) {
     for (const key of Object.keys(PasswordPolicyState)) {
       if (key === "Non_empty_Password_Required") {
         getKeys.push(key);
-        displayablerule.push(ruleMap[key]);
+        displayableRule.push(ruleMap[key]);
       }
     }
   }
-  return { getKeys, displayablerule };
+  return { getKeys, displayableRule };
 };

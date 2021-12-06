@@ -10,7 +10,7 @@ module.exports = {
     main: lModules,
   },
   output: {
-    filename: "bundle_mpc_bundle_3.min.js",
+    filename: "bundle_mpc_tenant_6.min.js",
     path: path.resolve(__dirname, "dist"),
   },
   module: {
@@ -38,6 +38,10 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: ["script-loader"],
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "file-loader",
       },
     ],
   },

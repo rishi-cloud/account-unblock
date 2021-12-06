@@ -5,11 +5,11 @@ import Signup from "./components/signup/index";
 // import { CommonDataContext } from "./providers/CommonDataContext";
 // import Cookies from "universal-cookie/es6";
 import { SettingContext } from "./providers/SettingProvider";
-import LoaderScreen from "./loader/LoaderScreen";
-import { ReactComponent as McAfeeLogo } from "./svg/Mcafee-Logo.svg";
+// import LoaderScreen from "./loader/LoaderScreen";
+// import { ReactComponent as McAfeeLogo } from "./svg/Mcafee-Logo.svg";
 import ForgotPassword from "./components/forgot-password/index";
-import translate from "./localization/translate";
-import styles from "./app.module.css";
+// import translate from "./localization/translate";
+// import styles from "./app.module.css";
 import {
   TealiumTagKeyConstants,
   TealiumTagValueConstans,
@@ -18,7 +18,7 @@ import { TrackingContext } from "./providers/TrackingProvider";
 
 function Main() {
   const { whichPage, setWhichPage } = useContext(AppContext);
-  const { setting, localizedContent } = useContext(SettingContext);
+  // const { setting, localizedContent } = useContext(SettingContext);
   const { utagData, setUtagData } = useContext(TrackingContext);
   const { affiliate_name } = useContext(SettingContext);
 

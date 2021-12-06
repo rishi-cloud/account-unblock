@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./app";
+import "./fonts/Poppins-ExtraBold.ttf";
 
 import "./index.css";
 

@@ -31,10 +31,11 @@ const Signup = (props) => {
   const [displayRules, setDisplayRules] = useState(false);
   const { locale } = useContext(CommonDataContext);
 
-  const { getKeys, displayablerule } = DisplayRules(
+  const { getKeys, displayableRule } = DisplayRules(
     passwordRules,
     PasswordPolicyState
   );
+
   const values = {
     a_contact_support: (chunks) => (
       <a
@@ -193,7 +194,7 @@ const Signup = (props) => {
             {displayRules ? (
               <>
                 <div className={styles.Passwordrules}>
-                  {displayablerule.map((item, index) => {
+                  {displayableRule.map((item, index) => {
                     return (
                       <div className={styles.Rule} key={index}>
                         {" "}
@@ -204,7 +205,13 @@ const Signup = (props) => {
                             <PasswordCross className={styles.cancel} />
                           )}
                         </div>
-                        <div className={styles.Ruletext}>{item}</div>
+                        <div className={styles.Ruletext}>
+                          {translate(item, "", {
+                            leastcount:
+                              passwordRules?.password_complexity_options
+                                ?.min_length,
+                          })}
+                        </div>
                       </div>
                     );
                   })}
@@ -286,11 +293,6 @@ const Signup = (props) => {
               ) : null}
             </div>
           </div>
-          {SignupError.errorCode && (
-            <div className={styles.Error}>
-              {translate(SignupError.errorCode)}
-            </div>
-          )}
           {optinFields && (
             <div className={styles.optinFieldsWrapper}>
               {optinFields.VirusThreats &&

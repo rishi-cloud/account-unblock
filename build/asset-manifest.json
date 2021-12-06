@@ -1,16 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.d1a9cd56.chunk.css",
-    "main.js": "/static/js/main.ae52e00e.chunk.js",
-    "main.js.map": "/static/js/main.ae52e00e.chunk.js.map",
+    "main.css": "/static/css/main.13985c67.chunk.css",
+    "main.js": "/static/js/main.12fdc816.chunk.js",
+    "main.js.map": "/static/js/main.12fdc816.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.a6f5e420.js",
     "runtime-main.js.map": "/static/js/runtime-main.a6f5e420.js.map",
-    "static/js/2.c2254dfd.chunk.js": "/static/js/2.c2254dfd.chunk.js",
-    "static/js/2.c2254dfd.chunk.js.map": "/static/js/2.c2254dfd.chunk.js.map",
+    "static/js/2.228820e0.chunk.js": "/static/js/2.228820e0.chunk.js",
+    "static/js/2.228820e0.chunk.js.map": "/static/js/2.228820e0.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.d1a9cd56.chunk.css.map": "/static/css/main.d1a9cd56.chunk.css.map",
-    "static/js/2.c2254dfd.chunk.js.LICENSE.txt": "/static/js/2.c2254dfd.chunk.js.LICENSE.txt",
+    "static/css/main.13985c67.chunk.css.map": "/static/css/main.13985c67.chunk.css.map",
+    "static/js/2.228820e0.chunk.js.LICENSE.txt": "/static/js/2.228820e0.chunk.js.LICENSE.txt",
     "static/media/Mcafee-Logo.5f756721.svg": "/static/media/Mcafee-Logo.5f756721.svg",
+    "static/media/Poppins-ExtraBold.4ed78cd5.ttf": "/static/media/Poppins-ExtraBold.4ed78cd5.ttf",
     "static/media/errorCross.52eec20f.svg": "/static/media/errorCross.52eec20f.svg",
     "static/media/eyeIcon.382b4453.svg": "/static/media/eyeIcon.382b4453.svg",
     "static/media/lockIcon.0ef78d8b.svg": "/static/media/lockIcon.0ef78d8b.svg",
@@ -21,8 +22,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.a6f5e420.js",
-    "static/js/2.c2254dfd.chunk.js",
-    "static/css/main.d1a9cd56.chunk.css",
-    "static/js/main.ae52e00e.chunk.js"
+    "static/js/2.228820e0.chunk.js",
+    "static/css/main.13985c67.chunk.css",
+    "static/js/main.12fdc816.chunk.js"
   ]
 }

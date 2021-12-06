@@ -12,6 +12,7 @@ import {
   TealiumTagValueConstans,
 } from "../constants/TealiumConstants";
 import { useLocation } from "react-router-dom";
+import validateEmail from "../utils/validateEmail";
 
 export default function SignupContainer(props) {
   // Context Data
@@ -60,6 +61,7 @@ export default function SignupContainer(props) {
       setOptinFields(setting.OptinFields);
     }
   }, [setting]);
+
   const debounceSubmit = useCallback(
     debounce(() => {
       setSignupForm({
@@ -70,11 +72,7 @@ export default function SignupContainer(props) {
     }, 2000),
     []
   );
-  const validateEmail = (email) => {
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-  };
+
   const onBlur = (e) => {
     if (e.target.name === "email") {
       if (e.target.value && !validateEmail(e.target.value)) {
@@ -220,7 +218,6 @@ export default function SignupContainer(props) {
           trackClickEvent("failure-at-signup");
         }
       }
-
       setLoader(false);
     }
   };
@@ -236,10 +233,14 @@ export default function SignupContainer(props) {
 
     const currentCount = cookies.get("ua");
     console.log(currentCount);
-    setLoginForm({ ...LoginForm, email: "", password: "" });
+    setLoginForm({
+      ...LoginForm,
+      email: LoginForm.isEmailPrefilled ? LoginForm.email : "",
+      password: "",
+    });
     setSignupForm({
       ...SignupForm,
-      email: "",
+      email: SignupForm.isEmailPrefilled ? SignupForm.email : "",
       password: "",
       confirmPassword: "",
     });

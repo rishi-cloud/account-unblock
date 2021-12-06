@@ -1,32 +1,34 @@
 import React from "react";
-import { useEffect } from "react";
+import { useState } from "react";
 import "./style.css";
 import translate from "../../localization/translate";
+import useInterval from "../../utils/useInterval";
 
 const Timer = (props) => {
-  const { TimerState, setTimer, setOtpValid, getOtp } = props;
+  const { setOtpValid, getOtp } = props;
 
-  useEffect(() => {
-    let myInterval = setInterval(() => {
-      if (TimerState.seconds > 0) {
-        setTimer({ ...TimerState, seconds: TimerState.seconds - 1 });
-      }
-      if (TimerState.seconds === 0) {
-        if (TimerState.minutes === 0) {
-          setOtpValid(false);
-          clearInterval(myInterval);
-        } else {
-          setTimer({
-            minutes: TimerState.minutes - 1,
-            seconds: 59,
-          });
-        }
-      }
-    }, 1000);
-    return () => {
-      clearInterval(myInterval);
-    };
+  const [TimerState, setTimer] = useState({
+    minutes: 20,
+    seconds: 0,
   });
+  const [stop, setStop] = useState(1000);
+
+  useInterval(() => {
+    if (TimerState.seconds > 0) {
+      setTimer({ ...TimerState, seconds: TimerState.seconds - 1 });
+    }
+    if (TimerState.seconds === 0) {
+      if (TimerState.minutes === 0) {
+        setOtpValid(false);
+        setStop(null);
+      } else {
+        setTimer({
+          minutes: TimerState.minutes - 1,
+          seconds: 59,
+        });
+      }
+    }
+  }, stop);
 
   return (
     <div className="timer-class">

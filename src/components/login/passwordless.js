@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { TealiumTagValueConstans } from "../../constants/TealiumConstants";
+import React from "react";
 import translate from "../../localization/translate";
 import styles from "./style.module.css";
 import { ReactComponent as OutlineMail } from "../../svg/mailIcon.svg";
@@ -12,10 +11,9 @@ const PasswordLessFlow = (props) => {
     LoginError,
     LoginForm,
     validateEmail,
-    getOtp,
+    // getOtp,
     hideEmail,
     onSubmit,
-    trackClickEvent,
     LoginText,
     otpValid,
     locale,

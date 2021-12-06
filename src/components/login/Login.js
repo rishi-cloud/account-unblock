@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import styles from "./style.module.css";
 import translate from "../../localization/translate";
-import PasswordFlow from "./password";
+import PasswordFlow from "./password.js";
 import PasswordLessFlow from "./passwordless";
-import { CommonDataContext } from "../../providers/CommonDataContext";
+// import { CommonDataContext } from "../../providers/CommonDataContext";
 
 const Login = (props) => {
   const {
@@ -26,7 +26,6 @@ const Login = (props) => {
     resendingCode,
     handleClickResendCode,
   } = props;
-  const { utagData } = useContext(CommonDataContext);
 
   return (
     <div className={styles.LoginWrapperContainer}>

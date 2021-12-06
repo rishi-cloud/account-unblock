@@ -34,6 +34,7 @@ const CommonDataProvider = (props) => {
     otpAvailable: false,
     isSubmitting: false,
     customizations: "",
+    isEmailPrefilled: props.email ? true : false,
   });
   const [SignupForm, setSignupForm] = useState({
     email: props.email || "",
@@ -41,6 +42,7 @@ const CommonDataProvider = (props) => {
     confirmPassword: "",
     isSubmitting: false,
     customizations: "",
+    isEmailPrefilled: props.email ? true : false,
   });
 
   // Tracking Event function from Context
@@ -57,6 +59,7 @@ const CommonDataProvider = (props) => {
         const filteredData = data.slice(16, -2);
         const jsonData = JSON.parse(filteredData);
         const DB_ARRAY = jsonData?.strategies[0]?.connections.filter(
+          // (item) => item.name === "AV-Password-Authentication"
           (item) => item.name === "Test-CustomDB"
         );
         console.log("DB ARRAY RECIVED", DB_ARRAY);

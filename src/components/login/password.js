@@ -6,7 +6,6 @@ import { ReactComponent as LockOutline } from "../../svg/lockIcon.svg";
 import { ReactComponent as TickIcon } from "../../svg/tickIcon.svg";
 import { ReactComponent as FillEye } from "../../svg/eyeIcon.svg";
 import { ReactComponent as PasswordCross } from "../../svg/errorCross.svg";
-import { TealiumTagValueConstans } from "../../constants/TealiumConstants";
 import { FormattedMessage } from "react-intl";
 
 const PasswordFlow = (props) => {
@@ -16,10 +15,9 @@ const PasswordFlow = (props) => {
     LoginForm,
     validateEmail,
     onSubmit,
-    trackClickEvent,
     LoginText,
     handleForgotPasswordClick,
-    blockScreenState,
+    // blockScreenState,
   } = props;
   const [showPassword, setShowPassword] = useState(false);
   return (

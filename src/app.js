@@ -10,7 +10,7 @@ import ResetPassword from "./components/reset-password";
 
 import { AccountProvider } from "./providers/AccountContext";
 import LanguageProvider from "./localization/languageProvider";
-import { LOCALES } from "./localization/constants";
+// import { LOCALES } from "./localization/constants";
 import { CommonDataProvider } from "./providers/CommonDataContext";
 
 import styles from "./app.module.css";
@@ -18,77 +18,43 @@ import { AppProvider } from "./providers/AppContext";
 import { SettingProvider } from "./providers/SettingProvider";
 import { TrackingProvider } from "./providers/TrackingProvider";
 import { ResetPasswordProvider } from "./providers/ResetPasswordContext";
-
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
+import { useEmail } from "./utils/useEmail";
+import { useLocale } from "./utils/useLocale";
+import { useAffId } from "./utils/useAffId";
 
 const App = ({ pageConfig, passwordResetConfig }) => {
-  const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+  const [emailFill] = useEmail();
+  const [appLocale] = useLocale();
+  const [affId] = useAffId();
 
-  let query = useQuery();
-  let locale = useRef("");
-  const affiliateId = useRef(query.get("aff_id") || parsedHash.get("aff_id"));
-  const email = useRef(query.get("aai") || parsedHash.get("aai"));
-  let lang;
-  let culture = query.get("culture") ?? parsedHash.get("culture");
-
-  try {
-    email.current = JSON.parse(email.current).ea;
-  } catch {
-    email.current = "";
-  }
-
-  if (culture === null) {
-    if (localStorage.getItem("lang") === null) {
-      lang = "en-us";
-    } else {
-      lang = localStorage.getItem("lang");
-    }
-  } else {
-    lang = culture;
-    localStorage.setItem("lang", lang);
-  }
-
-  if (lang) {
-    locale.current = lang;
-  } else {
-    locale.current = "en-us";
-  }
-
-  const attachAccountProvider = (Component) => {
+  const withAccountProvider = (Component) => {
     return (
-      <AccountProvider config={pageConfig} locale={locale.current}>
+      <AccountProvider config={pageConfig} locale={appLocale}>
         {Component}
       </AccountProvider>
     );
   };
 
   return (
-    <TrackingProvider config={pageConfig} affiliateId={affiliateId.current}>
-      <SettingProvider
-        locale={locale.current}
-        affiliateId={affiliateId.current}
-      >
+    <TrackingProvider config={pageConfig} affiliateId={affId}>
+      <SettingProvider locale={appLocale} affiliateId={affId}>
         <CommonDataProvider
           config={pageConfig}
           passwordResetConfig={passwordResetConfig}
-          email={email.current}
-          locale={locale.current}
+          email={emailFill}
+          locale={appLocale}
         >
           <AppProvider>
-            <LanguageProvider locale={locale.current}>
+            <LanguageProvider locale={appLocale}>
               <div className={styles.PageContainer}>
                 <div className={styles.ContentWrap}>
                   <div id="app">
                     <Switch>
                       <Route path="/login" exact>
-                        {attachAccountProvider(<Main />)}
+                        {withAccountProvider(<Main />)}
                       </Route>
                       <Route exact path="/authorize">
-                        {attachAccountProvider(
-                          <Authorize config={pageConfig} />
-                        )}
+                        {withAccountProvider(<Authorize config={pageConfig} />)}
                         <Authorize config={pageConfig} />
                       </Route>
                       <Route path="/lo/reset" exact>

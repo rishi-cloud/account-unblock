@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AccountContext } from "../providers/AccountContext";
 import { CommonDataContext } from "../providers/CommonDataContext";
-import { useLocation } from "react-router-dom";
+import validateEmail from "../utils/validateEmail";
 
 import { AppContext } from "../providers/AppContext";
 import {
@@ -183,11 +183,6 @@ export default function LoginContainer(props) {
       console.log(err);
     }
   };
-  const validateEmail = (email) => {
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-  };
 
   const onBlur = (e) => {
     if (e.target.name === "email") {
@@ -215,7 +210,8 @@ export default function LoginContainer(props) {
       subtitle: "choose_your_signIn_method_continue",
     });
     setLoginForm({
-      email: "",
+      ...LoginForm,
+      email: LoginForm.isEmailPrefilled ? LoginForm.email : "",
       password: "",
       otp: "",
       otpAvailable: false,

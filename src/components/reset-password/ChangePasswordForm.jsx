@@ -23,7 +23,7 @@ function ChangePasswordForm(props) {
   const [showPassword, setShowPassword] = useState(false);
   const [displayRules, setDisplayRules] = useState(false);
 
-  const { getKeys, displayablerule } = DisplayRules(
+  const { getKeys, displayableRule } = DisplayRules(
     passwordRules,
     PasswordPolicyState
   );
@@ -106,7 +106,7 @@ function ChangePasswordForm(props) {
                 style={{ marginBottom: "1.5rem" }}
               >
                 <div className="Passwordrules">
-                  {displayablerule.map((item, index) => {
+                  {displayableRule.map((item, index) => {
                     return (
                       <div className="Rule" key={index}>
                         <div className="checkbox">

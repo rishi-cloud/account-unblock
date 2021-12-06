@@ -10,14 +10,14 @@ function LoaderScreen(props) {
       <div className={styles.loaderLogo}>
         <McAfeeLogo className={styles.Logo} />
       </div>
-      <div className={styles.loadercreatingyouraccount}>
+      <div className={styles.loaderCreatingYourAccount}>
         <img
           alt="McAfeeLogo"
-          className={styles.loadinglogo}
+          className={styles.loadingLogo}
           src="https://cdn.jsdelivr.net/gh/atulrana007/McAfee-odrplat-auth0-ui/public/images/McAfee-Document-Logo1.png"
         />
         {props.text ? (
-          <div className={styles.loadingtext}>{translate(props.text)}</div>
+          <div className={styles.loadingText}>{translate(props.text)}</div>
         ) : null}
         <CircularLoader />
       </div>
