@@ -19,24 +19,24 @@ const AccountProvider = (props) => {
     localStorage.setItem("userData", JSON.stringify(data));
   };
   console.log("configs", props);
-  const webAuth = new auth0.WebAuth({
-    domain: props.config.auth0Domain,
-    clientID: props.config.clientID,
-    redirectUri: props.config.callbackURL,
-    responseType: props.config.extraParams.response_type,
-    scope: props.config.extraParams.scope,
-    state: props.config.extraParams.state,
-    nonce: props.config.extraParams.nonce,
-    _csrf: props.config.extraParams._csrf,
-    audience: props.config.extraParams.audience,
-    overrides: { __tenant: props.config.auth0Tenant },
-  });
   // const webAuth = new auth0.WebAuth({
-  //   domain: process.env.REACT_APP_AUTH0_DOMAIN,
-  //   clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
-  //   responseType: "token id_token",
-  //   redirectUri: "http://localhost:4040/authorize",
+  //   domain: props.config.auth0Domain,
+  //   clientID: props.config.clientID,
+  //   redirectUri: props.config?.callbackURL,
+  //   responseType: props.config?.extraParams?.response_type,
+  //   scope: props.config?.extraParams?.scope,
+  //   state: props.config?.extraParams?.state,
+  //   nonce: props.config?.extraParams?.nonce,
+  //   _csrf: props.config?.extraParams?._csrf,
+  //   audience: props.config?.extraParams?.audience,
+  //   overrides: { __tenant: props.config?.auth0Tenant },
   // });
+  const webAuth = new auth0.WebAuth({
+    domain: process.env.REACT_APP_AUTH0_DOMAIN,
+    clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
+    responseType: "token id_token",
+    redirectUri: "http://localhost:4040/authorize",
+  });
   const getSocialLogin = (name) => {
     return new Promise((resolve, reject) => {
       webAuth.authorize(
@@ -62,8 +62,8 @@ const AccountProvider = (props) => {
     return new Promise((resolve, reject) => {
       const variables = {
         // connection: "AV-Password-Authentication",
-        connection: "Test-CustomDB",
-        // connection: "Username-Password-Authentication",
+        // connection: "Test-CustomDB",
+        connection: "Username-Password-Authentication",
         email,
         password,
         ...{ optinFields: optinFields },
@@ -131,8 +131,8 @@ const AccountProvider = (props) => {
       webAuth.login(
         {
           // realm: "AV-Password-Authentication",
-          realm: "Test-CustomDB",
-          // realm: "Username-Password-Authentication",
+          // realm: "Test-CustomDB",
+          realm: "Username-Password-Authentication",
           username,
           password,
           onRedirecting: function (done) {
@@ -161,8 +161,8 @@ const AccountProvider = (props) => {
       webAuth.changePassword(
         {
           // connection: "AV-Password-Authentication",
-          // connection: "Username-Password-Authentication",
-          connection: "Test-CustomDB",
+          connection: "Username-Password-Authentication",
+          // connection: "Test-CustomDB",
           email: email,
         },
         (err, authResult) => {

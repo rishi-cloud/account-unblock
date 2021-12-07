@@ -7,6 +7,7 @@ import Main from "./Main";
 
 import Footer from "./components/Footer/Footer";
 import ResetPassword from "./components/reset-password";
+import AccountUnblock from "./components/account-unblock/index";
 
 import { AccountProvider } from "./providers/AccountContext";
 import LanguageProvider from "./localization/languageProvider";
@@ -61,6 +62,9 @@ const App = ({ pageConfig, passwordResetConfig }) => {
                         <ResetPasswordProvider>
                           <ResetPassword />
                         </ResetPasswordProvider>
+                      </Route>
+                      <Route path="/lo/unblock" exact>
+                        <AccountUnblock />
                       </Route>
                     </Switch>
                   </div>

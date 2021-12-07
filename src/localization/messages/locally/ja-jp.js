@@ -121,6 +121,12 @@ const ja = {
       "You’ve reached the maximum number of passcode attempts",
     We_just_sent_an_email_with_a_link_to_unlock_your_account_You_may_sign_in_with_a_password:
       "We just sent an email with a link to unlock your account. You may sign in with a password, <a_reset_pass>try resetting your password</a_reset_pass> or <a_contact_support>Contact Support.</a_contact_support>",
+    Your_account_unlocked: "Your account has been unlocked",
+    Signin_to_start_using_protection:
+      "Signin in to start using your protection.",
+    Link_Expired: "Link expired",
+    Reset_password_to_unlock_account:
+      "Reset your password or <a_contact_support>Contact Support</a_contact_support> to unlock your account.",
   },
 };
 export default ja;
